@@ -1,0 +1,2 @@
+model_checkpoint_path: "D:/Code/pycharm/EventProject/data/saver/checkpoint_rnn.data"
+all_model_checkpoint_paths: "D:/Code/pycharm/EventProject/data/saver/checkpoint_rnn.data"
