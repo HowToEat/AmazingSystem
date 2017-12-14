@@ -187,6 +187,12 @@
     <None Include="python\relation_classification\checkpoint\model.ckpt.index" />
     <None Include="python\relation_classification\checkpoint\model.ckpt.meta" />
     <None Include="python\relation_classification\data\position_w2v_15d" />
+    <None Include="Resources\JiebaConfig\char_state_tab.json" />
+    <None Include="Resources\JiebaConfig\pos_prob_emit.json" />
+    <None Include="Resources\JiebaConfig\pos_prob_start.json" />
+    <None Include="Resources\JiebaConfig\pos_prob_trans.json" />
+    <None Include="Resources\JiebaConfig\prob_emit.json" />
+    <None Include="Resources\JiebaConfig\prob_trans.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -215,13 +221,19 @@
     <Content Include="python\relation_classification\model.py" />
     <Content Include="python\relation_classification\data\word_embeddings.txt" />
     <Content Include="python\relation_classification\data\words.lst" />
+    <Content Include="Resources\JiebaConfig\cn_synonym.txt" />
+    <Content Include="Resources\JiebaConfig\dict.txt" />
+    <Content Include="Resources\JiebaConfig\idf.txt" />
+    <Content Include="Resources\JiebaConfig\stopwords.txt" />
+    <Content Include="Resources\News.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /s /y $(ProjectDir)python $(TargetDir)python\</PostBuildEvent>
+    <PostBuildEvent>xcopy /s /y $(ProjectDir)python $(TargetDir)python\
+xcopy /s /y $(ProjectDir)Resources\JiebaConfig $(TargetDir)JiebaConfig\</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.106.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.106.0\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
