@@ -109,9 +109,9 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PO_数据库表对应的实体类--》放这里\EntityMention.cs" />
     <Compile Include="PO_数据库表对应的实体类--》放这里\NamedEntity.cs" />
     <Compile Include="PO_数据库表对应的实体类--》放这里\News.cs" />
+    <Compile Include="PO_数据库表对应的实体类--》放这里\Section.cs" />
     <Compile Include="Resources\Controls\LoadingCircle.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -142,6 +142,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\EventExtractForm.resx">
       <DependentUpon>EventExtractForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NamedEntityForm.resx">
+      <DependentUpon>NamedEntityForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

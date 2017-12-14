@@ -8,7 +8,7 @@ namespace InfoAnalySystem.Utils {
             ConnectionString = Const.connStr,
             DbType = DbType.Sqlite,
             IsAutoCloseConnection = true, //默认false
-            InitKeyType = InitKeyType.Attribute  //默认SystemTable
+            InitKeyType = InitKeyType.SystemTable  //默认SystemTable
         });
 
         /// <summary>

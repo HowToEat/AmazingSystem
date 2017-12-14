@@ -53,11 +53,12 @@ namespace InfoAnalySystem {
         //载入语料
         private void Form1_Load(object sender, EventArgs e)
         {
-            List<string> titleList = DBHelper.db.Queryable<News>().Select(news => news.title).Take(100).ToList();
+            var newsList = DBHelper.db.Queryable<News>().Select(news => new { news.id, news.title }).Take(100).ToList();
             int j = 0;
-            foreach (string title in titleList) {
+            foreach (var news in newsList) {
                 LinkLabel titleLabel = new LinkLabel();
-                titleLabel.Text = title;
+                titleLabel.Text = news.title;
+                titleLabel.Tag = news.id;
                 titleLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(justDoIt);
                 this.flowLayoutPanel3.Controls.Add(titleLabel);
                 j++;
@@ -68,11 +69,11 @@ namespace InfoAnalySystem {
         private void justDoIt(object sender, LinkLabelLinkClickedEventArgs e) {
             //获取点击的标题
             LinkLabel titleLabel = sender as LinkLabel;
-            String title = titleLabel.Text;
+            var newsId = (int)titleLabel.Tag;
             //获取当前页面名称
             string tagName = this.tabControl.SelectedTab.Text;
             if (tagName.Equals(Const.nameEntityPage)) {
-                namedEntityForm.doNamedEntityRecognition(title);
+                namedEntityForm.doNamedEntityRecognition(newsId);
             } else if (tagName.Equals(Const.relationExtractionPage))
             {
 
