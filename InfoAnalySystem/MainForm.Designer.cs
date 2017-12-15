@@ -27,8 +27,8 @@ namespace InfoAnalySystem {
         private void InitializeComponent() {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.basePanel1 = new System.Windows.Forms.Panel();
-            this.newsListView = new System.Windows.Forms.ListView();
             this.basePanel2 = new System.Windows.Forms.Panel();
+            this.newsListView = new CCWin.SkinControl.SkinListView();
             this.basePanel1.SuspendLayout();
             this.basePanel2.SuspendLayout();
             this.SuspendLayout();
@@ -53,18 +53,6 @@ namespace InfoAnalySystem {
             this.basePanel1.Size = new System.Drawing.Size(200, 562);
             this.basePanel1.TabIndex = 9;
             // 
-            // newsListView
-            // 
-            this.newsListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.newsListView.Location = new System.Drawing.Point(0, 0);
-            this.newsListView.MultiSelect = false;
-            this.newsListView.Name = "newsListView";
-            this.newsListView.Size = new System.Drawing.Size(200, 562);
-            this.newsListView.TabIndex = 0;
-            this.newsListView.UseCompatibleStateImageBehavior = false;
-            this.newsListView.View = System.Windows.Forms.View.Tile;
-            this.newsListView.SelectedIndexChanged += new System.EventHandler(this.justDoIt);
-            // 
             // basePanel2
             // 
             this.basePanel2.BackColor = System.Drawing.Color.White;
@@ -74,6 +62,18 @@ namespace InfoAnalySystem {
             this.basePanel2.Name = "basePanel2";
             this.basePanel2.Size = new System.Drawing.Size(584, 562);
             this.basePanel2.TabIndex = 10;
+            // 
+            // newsListView
+            // 
+            this.newsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.newsListView.Location = new System.Drawing.Point(0, 0);
+            this.newsListView.Name = "newsListView";
+            this.newsListView.OwnerDraw = true;
+            this.newsListView.Size = new System.Drawing.Size(200, 562);
+            this.newsListView.TabIndex = 0;
+            this.newsListView.UseCompatibleStateImageBehavior = false;
+            this.newsListView.View = System.Windows.Forms.View.Tile;
+            this.newsListView.SelectedIndexChanged += new System.EventHandler(this.justDoIt);
             // 
             // MainForm
             // 
@@ -97,7 +97,7 @@ namespace InfoAnalySystem {
         private System.Windows.Forms.TabControl tabControl;
         private Panel basePanel1;
         private Panel basePanel2;
-        private ListView newsListView;
+        private CCWin.SkinControl.SkinListView newsListView;
     }
 }
 

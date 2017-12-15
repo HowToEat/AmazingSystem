@@ -24,7 +24,7 @@ namespace InfoAnalySystem.Forms {
         /// 接受一条新闻，进行关系抽取
         /// </summary>
         /// <param name="newsId">新闻Id</param>
-        private async void doWork(int newsId) {
+        public async void doWork(int newsId) {
             var sectionList = DBHelper.db.Queryable<Section>().Where(it => it.newsId == newsId).ToList();
             if (sectionList.Count <= 0) {
                 MessageBox.Show("请先对该新闻提取命名实体，并保存入数据库");
@@ -39,23 +39,23 @@ namespace InfoAnalySystem.Forms {
                 }
             }
 
-            this.doWorkBtn.Enabled = false;
-            this.loadLabel.Visible = true;
-            this.loadCircle.Visible = true;
-            string sentence = this.sentenceInput.Text.Trim();
-            //调用python
-            this.relationLabel.Text = await this.getRelation(sentence);
-            string[] splitedSentence = this.splitSentenceByEntity(sentence);
-            this.senLeftLabel.Text = splitedSentence[0];
-            this.entity1Label.Text = splitedSentence[1];
-            this.senMidLabel.Text = splitedSentence[2];
-            this.entity2Label.Text = splitedSentence[3];
-            this.senRightLabel.Text = splitedSentence[4];
-            // 重绘界面
-            this.paint_Relation();
-            this.doWorkBtn.Enabled = true;
-            this.loadLabel.Visible = false;
-            this.loadCircle.Visible = false;
+            //this.doWorkBtn.Enabled = false;
+            //this.loadLabel.Visible = true;
+            //this.loadCircle.Visible = true;
+            //string sentence = this.sentenceInput.Text.Trim();
+            ////调用python
+            //this.relationLabel.Text = await this.getRelation(sentence);
+            //string[] splitedSentence = this.splitSentenceByEntity(sentence);
+            //this.senLeftLabel.Text = splitedSentence[0];
+            //this.entity1Label.Text = splitedSentence[1];
+            //this.senMidLabel.Text = splitedSentence[2];
+            //this.entity2Label.Text = splitedSentence[3];
+            //this.senRightLabel.Text = splitedSentence[4];
+            //// 重绘界面
+            //this.paint_Relation();
+            //this.doWorkBtn.Enabled = true;
+            //this.loadLabel.Visible = false;
+            //this.loadCircle.Visible = false;
         }
         /// <summary>
         /// 绘制关系连线

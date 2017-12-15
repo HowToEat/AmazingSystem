@@ -20,9 +20,9 @@ using InfoAnalySystem.PO;
 namespace InfoAnalySystem {
     public partial class MainForm : Skin_Metro {
         private NamedEntityForm namedEntityForm = new NamedEntityForm();
-        private Form relExtForm = new RelExtForm();
-        private Form relNetForm = new RelNetForm();
-        private Form eventExtForm = new EventExtractForm();
+        private RelExtForm relExtForm = new RelExtForm();
+        private RelNetForm relNetForm = new RelNetForm();
+        private EventExtractForm eventExtForm = new EventExtractForm();
 
         public MainForm() {
             InitializeComponent();
@@ -75,7 +75,7 @@ namespace InfoAnalySystem {
                 namedEntityForm.doNamedEntityRecognition(newsId);
             } else if (tagName.Equals(Const.relationExtractionPage))
             {
-
+                relExtForm.doWork(newsId);
             }
             else if (tagName.Equals(Const.relationLibraryPage))
             {
