@@ -13,6 +13,8 @@ using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
+using InfoAnalySystem.PO;
+using InfoAnalySystem.Utils;
 
 namespace InfoAnalySystem.Forms {
     public partial class EventExtractForm : Form
@@ -31,40 +33,64 @@ namespace InfoAnalySystem.Forms {
         }
 
 
-        /// <summary>
-        /// 抽取事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void eventExtractBtn_Click(object sender, EventArgs e)
+        public async void doEventExtract(int newsId)
         {
-            //string eventStr = "[昨天下午][，][101国道密云县庄头峪村附近路段][上，一辆开往承德、载有20多名乘客的][客车][与一辆拉矿石的][农用车][相撞][。]";
-            //string eventType = "[时间][None][地点][None][参与者][None][参与者][trigger-交通事故][None]";
+            News news = DBHelper.db.Queryable<News>().InSingle(newsId);
 
-            string strInput = this.eventInputText.Text;
+            string strInput = news.content;
             string eventStr = await this.loadEvent(strInput);
+
 
             this.eventShowPanel.Controls.Clear();
             this.eventShowPanel.CreateGraphics().Clear(Color.White);
             coordinateList.Clear();
 
-
-            //string eventStr = "{{{[4月17日上午10时59分][，][晋江市灵源街道好日子超市门口][，一辆平板][载货车][与一辆][货车][发生][碰撞][，致使货车司机被困。]}{[3月18日上午8时30分][，][兴庆区丽景北街][发生一起][车祸][。]}}{{[时间][None][地点][None][参与者][None][参与者][None][trigger-交通事故][None]}{[时间][None][地点][None][trigger-交通事故][None]}}}";
-            //string eventStr = "{{{[4月17日上午10时59分][，][晋江市灵源街道好日子超市门口][，一辆平板][载货车][与一辆][货车][发生][碰撞][，致使货车司机被困。]}}{{[时间][None][地点][None][参与者][None][参与者][None][trigger-交通事故][None]}}}";
             List<EventEntity> eventList = this.analysisEventText(eventStr);
-            
             if (eventList.Count != 0)
             {
                 int height = 0;
                 foreach (EventEntity eventEntity in eventList)
                 {
-                    paintEvent(eventEntity.wordList, eventEntity.typeList,height);
+                    paintEvent(eventEntity.wordList, eventEntity.typeList, height);
                     height += 200;
                 }
                 this.eventShowPanel.Paint += paintEventLine;
-
             }
         }
+
+        ///// <summary>
+        ///// 抽取事件
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private async void eventExtractBtn_Click(object sender, EventArgs e)
+        //{
+        //    //string eventStr = "[昨天下午][，][101国道密云县庄头峪村附近路段][上，一辆开往承德、载有20多名乘客的][客车][与一辆拉矿石的][农用车][相撞][。]";
+        //    //string eventType = "[时间][None][地点][None][参与者][None][参与者][trigger-交通事故][None]";
+
+        //    string strInput = this.eventInputText.Text;
+        //    string eventStr = await this.loadEvent(strInput);
+
+        //    this.eventShowPanel.Controls.Clear();
+        //    this.eventShowPanel.CreateGraphics().Clear(Color.White);
+        //    coordinateList.Clear();
+
+
+        //    //string eventStr = "{{{[4月17日上午10时59分][，][晋江市灵源街道好日子超市门口][，一辆平板][载货车][与一辆][货车][发生][碰撞][，致使货车司机被困。]}{[3月18日上午8时30分][，][兴庆区丽景北街][发生一起][车祸][。]}}{{[时间][None][地点][None][参与者][None][参与者][None][trigger-交通事故][None]}{[时间][None][地点][None][trigger-交通事故][None]}}}";
+        //    //string eventStr = "{{{[4月17日上午10时59分][，][晋江市灵源街道好日子超市门口][，一辆平板][载货车][与一辆][货车][发生][碰撞][，致使货车司机被困。]}}{{[时间][None][地点][None][参与者][None][参与者][None][trigger-交通事故][None]}}}";
+        //    List<EventEntity> eventList = this.analysisEventText(eventStr);
+            
+        //    if (eventList.Count != 0)
+        //    {
+        //        int height = 0;
+        //        foreach (EventEntity eventEntity in eventList)
+        //        {
+        //            paintEvent(eventEntity.wordList, eventEntity.typeList,height);
+        //            height += 200;
+        //        }
+        //        this.eventShowPanel.Paint += paintEventLine;
+        //    }
+        //}
 
         /// <summary>
         /// loading...
@@ -83,6 +109,7 @@ namespace InfoAnalySystem.Forms {
             return eventEntity;
 
         }
+
 
         /// <summary>
         /// 从python中获取文件
@@ -226,7 +253,7 @@ namespace InfoAnalySystem.Forms {
                     eventList[i].AutoSize = true;
                     if (i == 0)
                     {
-                        eventList[i].Location = new Point(10, 100 + height);
+                        eventList[i].Location = new Point(30, 100 + height);
                     }
                     else
                     {

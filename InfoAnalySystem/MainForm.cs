@@ -83,7 +83,7 @@ namespace InfoAnalySystem {
             }
             else if (tagName.Equals(Const.eventPage))
             {
-
+                eventExtForm.doEventExtract(newsId);
             }
         }
 
