@@ -9,6 +9,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InfoAnalySystem.Utils;
+using InfoAnalySystem.PO;
 
 namespace InfoAnalySystem.Forms {
     public partial class RelExtForm : Form {
@@ -19,11 +21,24 @@ namespace InfoAnalySystem.Forms {
         
         #region response funcs
         /// <summary>
-        /// 接受输入信息，进行关系抽取
+        /// 接受一条新闻，进行关系抽取
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void doWork(object sender, EventArgs e) {
+        /// <param name="newsId">新闻Id</param>
+        private async void doWork(int newsId) {
+            var sectionList = DBHelper.db.Queryable<Section>().Where(it => it.newsId == newsId).ToList();
+            if (sectionList.Count <= 0) {
+                MessageBox.Show("请先对该新闻提取命名实体，并保存入数据库");
+                return;
+            }
+            foreach(var section in sectionList) {
+                var entityMentionList = DBHelper.db.Queryable<EntityMention>().Where(it => it.sectionId == section.id).ToList();
+                for(var i = 0; i < entityMentionList.Count - 1; i++) {
+                    var entity1 = entityMentionList[i];
+                    var entity2 = entityMentionList[i + 1];
+                    ;
+                }
+            }
+
             this.doWorkBtn.Enabled = false;
             this.loadLabel.Visible = true;
             this.loadCircle.Visible = true;

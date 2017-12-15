@@ -27,7 +27,7 @@ namespace InfoAnalySystem {
         private void InitializeComponent() {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.basePanel1 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.newsListView = new System.Windows.Forms.ListView();
             this.basePanel2 = new System.Windows.Forms.Panel();
             this.basePanel1.SuspendLayout();
             this.basePanel2.SuspendLayout();
@@ -42,26 +42,28 @@ namespace InfoAnalySystem {
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(584, 562);
             this.tabControl.TabIndex = 8;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.justDoIt);
             // 
             // basePanel1
             // 
-            this.basePanel1.Controls.Add(this.flowLayoutPanel3);
+            this.basePanel1.Controls.Add(this.newsListView);
             this.basePanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.basePanel1.Location = new System.Drawing.Point(8, 30);
             this.basePanel1.Name = "basePanel1";
             this.basePanel1.Size = new System.Drawing.Size(200, 562);
             this.basePanel1.TabIndex = 9;
             // 
-            // flowLayoutPanel3
+            // newsListView
             // 
-            this.flowLayoutPanel3.AutoScroll = true;
-            this.flowLayoutPanel3.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Padding = new System.Windows.Forms.Padding(20);
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(200, 562);
-            this.flowLayoutPanel3.TabIndex = 1;
+            this.newsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.newsListView.Location = new System.Drawing.Point(0, 0);
+            this.newsListView.MultiSelect = false;
+            this.newsListView.Name = "newsListView";
+            this.newsListView.Size = new System.Drawing.Size(200, 562);
+            this.newsListView.TabIndex = 0;
+            this.newsListView.UseCompatibleStateImageBehavior = false;
+            this.newsListView.View = System.Windows.Forms.View.Tile;
+            this.newsListView.SelectedIndexChanged += new System.EventHandler(this.justDoIt);
             // 
             // basePanel2
             // 
@@ -95,7 +97,7 @@ namespace InfoAnalySystem {
         private System.Windows.Forms.TabControl tabControl;
         private Panel basePanel1;
         private Panel basePanel2;
-        private FlowLayoutPanel flowLayoutPanel3;
+        private ListView newsListView;
     }
 }
 

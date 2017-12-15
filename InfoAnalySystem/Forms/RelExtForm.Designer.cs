@@ -180,7 +180,6 @@
             this.doWorkBtn.TabIndex = 1;
             this.doWorkBtn.Text = "分析";
             this.doWorkBtn.UseVisualStyleBackColor = true;
-            this.doWorkBtn.Click += new System.EventHandler(this.doWork);
             // 
             // RelExtForm
             // 

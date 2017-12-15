@@ -56,20 +56,19 @@ namespace InfoAnalySystem {
             var newsList = DBHelper.db.Queryable<News>().Select(news => new { news.id, news.title }).Take(100).ToList();
             int j = 0;
             foreach (var news in newsList) {
-                LinkLabel titleLabel = new LinkLabel();
-                titleLabel.Text = news.title;
-                titleLabel.Tag = news.id;
-                titleLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(justDoIt);
-                this.flowLayoutPanel3.Controls.Add(titleLabel);
+                var listViewItem = new ListViewItem(news.title);
+                listViewItem.Tag = news.id;
+                this.newsListView.Items.Add(listViewItem);
                 j++;
             }
         }
 
         //切换语料
-        private void justDoIt(object sender, LinkLabelLinkClickedEventArgs e) {
+        private void justDoIt(object sender, EventArgs e) {
+            if (newsListView.SelectedItems.Count <= 0)
+                return;
             //获取点击的标题
-            LinkLabel titleLabel = sender as LinkLabel;
-            var newsId = (int)titleLabel.Tag;
+            var newsId = (int)newsListView.SelectedItems[0].Tag;
             //获取当前页面名称
             string tagName = this.tabControl.SelectedTab.Text;
             if (tagName.Equals(Const.nameEntityPage)) {
