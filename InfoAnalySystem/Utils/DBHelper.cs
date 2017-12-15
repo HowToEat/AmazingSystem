@@ -1,6 +1,7 @@
 ﻿using System;
 using SqlSugar;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace InfoAnalySystem.Utils {
     class DBHelper {
@@ -16,7 +17,7 @@ namespace InfoAnalySystem.Utils {
         /// 为InfoAnalySystem.PO下每个实体创建表
         /// 数字请使用int?或double?类型，id的属性名必须定义为id
         /// </summary>
-        static public void CreateTable() {
+        static public void createTable() {
             var assembly = Assembly.GetExecutingAssembly();
             Type[] typeArr = assembly.GetTypes();
             foreach (Type t in typeArr) {
@@ -41,6 +42,18 @@ namespace InfoAnalySystem.Utils {
             }
         }
 
+        /// <summary>
+        /// 批量插入并将id加入每个成员
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dataSet"></param>
+        static public void batchedInsertGetId<T>(IEnumerable<T> dataSet) where T : class,new() {
+            db.Ado.BeginTran(System.Data.IsolationLevel.ReadCommitted);
+            foreach(var data in dataSet) {
+                db.Insertable(data).ExecuteCommandIdentityIntoEntity();
+            }
+            db.Ado.CommitTran();
+        }
         //------------------------------------使用样例--------------------------------------------
         //教程：http://www.codeisbug.com/Doc/8/1121
 

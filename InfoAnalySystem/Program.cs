@@ -15,7 +15,7 @@ namespace InfoAnalySystem {
         [STAThread]
         static void Main() {
             if (!File.Exists(Const.dbFileName)) {
-                DBHelper.CreateTable();
+                DBHelper.createTable();
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

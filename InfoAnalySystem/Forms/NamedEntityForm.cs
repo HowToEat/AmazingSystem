@@ -16,7 +16,8 @@ namespace InfoAnalySystem.Forms {
     public partial class NamedEntityForm : Form {
         private int newsId;
         private List<Section> sectionList = new List<Section>();
-        private List<NamedEntity> entityList = new List<NamedEntity>();
+        private List<EntityMention> entityMentionList = new List<EntityMention>();
+        private Dictionary<string, NamedEntity> entityMap = new Dictionary<string, NamedEntity>();
 
         public NamedEntityForm() {
             InitializeComponent();
@@ -27,8 +28,11 @@ namespace InfoAnalySystem.Forms {
         /// </summary>
         /// <param name="newsId"></param>
         public void doNamedEntityRecognition(int newsId) {
-            this.newsId = newsId;
             saveBtn.Visible = true;
+            this.newsId = newsId;
+            this.sectionList.Clear();
+            this.entityMentionList.Clear();
+            this.entityMap.Clear();
             //清空panel
             for (int i = flowLayoutPanel1.Controls.Count - 1; i >= 0; i--) {
                 Control c = flowLayoutPanel1.Controls[i];
@@ -73,12 +77,20 @@ namespace InfoAnalySystem.Forms {
                     } else {
                         addLabel(sentence, entityFlag);
                         if (entityFlag >= 0) { //找到entity
-                            var entity = new NamedEntity();
-                            entity.indexInSection = wordIndex;
-                            entity.indexInNews = wordIndex + sectionIndex;
-                            entity.newsId = this.newsId;
-                            entity.value = sentence;
-                            entityList.Add(entity);
+                            var entityMention = new EntityMention();
+                            entityMention.indexInSection = wordIndex;
+                            entityMention.indexInNews = wordIndex + sectionIndex;
+                            entityMention.newsId = this.newsId;
+                            entityMention.value = sentence;
+                            entityMentionList.Add(entityMention);
+                            if (!entityMap.ContainsKey(sentence)) {
+                                var entity = DBHelper.db.Queryable<NamedEntity>().Where(it => it.value == sentence).First();
+                                if (entity == null) {  //只保存未存入数据库的
+                                    entity = new NamedEntity();
+                                    entity.value = sentence;
+                                    entityMap.Add(sentence, entity);
+                                }
+                            }
                         }
                         entityFlag = wordFlag;
                         sentence = word.Word;
@@ -125,7 +137,7 @@ namespace InfoAnalySystem.Forms {
 
         // 存入数据库响应函数
         private void saveBtn_Click(object sender, EventArgs e) {
-            bool isExit = DBHelper.db.Queryable<Section>().Where(it => it.newsId == this.newsId).First() != null;
+            bool isExit = DBHelper.db.Queryable<EntityMention>().Where(it => it.newsId == this.newsId).First() != null;
             bool isOverwrite = true;
             if (isExit) {
                 DialogResult result = MessageBox.Show("数据库中已有数据，确定覆盖吗？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
@@ -133,18 +145,28 @@ namespace InfoAnalySystem.Forms {
             }
             if(!isExit || isExit && isOverwrite) {
                 DBHelper.db.Deleteable<Section>().Where(it => it.newsId == this.newsId).ExecuteCommand();
-                DBHelper.db.Deleteable<NamedEntity>().Where(it => it.newsId == this.newsId).ExecuteCommand();
+                DBHelper.db.Deleteable<EntityMention>().Where(it => it.newsId == this.newsId).ExecuteCommand();
                 DBHelper.db.Insertable(sectionList.ToArray()).ExecuteCommand();
-                DBHelper.db.Insertable(entityList.ToArray()).ExecuteCommand();
+                DBHelper.db.Insertable(entityMentionList.ToArray()).ExecuteCommand();
+                DBHelper.db.Insertable(entityMap.Values.ToArray()).ExecuteCommand();
                 //更新entity对应的sectionId
                 var updateSql =
-                    "UPDATE NamedEntity " +
+                    "UPDATE EntityMention " +
                     "SET sectionId = ( " +
                         "SELECT id from Section " +
-                        "where Section.indexInNews == NamedEntity.indexInNews - NamedEntity.indexInSection " +
+                        "where Section.indexInNews == EntityMention.indexInNews - EntityMention.indexInSection " +
                             "AND Section.newsId == @newsId " +
                     ") " +
-                    "where NamedEntity.newsId == @newsId";
+                    "where EntityMention.newsId == @newsId";
+                DBHelper.db.Ado.ExecuteCommand(updateSql, new SqlSugar.SugarParameter("@newsId", this.newsId));
+                //更新entity对应的entityId
+                updateSql =
+                    "UPDATE EntityMention " +
+                    "SET entityId = ( " +
+                        "SELECT id from NamedEntity " +
+                        "where NamedEntity.value == EntityMention.value "+
+                    ") " +
+                    "where EntityMention.newsId == @newsId";
                 DBHelper.db.Ado.ExecuteCommand(updateSql, new SqlSugar.SugarParameter("@newsId", this.newsId));
                 MessageBox.Show("保存完成");
             }
