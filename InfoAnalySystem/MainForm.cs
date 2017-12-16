@@ -51,16 +51,8 @@ namespace InfoAnalySystem {
         }
 
         //载入语料
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            var newsList = DBHelper.db.Queryable<News>().Select(news => new { news.id, news.title }).Take(100).ToList();
-            int j = 0;
-            foreach (var news in newsList) {
-                var listViewItem = new ListViewItem(news.title);
-                listViewItem.Tag = news.id;
-                this.newsListView.Items.Add(listViewItem);
-                j++;
-            }
+        private void Form1_Load(object sender, EventArgs e){
+            this.showNewsByPage(1);
         }
 
         //切换语料
@@ -87,6 +79,46 @@ namespace InfoAnalySystem {
             }
         }
 
-    }
+        private void pageUpBtn_Click(object sender, EventArgs e) {
+            var curPage = int.Parse(pageNo.Tag.ToString());
+            if (curPage > 1) {
+                curPage -= 1;
+                this.showNewsByPage(curPage);
+            }
+        }
+        private void pageDownBtn_Click(object sender, EventArgs e) {
+            var curPage = int.Parse(pageNo.Tag.ToString());
+            var pageCount = int.Parse(totalPage.Tag.ToString());
+            if (curPage < pageCount) {
+                curPage += 1;
+                this.showNewsByPage(curPage);
+            }
+        }
 
+        private void showNewsByPage(int pageIndex) {
+            int totalCount = 0;
+            var sizePerPage = int.Parse(pageSize.Tag.ToString());
+            var newsList = DBHelper.db.Queryable<News>(
+                ).Select(news => new { news.id, news.title }
+                ).ToPageList(pageIndex, sizePerPage, ref totalCount);
+            this.pageNo.Tag = pageIndex;
+            this.totalPage.Tag = Math.Ceiling(totalCount / (float)sizePerPage);
+            if (pageIndex <= 1)
+                this.pageUpBtn.Enabled = false;
+            else
+                this.pageUpBtn.Enabled = true;
+            if (pageIndex * sizePerPage >= totalCount)
+                this.pageDownBtn.Enabled = false;
+            else
+                this.pageDownBtn.Enabled = true;
+            this.newsListView.Items.Clear();
+            foreach (var news in newsList) {
+                var listViewItem = new ListViewItem(news.title);
+                listViewItem.Tag = news.id;
+                this.newsListView.Items.Add(listViewItem);
+            }
+        }
+
+
+    }
 }

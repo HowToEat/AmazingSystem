@@ -8,9 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using InfoAnalySystem.Utils;
 using InfoAnalySystem.PO;
+using System.Net;
+using System.IO;
+using System.Windows.Forms;
 
 namespace InfoAnalySystem.Forms {
     public partial class RelExtForm : Form {
@@ -30,14 +32,60 @@ namespace InfoAnalySystem.Forms {
                 MessageBox.Show("请先对该新闻提取命名实体，并保存入数据库");
                 return;
             }
-            foreach(var section in sectionList) {
-                var entityMentionList = DBHelper.db.Queryable<EntityMention>().Where(it => it.sectionId == section.id).ToList();
-                for(var i = 0; i < entityMentionList.Count - 1; i++) {
-                    var entity1 = entityMentionList[i];
-                    var entity2 = entityMentionList[i + 1];
-                    ;
+            var entityMentionTop = DBHelper.db.Queryable<EntityMention>(
+                ).Where(it => it.newsId == newsId
+                ).GroupBy(it => it.value
+                ).OrderBy(it => SqlSugar.SqlFunc.AggregateCount(it.value), SqlSugar.OrderByType.Desc
+                ).Take(10).ToList();
+            for (var i = 0; i < entityMentionTop.Count - 4; i++) {
+                var entity1 = entityMentionTop[i];
+                var entity2 = entityMentionTop[i + 1];
+                var entity3 = entityMentionTop[i + 2];
+                var entity4 = entityMentionTop[i + 3];
+                var entity5 = entityMentionTop[i + 4];
+                string srchWebAddr = "http://www.baidu.com.cn/s?rn=5&wd=" + entity1.value + "+" + entity2.value + "+" + entity3.value + "+" + entity4.value + "+" + entity5.value;
+                WebRequest request = WebRequest.Create(srchWebAddr);
+                WebResponse response = request.GetResponse();
+                StreamReader htmlReader = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8"));
+                var htmlDoc = new HtmlAgilityPack.HtmlDocument();
+                htmlDoc.Load(htmlReader);
+                var srchResultList = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class,'result c-container')]");
+                foreach (var srchResultDiv in srchResultList) {
+                    var srchResultAbstract = srchResultDiv.SelectSingleNode(".//div[contains(@class,'c-abstract')]");
+                    if (srchResultAbstract != null) {
+                        var resultText = srchResultAbstract.InnerText;
+                        if (!resultText.Substring(0, resultText.Length - 3).Contains("..."))
+                            Console.WriteLine(srchResultAbstract.InnerText.Replace("&nbsp", " "));
+                    }
                 }
+                Console.WriteLine();
             }
+
+            //foreach(var section in sectionList) {
+            //    var entityMentionList = DBHelper.db.Queryable<EntityMention>().Where(it => it.sectionId == section.id).ToList();
+            //    for(var i = 0; i < entityMentionList.Count - 2; i++) {
+            //        var entity1 = entityMentionList[i];
+            //        var entity2 = entityMentionList[i + 1];
+            //        var entity3 = entityMentionList[i + 2];
+            //        WebRequest request = WebRequest.Create("http://www.baidu.com.cn/s?rn=5&wd="+entity1.value+"+"+entity2.value+"+"+entity3.value);
+            //        WebResponse response = request.GetResponse();
+            //        StreamReader htmlReader = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8"));
+            //        var htmlDoc = new HtmlAgilityPack.HtmlDocument();
+            //        htmlDoc.Load(htmlReader);
+            //        var entity1Count = Regex.Matches(htmlDoc.ParsedText, entity1.value).Count;
+            //        var entity2Count = Regex.Matches(htmlDoc.ParsedText, entity2.value).Count;
+            //        var entity3Count = Regex.Matches(htmlDoc.ParsedText, entity3.value).Count;
+            //        var srchResultList = htmlDoc.DocumentNode.SelectNodes("//div[contains(@class,'result c-container')]");
+            //        foreach(var srchResultDiv in srchResultList) {
+            //            var srchResultA = srchResultDiv.SelectSingleNode("h3/a");
+            //            if (srchResultA != null) {
+            //                Console.WriteLine(srchResultA.InnerHtml);
+            //            }
+            //        }
+            //        Console.WriteLine();
+            //        ;
+            //    }
+            //}
 
             //this.doWorkBtn.Enabled = false;
             //this.loadLabel.Visible = true;

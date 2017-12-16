@@ -8,6 +8,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InfoAnalySystem.Utils;
+using InfoAnalySystem.PO;
 
 namespace InfoAnalySystem.Forms {
     public partial class RelNetForm : Form {
@@ -30,18 +32,7 @@ namespace InfoAnalySystem.Forms {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void refreshBtn_Click(object sender = null, EventArgs e = null) {
-            relSetFlowLayout.Controls.Clear();
-            for (int i = 0; i < 20; i++) {
-                Label relLabel = new Label();
-                relLabel.Text = "M2战车(10)";
-                relLabel.Cursor = Cursors.Hand;
-                relLabel.ForeColor = SystemColors.WindowFrame;
-                relLabel.Margin = new Padding(0, 0, 0, 10);
-                relLabel.Click += relLabelClick;
-                relLabel.MouseEnter += (labelSender, e2) => { ((Label)labelSender).ForeColor = Color.Coral; };
-                relLabel.MouseLeave += (labelSender, e2) => { ((Label)labelSender).ForeColor = SystemColors.WindowFrame; };
-                relSetFlowLayout.Controls.Add(relLabel);
-            }
+            this.showEntitiesByPage(int.Parse(pageNo.Tag.ToString()));
         }
         /// <summary>
         /// 关系实体库中实体的点击事件
@@ -73,12 +64,62 @@ namespace InfoAnalySystem.Forms {
             flowAnimator.Hide(relNetPanel);
             flowAnimator.WaitAllAnimations();
             flowAnimator.Show(relSetFlowLayout);
-
         }
 
+        private void pageUpBtn_Click(object sender, EventArgs e) {
+            var curPage = int.Parse(pageNo.Tag.ToString());
+            if (curPage > 1) {
+                curPage -= 1;
+                this.showEntitiesByPage(curPage);
+            }
+        }
+        private void pageDownBtn_Click(object sender, EventArgs e) {
+            var curPage = int.Parse(pageNo.Tag.ToString());
+            var pageCount = int.Parse(totalPage.Tag.ToString());
+            if (curPage < pageCount) {
+                curPage += 1;
+                this.showEntitiesByPage(curPage);
+            }
+        }
         #endregion
 
         #region utils
+        /// <summary>
+        /// 分页展示实体列表
+        /// </summary>
+        /// <param name="pageIndex">要展示的页码</param>
+        private void showEntitiesByPage(int pageIndex) {
+            int totalCount = 0;
+            var sizePerPage = int.Parse(pageSize.Tag.ToString());
+            var entityList = DBHelper.db.Queryable<EntityMention>(
+                ).GroupBy(it => it.value
+                ).Select(it => new { value = it.value, count = SqlSugar.SqlFunc.AggregateCount(it.value) }
+                ).OrderBy(it => it.count, SqlSugar.OrderByType.Desc
+                ).ToPageList(pageIndex, sizePerPage, ref totalCount);
+            this.pageNo.Tag = pageIndex;
+            this.totalPage.Tag = Math.Ceiling(totalCount / (float)sizePerPage);
+            if (pageIndex <= 1)
+                this.pageUpBtn.Enabled = false;
+            else
+                this.pageUpBtn.Enabled = true;
+            if (pageIndex * sizePerPage >= totalCount)
+                this.pageDownBtn.Enabled = false;
+            else 
+                this.pageDownBtn.Enabled = true;
+            relSetFlowLayout.Controls.Clear();
+            foreach (var entityWithCount in entityList) {
+                Label relLabel = new Label();
+                relLabel.Text = entityWithCount.value + "(" + entityWithCount.count + ")";
+                relLabel.Cursor = Cursors.Hand;
+                relLabel.ForeColor = SystemColors.WindowFrame;
+                relLabel.Margin = new Padding(0, 0, 0, 10);
+                relLabel.Click += relLabelClick;
+                relLabel.MouseEnter += (labelSender, e2) => { ((Label)labelSender).ForeColor = Color.Coral; };
+                relLabel.MouseLeave += (labelSender, e2) => { ((Label)labelSender).ForeColor = SystemColors.WindowFrame; };
+                relSetFlowLayout.Controls.Add(relLabel);
+            }
+        }
+
         /// <summary>
         /// 为关系网图加入内容
         /// </summary>
@@ -165,5 +206,9 @@ namespace InfoAnalySystem.Forms {
         }
 
         #endregion
+
+
+
+
     }
 }

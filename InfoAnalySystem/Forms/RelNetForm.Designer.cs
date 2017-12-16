@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            CCWin.SkinControl.Animation animation4 = new CCWin.SkinControl.Animation();
+            CCWin.SkinControl.Animation animation3 = new CCWin.SkinControl.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelNetForm));
             this.refreshBtn = new System.Windows.Forms.Button();
             this.relNetPanel = new System.Windows.Forms.Panel();
@@ -34,22 +34,27 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.relNetBackBtn = new System.Windows.Forms.Button();
             this.entyLabel = new System.Windows.Forms.Label();
+            this.relNetBackBtn = new System.Windows.Forms.Button();
             this.relSetFlowLayout = new System.Windows.Forms.FlowLayoutPanel();
             this.flowAnimator = new CCWin.SkinControl.SkinAnimator(this.components);
+            this.buttonFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.pageUpBtn = new System.Windows.Forms.Button();
+            this.pageDownBtn = new System.Windows.Forms.Button();
+            this.pageNo = new System.Windows.Forms.Label();
+            this.totalPage = new System.Windows.Forms.Label();
+            this.pageSize = new System.Windows.Forms.Label();
             this.relSentenceTip = new CCWin.SkinToolTip(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
             this.relNetPanel.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.buttonFlowLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // refreshBtn
             // 
             this.refreshBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.flowAnimator.SetDecoration(this.refreshBtn, CCWin.SkinControl.DecorationType.None);
-            this.refreshBtn.Location = new System.Drawing.Point(573, 2);
+            this.refreshBtn.Location = new System.Drawing.Point(3, 2);
             this.refreshBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.refreshBtn.Name = "refreshBtn";
             this.refreshBtn.Size = new System.Drawing.Size(75, 28);
@@ -149,21 +154,6 @@
             this.label6.TabIndex = 3;
             this.label6.Text = "打击--蓝色";
             // 
-            // relNetBackBtn
-            // 
-            this.relNetBackBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.relNetBackBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.flowAnimator.SetDecoration(this.relNetBackBtn, CCWin.SkinControl.DecorationType.None);
-            this.relNetBackBtn.Location = new System.Drawing.Point(493, 2);
-            this.relNetBackBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.relNetBackBtn.Name = "relNetBackBtn";
-            this.relNetBackBtn.Size = new System.Drawing.Size(75, 28);
-            this.relNetBackBtn.TabIndex = 0;
-            this.relNetBackBtn.Text = "返回";
-            this.relNetBackBtn.UseVisualStyleBackColor = true;
-            this.relNetBackBtn.Visible = false;
-            this.relNetBackBtn.Click += new System.EventHandler(this.relNetBackBtn_Click);
-            // 
             // entyLabel
             // 
             this.flowAnimator.SetDecoration(this.entyLabel, CCWin.SkinControl.DecorationType.None);
@@ -174,8 +164,24 @@
             this.entyLabel.Size = new System.Drawing.Size(100, 22);
             this.entyLabel.TabIndex = 0;
             // 
+            // relNetBackBtn
+            // 
+            this.relNetBackBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.relNetBackBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.flowAnimator.SetDecoration(this.relNetBackBtn, CCWin.SkinControl.DecorationType.None);
+            this.relNetBackBtn.Location = new System.Drawing.Point(246, 2);
+            this.relNetBackBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.relNetBackBtn.Name = "relNetBackBtn";
+            this.relNetBackBtn.Size = new System.Drawing.Size(75, 28);
+            this.relNetBackBtn.TabIndex = 0;
+            this.relNetBackBtn.Text = "返回";
+            this.relNetBackBtn.UseVisualStyleBackColor = true;
+            this.relNetBackBtn.Visible = false;
+            this.relNetBackBtn.Click += new System.EventHandler(this.relNetBackBtn_Click);
+            // 
             // relSetFlowLayout
             // 
+            this.relSetFlowLayout.AutoScroll = true;
             this.relSetFlowLayout.BackColor = System.Drawing.Color.White;
             this.flowAnimator.SetDecoration(this.relSetFlowLayout, CCWin.SkinControl.DecorationType.None);
             this.relSetFlowLayout.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -191,22 +197,96 @@
             // 
             this.flowAnimator.AnimationType = CCWin.SkinControl.AnimationType.Leaf;
             this.flowAnimator.Cursor = null;
-            animation4.AnimateOnlyDifferences = true;
-            animation4.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.BlindCoeff")));
-            animation4.LeafCoeff = 1F;
-            animation4.MaxTime = 1F;
-            animation4.MinTime = 0F;
-            animation4.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.MosaicCoeff")));
-            animation4.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation4.MosaicShift")));
-            animation4.MosaicSize = 0;
-            animation4.Padding = new System.Windows.Forms.Padding(0);
-            animation4.RotateCoeff = 0F;
-            animation4.RotateLimit = 0F;
-            animation4.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.ScaleCoeff")));
-            animation4.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.SlideCoeff")));
-            animation4.TimeCoeff = 0F;
-            animation4.TransparencyCoeff = 0F;
-            this.flowAnimator.DefaultAnimation = animation4;
+            animation3.AnimateOnlyDifferences = true;
+            animation3.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.BlindCoeff")));
+            animation3.LeafCoeff = 1F;
+            animation3.MaxTime = 1F;
+            animation3.MinTime = 0F;
+            animation3.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicCoeff")));
+            animation3.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicShift")));
+            animation3.MosaicSize = 0;
+            animation3.Padding = new System.Windows.Forms.Padding(0);
+            animation3.RotateCoeff = 0F;
+            animation3.RotateLimit = 0F;
+            animation3.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.ScaleCoeff")));
+            animation3.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.SlideCoeff")));
+            animation3.TimeCoeff = 0F;
+            animation3.TransparencyCoeff = 0F;
+            this.flowAnimator.DefaultAnimation = animation3;
+            // 
+            // buttonFlowLayoutPanel
+            // 
+            this.buttonFlowLayoutPanel.BackColor = System.Drawing.Color.White;
+            this.buttonFlowLayoutPanel.Controls.Add(this.refreshBtn);
+            this.buttonFlowLayoutPanel.Controls.Add(this.pageUpBtn);
+            this.buttonFlowLayoutPanel.Controls.Add(this.pageDownBtn);
+            this.buttonFlowLayoutPanel.Controls.Add(this.relNetBackBtn);
+            this.buttonFlowLayoutPanel.Controls.Add(this.pageNo);
+            this.buttonFlowLayoutPanel.Controls.Add(this.totalPage);
+            this.buttonFlowLayoutPanel.Controls.Add(this.pageSize);
+            this.flowAnimator.SetDecoration(this.buttonFlowLayoutPanel, CCWin.SkinControl.DecorationType.None);
+            this.buttonFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonFlowLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.buttonFlowLayoutPanel.Name = "buttonFlowLayoutPanel";
+            this.buttonFlowLayoutPanel.Size = new System.Drawing.Size(651, 36);
+            this.buttonFlowLayoutPanel.TabIndex = 6;
+            // 
+            // pageUpBtn
+            // 
+            this.flowAnimator.SetDecoration(this.pageUpBtn, CCWin.SkinControl.DecorationType.None);
+            this.pageUpBtn.Location = new System.Drawing.Point(84, 3);
+            this.pageUpBtn.Name = "pageUpBtn";
+            this.pageUpBtn.Size = new System.Drawing.Size(75, 28);
+            this.pageUpBtn.TabIndex = 5;
+            this.pageUpBtn.Text = "上一页";
+            this.pageUpBtn.UseVisualStyleBackColor = true;
+            this.pageUpBtn.Click += new System.EventHandler(this.pageUpBtn_Click);
+            // 
+            // pageDownBtn
+            // 
+            this.flowAnimator.SetDecoration(this.pageDownBtn, CCWin.SkinControl.DecorationType.None);
+            this.pageDownBtn.Location = new System.Drawing.Point(165, 3);
+            this.pageDownBtn.Name = "pageDownBtn";
+            this.pageDownBtn.Size = new System.Drawing.Size(75, 28);
+            this.pageDownBtn.TabIndex = 5;
+            this.pageDownBtn.Text = "下一页";
+            this.pageDownBtn.UseVisualStyleBackColor = true;
+            this.pageDownBtn.Click += new System.EventHandler(this.pageDownBtn_Click);
+            // 
+            // pageNo
+            // 
+            this.pageNo.AutoSize = true;
+            this.flowAnimator.SetDecoration(this.pageNo, CCWin.SkinControl.DecorationType.None);
+            this.pageNo.Location = new System.Drawing.Point(327, 0);
+            this.pageNo.Name = "pageNo";
+            this.pageNo.Size = new System.Drawing.Size(37, 15);
+            this.pageNo.TabIndex = 6;
+            this.pageNo.Tag = "1";
+            this.pageNo.Text = "页码";
+            this.pageNo.Visible = false;
+            // 
+            // totalPage
+            // 
+            this.totalPage.AutoSize = true;
+            this.flowAnimator.SetDecoration(this.totalPage, CCWin.SkinControl.DecorationType.None);
+            this.totalPage.Location = new System.Drawing.Point(370, 0);
+            this.totalPage.Name = "totalPage";
+            this.totalPage.Size = new System.Drawing.Size(52, 15);
+            this.totalPage.TabIndex = 7;
+            this.totalPage.Text = "总页数";
+            this.totalPage.Visible = false;
+            // 
+            // pageSize
+            // 
+            this.pageSize.AutoSize = true;
+            this.flowAnimator.SetDecoration(this.pageSize, CCWin.SkinControl.DecorationType.None);
+            this.pageSize.Location = new System.Drawing.Point(428, 0);
+            this.pageSize.Name = "pageSize";
+            this.pageSize.Size = new System.Drawing.Size(67, 15);
+            this.pageSize.TabIndex = 8;
+            this.pageSize.Tag = "40";
+            this.pageSize.Text = "每页条数";
+            this.pageSize.Visible = false;
             // 
             // relSentenceTip
             // 
@@ -217,27 +297,15 @@
             this.relSentenceTip.ReshowDelay = 800;
             this.relSentenceTip.TipFore = System.Drawing.SystemColors.WindowFrame;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Controls.Add(this.refreshBtn);
-            this.panel1.Controls.Add(this.relNetBackBtn);
-            this.flowAnimator.SetDecoration(this.panel1, CCWin.SkinControl.DecorationType.None);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(651, 33);
-            this.panel1.TabIndex = 5;
-            // 
             // RelNetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(651, 464);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.relSetFlowLayout);
             this.Controls.Add(this.relNetPanel);
+            this.Controls.Add(this.buttonFlowLayoutPanel);
             this.flowAnimator.SetDecoration(this, CCWin.SkinControl.DecorationType.None);
             this.Name = "RelNetForm";
             this.Text = "RelNet";
@@ -246,7 +314,8 @@
             this.relNetPanel.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.buttonFlowLayoutPanel.ResumeLayout(false);
+            this.buttonFlowLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -265,6 +334,11 @@
         private System.Windows.Forms.Button refreshBtn;
         private CCWin.SkinControl.SkinAnimator flowAnimator;
         private CCWin.SkinToolTip relSentenceTip;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.FlowLayoutPanel buttonFlowLayoutPanel;
+        private System.Windows.Forms.Button pageUpBtn;
+        private System.Windows.Forms.Button pageDownBtn;
+        private System.Windows.Forms.Label pageNo;
+        private System.Windows.Forms.Label totalPage;
+        private System.Windows.Forms.Label pageSize;
     }
 }

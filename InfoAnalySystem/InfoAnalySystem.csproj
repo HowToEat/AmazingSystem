@@ -54,6 +54,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>dlllib\CSkin.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.6.7.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.6.7\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="JiebaNet.Analyser, Version=0.38.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\jieba.NET.0.38.3\lib\net45\JiebaNet.Analyser.dll</HintPath>
       <Private>True</Private>
