@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InfoAnalySystem.Utils;
 using InfoAnalySystem.PO;
+using SqlSugar;
 
 namespace InfoAnalySystem.Forms {
     public partial class RelNetForm : Form {
@@ -48,9 +49,8 @@ namespace InfoAnalySystem.Forms {
             flowAnimator.WaitAllAnimations();
             flowAnimator.Show(relNetPanel);
             // 绘制关系图
-            var entityText = ((Label)sender).Text;
-            entityText = entityText.Substring(0, entityText.LastIndexOf('('));
-            feedRelEntitys(entityText);
+            var entity = (NamedEntity)((Label)sender).Tag;
+            feedRelEntitys(entity);
             relNetPanel.Paint += paintRelNet;
         }
         /// <summary>
@@ -89,13 +89,15 @@ namespace InfoAnalySystem.Forms {
         /// </summary>
         /// <param name="pageIndex">要展示的页码</param>
         private void showEntitiesByPage(int pageIndex) {
+            //分页获取实体集合，按出现次数排序
             int totalCount = 0;
             var sizePerPage = int.Parse(pageSize.Tag.ToString());
-            var entityList = DBHelper.db.Queryable<EntityMention>(
-                ).GroupBy(it => it.value
-                ).Select(it => new { value = it.value, count = SqlSugar.SqlFunc.AggregateCount(it.value) }
-                ).OrderBy(it => it.count, SqlSugar.OrderByType.Desc
-                ).ToPageList(pageIndex, sizePerPage, ref totalCount);
+            var entityList = DBHelper.db.Queryable<EntityMention,NamedEntity>(
+                (em,ent)=> new object[] {SqlSugar.JoinType.Left, em.entityId==ent.id})
+                .GroupBy((em, ent) => em.entityId)
+                .OrderBy(em => SqlSugar.SqlFunc.AggregateCount(em.entityId), SqlSugar.OrderByType.Desc)
+                .Select((em, ent) => new {model = ent, count = SqlSugar.SqlFunc.AggregateCount(em.entityId) })
+                .ToPageList(pageIndex, sizePerPage, ref totalCount);
             this.pageNo.Tag = pageIndex;
             this.totalPage.Tag = Math.Ceiling(totalCount / (float)sizePerPage);
             if (pageIndex <= 1)
@@ -106,10 +108,12 @@ namespace InfoAnalySystem.Forms {
                 this.pageDownBtn.Enabled = false;
             else 
                 this.pageDownBtn.Enabled = true;
+            // 加入实体列表
             relSetFlowLayout.Controls.Clear();
             foreach (var entityWithCount in entityList) {
                 Label relLabel = new Label();
-                relLabel.Text = entityWithCount.value + "(" + entityWithCount.count + ")";
+                relLabel.Text = entityWithCount.model.value + "(" + entityWithCount.count + ")";
+                relLabel.Tag = entityWithCount.model;
                 relLabel.Cursor = Cursors.Hand;
                 relLabel.ForeColor = SystemColors.WindowFrame;
                 relLabel.Margin = new Padding(0, 0, 0, 10);
@@ -124,12 +128,22 @@ namespace InfoAnalySystem.Forms {
         /// 为关系网图加入内容
         /// </summary>
         /// <param name="entityText"></param>
-        private void feedRelEntitys(string entityText) {
-            entyLabel.Text = entityText;
+        private void feedRelEntitys(NamedEntity ne) {
+            entyLabel.Text = ne.value;
             foreach (var relEntyLabel in relEntyLabelList) {
                 relEntyLabel.Dispose();
             }
-            string[] relEntyList = { "美军", "悍马", "AN/TWQ-1 “复仇者”", "BAE系统公司", "M-SHORAD新型履带式野战防空系统", "无人机", "巡航导弹", "直升机", "低空固定翼飞机", "地面目标" };
+            //找10个出现频率最高
+            var sectionIds = DBHelper.db.Queryable<EntityMention>()
+                .Where(it => it.entityId == ne.id)
+                .Select(em => em.sectionId).ToList();
+            var relEntyList = DBHelper.db.Queryable<EntityMention, Section>(
+                (em,sec)=>em.sectionId==sec.id)
+                .Where(em => sectionIds.Contains(em.sectionId) && em.entityId != ne.id)
+                .GroupBy(em => em.entityId)
+                .OrderBy(em => SqlFunc.AggregateCount(em.entityId), OrderByType.Desc)
+                .Select((em, sec) =>new { entityMention = em, section = sec })
+                .Take(10).ToList();
             string[] relSet = { "从属", "对比", "对比", "从属", "别名", "打击", "打击", "打击", "打击", "打击" };
             relList.Clear();
             relList.AddRange(relSet);
@@ -142,12 +156,11 @@ namespace InfoAnalySystem.Forms {
             // 关系实体排布一圈，远近不一
             var rand = new Random();
             var baseRadius = (int)(0.2 * relNetPanel.Height);
-            var intervalRadian = 2 * Math.PI / relEntyList.Length;
+            var intervalRadian = 2 * Math.PI / relEntyList.Count;
             var radian = 0.0;
-            for (int i = 0; i < relEntyList.Length; i++) {
-                var relEnty = relEntyList[i];
-                var relation = relSet[i];
-                string relSentence = "此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统此前只在“悍马”轻型战术车辆上搭载整合4联装的FIM - 92“毒刺”轻型防空导弹，研制出对付低空来袭目标的AN / TWQ - 1 “复仇者”野战防空系统";
+            foreach(var emAndSec in relEntyList) {
+                var relEnty = emAndSec.entityMention.value;
+                var relSentence = emAndSec.section.value;
                 if (relSentence.Length > 100) {
                     relSentence = relSentence.Substring(0, 100);
                     relSentence += "...";
@@ -156,7 +169,7 @@ namespace InfoAnalySystem.Forms {
                 var relEntyLabel = new Label();
                 relEntyLabel.MouseMove += (sender, e) => { if (e.Button == MouseButtons.Left) ((Label)sender).Location = relNetPanel.PointToClient(MousePosition); };
                 relEntyLabel.Text = relEnty;
-                this.relSentenceTip.SetToolTip(relEntyLabel, entityText + "--" + relEnty + "：" + relation + "\n" + relSentence);
+                this.relSentenceTip.SetToolTip(relEntyLabel, ne.value + "--" + relEnty + "\n" + relSentence);
                 int radius = rand.Next(0, baseRadius) + baseRadius;
                 var relEntyX = (int)(entyX - radius * Math.Cos(radian));
                 var relEntyY = (int)(entyY - radius * Math.Sin(radian));

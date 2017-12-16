@@ -18,6 +18,7 @@ namespace InfoAnalySystem.Utils {
         /// 数字请使用int?或double?类型，id的属性名必须定义为id
         /// </summary>
         static public void createTable() {
+            //db.CodeFirst.BackupTable().InitTables("InfoAnalySystem.PO");
             var assembly = Assembly.GetExecutingAssembly();
             Type[] typeArr = assembly.GetTypes();
             foreach (Type t in typeArr) {
