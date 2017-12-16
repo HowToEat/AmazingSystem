@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            CCWin.SkinControl.Animation animation3 = new CCWin.SkinControl.Animation();
+            CCWin.SkinControl.Animation animation6 = new CCWin.SkinControl.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelNetForm));
             this.refreshBtn = new System.Windows.Forms.Button();
             this.relNetPanel = new System.Windows.Forms.Panel();
@@ -44,7 +44,7 @@
             this.pageNo = new System.Windows.Forms.Label();
             this.totalPage = new System.Windows.Forms.Label();
             this.pageSize = new System.Windows.Forms.Label();
-            this.relSentenceTip = new CCWin.SkinToolTip(this.components);
+            this.relSentenceTip = new System.Windows.Forms.ToolTip(this.components);
             this.relNetPanel.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.buttonFlowLayoutPanel.SuspendLayout();
@@ -197,22 +197,22 @@
             // 
             this.flowAnimator.AnimationType = CCWin.SkinControl.AnimationType.Leaf;
             this.flowAnimator.Cursor = null;
-            animation3.AnimateOnlyDifferences = true;
-            animation3.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.BlindCoeff")));
-            animation3.LeafCoeff = 1F;
-            animation3.MaxTime = 1F;
-            animation3.MinTime = 0F;
-            animation3.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicCoeff")));
-            animation3.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicShift")));
-            animation3.MosaicSize = 0;
-            animation3.Padding = new System.Windows.Forms.Padding(0);
-            animation3.RotateCoeff = 0F;
-            animation3.RotateLimit = 0F;
-            animation3.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.ScaleCoeff")));
-            animation3.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.SlideCoeff")));
-            animation3.TimeCoeff = 0F;
-            animation3.TransparencyCoeff = 0F;
-            this.flowAnimator.DefaultAnimation = animation3;
+            animation6.AnimateOnlyDifferences = true;
+            animation6.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.BlindCoeff")));
+            animation6.LeafCoeff = 1F;
+            animation6.MaxTime = 1F;
+            animation6.MinTime = 0F;
+            animation6.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.MosaicCoeff")));
+            animation6.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation6.MosaicShift")));
+            animation6.MosaicSize = 0;
+            animation6.Padding = new System.Windows.Forms.Padding(0);
+            animation6.RotateCoeff = 0F;
+            animation6.RotateLimit = 0F;
+            animation6.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.ScaleCoeff")));
+            animation6.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.SlideCoeff")));
+            animation6.TimeCoeff = 0F;
+            animation6.TransparencyCoeff = 0F;
+            this.flowAnimator.DefaultAnimation = animation6;
             // 
             // buttonFlowLayoutPanel
             // 
@@ -290,12 +290,8 @@
             // 
             // relSentenceTip
             // 
-            this.relSentenceTip.AutoPopDelay = 5000;
-            this.relSentenceTip.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.relSentenceTip.InitialDelay = 500;
-            this.relSentenceTip.OwnerDraw = true;
-            this.relSentenceTip.ReshowDelay = 800;
-            this.relSentenceTip.TipFore = System.Drawing.SystemColors.WindowFrame;
+            this.relSentenceTip.IsBalloon = true;
+            this.relSentenceTip.ShowAlways = true;
             // 
             // RelNetForm
             // 
@@ -333,12 +329,12 @@
         private System.Windows.Forms.Label entyLabel;
         private System.Windows.Forms.Button refreshBtn;
         private CCWin.SkinControl.SkinAnimator flowAnimator;
-        private CCWin.SkinToolTip relSentenceTip;
         private System.Windows.Forms.FlowLayoutPanel buttonFlowLayoutPanel;
         private System.Windows.Forms.Button pageUpBtn;
         private System.Windows.Forms.Button pageDownBtn;
         private System.Windows.Forms.Label pageNo;
         private System.Windows.Forms.Label totalPage;
         private System.Windows.Forms.Label pageSize;
+        private System.Windows.Forms.ToolTip relSentenceTip;
     }
 }

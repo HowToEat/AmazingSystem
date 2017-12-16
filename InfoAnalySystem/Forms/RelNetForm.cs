@@ -161,10 +161,10 @@ namespace InfoAnalySystem.Forms {
             foreach(var emAndSec in relEntyList) {
                 var relEnty = emAndSec.entityMention.value;
                 var relSentence = emAndSec.section.value;
-                if (relSentence.Length > 100) {
-                    relSentence = relSentence.Substring(0, 100);
-                    relSentence += "...";
-                }
+                //if (relSentence.Length > 100) {
+                //    relSentence = relSentence.Substring(0, 100);
+                //    relSentence += "...";
+                //}
                 relSentence = new Regex(@"(\S{20})").Replace(relSentence, "$1\n");
                 var relEntyLabel = new Label();
                 relEntyLabel.MouseMove += (sender, e) => { if (e.Button == MouseButtons.Left) ((Label)sender).Location = relNetPanel.PointToClient(MousePosition); };
