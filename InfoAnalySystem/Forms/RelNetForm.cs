@@ -42,6 +42,8 @@ namespace InfoAnalySystem.Forms {
         /// <param name="e"></param>
         private void relLabelClick(object sender, EventArgs e) {
             this.relNetBackBtn.Visible = true;
+            this.pageUpBtn.Visible = false;
+            this.pageDownBtn.Visible = false;
             // 切换页面
             flowAnimator.Hide(relSetFlowLayout);
             relNetPanel.Location = relSetFlowLayout.Location;
@@ -60,6 +62,8 @@ namespace InfoAnalySystem.Forms {
         /// <param name="e"></param>
         private void relNetBackBtn_Click(object sender, EventArgs e) {
             this.relNetBackBtn.Visible = false;
+            this.pageUpBtn.Visible = true;
+            this.pageDownBtn.Visible = true;
             relNetPanel.Paint -= paintRelNet;
             flowAnimator.Hide(relNetPanel);
             flowAnimator.WaitAllAnimations();
@@ -133,7 +137,7 @@ namespace InfoAnalySystem.Forms {
             foreach (var relEntyLabel in relEntyLabelList) {
                 relEntyLabel.Dispose();
             }
-            //找10个出现频率最高
+            //找10个出现频率最高的实体
             var sectionIds = DBHelper.db.Queryable<EntityMention>()
                 .Where(it => it.entityId == ne.id)
                 .Select(em => em.sectionId).ToList();
@@ -161,10 +165,10 @@ namespace InfoAnalySystem.Forms {
             foreach(var emAndSec in relEntyList) {
                 var relEnty = emAndSec.entityMention.value;
                 var relSentence = emAndSec.section.value;
-                //if (relSentence.Length > 100) {
-                //    relSentence = relSentence.Substring(0, 100);
-                //    relSentence += "...";
-                //}
+                if (relSentence.Length > 400) {
+                    relSentence = relSentence.Substring(0, 100);
+                    relSentence += "...";
+                }
                 relSentence = new Regex(@"(\S{20})").Replace(relSentence, "$1\n");
                 var relEntyLabel = new Label();
                 relEntyLabel.MouseMove += (sender, e) => { if (e.Button == MouseButtons.Left) ((Label)sender).Location = relNetPanel.PointToClient(MousePosition); };

@@ -47,7 +47,7 @@ namespace InfoAnalySystem {
             this.tabControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(584, 562);
+            this.tabControl.Size = new System.Drawing.Size(897, 715);
             this.tabControl.TabIndex = 8;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.justDoIt);
             // 
@@ -58,7 +58,7 @@ namespace InfoAnalySystem {
             this.basePanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.basePanel1.Location = new System.Drawing.Point(8, 30);
             this.basePanel1.Name = "basePanel1";
-            this.basePanel1.Size = new System.Drawing.Size(200, 562);
+            this.basePanel1.Size = new System.Drawing.Size(200, 715);
             this.basePanel1.TabIndex = 9;
             // 
             // newsListView
@@ -67,7 +67,7 @@ namespace InfoAnalySystem {
             this.newsListView.Location = new System.Drawing.Point(0, 34);
             this.newsListView.Name = "newsListView";
             this.newsListView.OwnerDraw = true;
-            this.newsListView.Size = new System.Drawing.Size(200, 528);
+            this.newsListView.Size = new System.Drawing.Size(200, 681);
             this.newsListView.TabIndex = 0;
             this.newsListView.UseCompatibleStateImageBehavior = false;
             this.newsListView.View = System.Windows.Forms.View.Tile;
@@ -146,7 +146,7 @@ namespace InfoAnalySystem {
             this.basePanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.basePanel2.Location = new System.Drawing.Point(208, 30);
             this.basePanel2.Name = "basePanel2";
-            this.basePanel2.Size = new System.Drawing.Size(584, 562);
+            this.basePanel2.Size = new System.Drawing.Size(897, 715);
             this.basePanel2.TabIndex = 10;
             // 
             // MainForm
@@ -154,7 +154,7 @@ namespace InfoAnalySystem {
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ClientSize = new System.Drawing.Size(1113, 753);
             this.Controls.Add(this.basePanel2);
             this.Controls.Add(this.basePanel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
