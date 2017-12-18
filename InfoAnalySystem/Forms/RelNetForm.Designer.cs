@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            CCWin.SkinControl.Animation animation6 = new CCWin.SkinControl.Animation();
+            CCWin.SkinControl.Animation animation2 = new CCWin.SkinControl.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelNetForm));
             this.refreshBtn = new System.Windows.Forms.Button();
             this.relNetPanel = new System.Windows.Forms.Panel();
@@ -93,6 +93,7 @@
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(118, 96);
             this.flowLayoutPanel2.TabIndex = 1;
+            this.flowLayoutPanel2.Visible = false;
             // 
             // label7
             // 
@@ -156,12 +157,13 @@
             // 
             // entyLabel
             // 
+            this.entyLabel.AutoSize = true;
             this.flowAnimator.SetDecoration(this.entyLabel, CCWin.SkinControl.DecorationType.None);
             this.entyLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.entyLabel.ForeColor = System.Drawing.Color.Firebrick;
             this.entyLabel.Location = new System.Drawing.Point(0, 0);
             this.entyLabel.Name = "entyLabel";
-            this.entyLabel.Size = new System.Drawing.Size(100, 22);
+            this.entyLabel.Size = new System.Drawing.Size(0, 27);
             this.entyLabel.TabIndex = 0;
             // 
             // relNetBackBtn
@@ -197,22 +199,22 @@
             // 
             this.flowAnimator.AnimationType = CCWin.SkinControl.AnimationType.Leaf;
             this.flowAnimator.Cursor = null;
-            animation6.AnimateOnlyDifferences = true;
-            animation6.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.BlindCoeff")));
-            animation6.LeafCoeff = 1F;
-            animation6.MaxTime = 1F;
-            animation6.MinTime = 0F;
-            animation6.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.MosaicCoeff")));
-            animation6.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation6.MosaicShift")));
-            animation6.MosaicSize = 0;
-            animation6.Padding = new System.Windows.Forms.Padding(0);
-            animation6.RotateCoeff = 0F;
-            animation6.RotateLimit = 0F;
-            animation6.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.ScaleCoeff")));
-            animation6.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation6.SlideCoeff")));
-            animation6.TimeCoeff = 0F;
-            animation6.TransparencyCoeff = 0F;
-            this.flowAnimator.DefaultAnimation = animation6;
+            animation2.AnimateOnlyDifferences = true;
+            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
+            animation2.LeafCoeff = 1F;
+            animation2.MaxTime = 1F;
+            animation2.MinTime = 0F;
+            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
+            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
+            animation2.MosaicSize = 0;
+            animation2.Padding = new System.Windows.Forms.Padding(0);
+            animation2.RotateCoeff = 0F;
+            animation2.RotateLimit = 0F;
+            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
+            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
+            animation2.TimeCoeff = 0F;
+            animation2.TransparencyCoeff = 0F;
+            this.flowAnimator.DefaultAnimation = animation2;
             // 
             // buttonFlowLayoutPanel
             // 

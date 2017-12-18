@@ -173,6 +173,7 @@ namespace InfoAnalySystem.Forms {
                 var relEntyLabel = new Label();
                 relEntyLabel.MouseMove += (sender, e) => { if (e.Button == MouseButtons.Left) ((Label)sender).Location = relNetPanel.PointToClient(MousePosition); };
                 relEntyLabel.Text = relEnty;
+                relEntyLabel.AutoSize = true;
                 this.relSentenceTip.SetToolTip(relEntyLabel, ne.value + "--" + relEnty + "\n" + relSentence);
                 int radius = rand.Next(0, baseRadius) + baseRadius;
                 var relEntyX = (int)(entyX - radius * Math.Cos(radian));
