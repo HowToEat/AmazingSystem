@@ -128,6 +128,10 @@ namespace InfoAnalySystem.Forms {
             for(int i=0;i<relationList.Count;i++) {
                 var relationPair = relationList[i].ToList();
                 var relType = relationPair[0].ToString();
+                switch (relType) {
+                    case "CATEGORY_ZH":relType = "类别";break;
+                    case "DESC": relType = "简介";break;
+                }
                 var relValue = relationPair[1].ToString();
                 relationGridView["relType", i].Value = relType;
                 relationGridView["relValue", i].Value = relValue;
