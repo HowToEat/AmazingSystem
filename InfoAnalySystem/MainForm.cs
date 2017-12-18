@@ -67,7 +67,7 @@ namespace InfoAnalySystem {
                 namedEntityForm.doNamedEntityRecognition(newsId);
             } else if (tagName.Equals(Const.relationExtractionPage))
             {
-                relExtForm.doWork(newsId);
+                relExtForm.getEntitiesFromNews(newsId);
             }
             else if (tagName.Equals(Const.relationLibraryPage))
             {
@@ -79,6 +79,7 @@ namespace InfoAnalySystem {
             }
         }
 
+        #region 语料翻页相关
         private void pageUpBtn_Click(object sender, EventArgs e) {
             var curPage = int.Parse(pageNo.Tag.ToString());
             if (curPage > 1) {
@@ -118,7 +119,7 @@ namespace InfoAnalySystem {
                 this.newsListView.Items.Add(listViewItem);
             }
         }
-
+        #endregion
 
     }
 }

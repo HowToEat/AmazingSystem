@@ -29,6 +29,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelExtForm));
             this.panel4 = new System.Windows.Forms.Panel();
             this.entityInput = new System.Windows.Forms.TextBox();
+            this.backBtn = new System.Windows.Forms.Button();
             this.doWorkBtn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.entityNotFoundTip = new System.Windows.Forms.Label();
@@ -36,12 +37,11 @@
             this.newsNotAnalyTip = new System.Windows.Forms.Label();
             this.selectEntityFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.contentPanel = new System.Windows.Forms.Panel();
-            this.relationGridView = new System.Windows.Forms.DataGridView();
             this.selectEntityTip = new System.Windows.Forms.Label();
-            this.backBtn = new System.Windows.Forms.Button();
-            this.leafAnimator = new CCWin.SkinControl.SkinAnimator(this.components);
+            this.relationGridView = new System.Windows.Forms.DataGridView();
             this.relType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.relValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.leafAnimator = new CCWin.SkinControl.SkinAnimator(this.components);
             this.panel4.SuspendLayout();
             this.contentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.relationGridView)).BeginInit();
@@ -70,6 +70,21 @@
             this.entityInput.Name = "entityInput";
             this.entityInput.Size = new System.Drawing.Size(304, 25);
             this.entityInput.TabIndex = 3;
+            this.entityInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.entityInput_KeyDown);
+            // 
+            // backBtn
+            // 
+            this.backBtn.AutoSize = true;
+            this.leafAnimator.SetDecoration(this.backBtn, CCWin.SkinControl.DecorationType.None);
+            this.backBtn.Location = new System.Drawing.Point(562, 24);
+            this.backBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.Size = new System.Drawing.Size(75, 31);
+            this.backBtn.TabIndex = 1;
+            this.backBtn.Text = "返回";
+            this.backBtn.UseVisualStyleBackColor = true;
+            this.backBtn.Visible = false;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
             // doWorkBtn
             // 
@@ -131,7 +146,7 @@
             this.newsNotAnalyTip.Name = "newsNotAnalyTip";
             this.newsNotAnalyTip.Size = new System.Drawing.Size(166, 115);
             this.newsNotAnalyTip.TabIndex = 13;
-            this.newsNotAnalyTip.Text = "未找到命名实体，请先对该新闻提取命名实体，并保存入数据库";
+            this.newsNotAnalyTip.Text = "未找到命名实体，请先对该新闻提取命名实体，并“存入数据库”";
             this.newsNotAnalyTip.Visible = false;
             // 
             // selectEntityFlowPanel
@@ -155,6 +170,19 @@
             this.contentPanel.Name = "contentPanel";
             this.contentPanel.Size = new System.Drawing.Size(444, 304);
             this.contentPanel.TabIndex = 10;
+            // 
+            // selectEntityTip
+            // 
+            this.selectEntityTip.AutoSize = true;
+            this.leafAnimator.SetDecoration(this.selectEntityTip, CCWin.SkinControl.DecorationType.None);
+            this.selectEntityTip.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.selectEntityTip.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.selectEntityTip.Location = new System.Drawing.Point(10, 27);
+            this.selectEntityTip.Name = "selectEntityTip";
+            this.selectEntityTip.Size = new System.Drawing.Size(161, 19);
+            this.selectEntityTip.TabIndex = 8;
+            this.selectEntityTip.Text = "请选择一个实体：";
+            this.selectEntityTip.Visible = false;
             // 
             // relationGridView
             // 
@@ -182,54 +210,6 @@
             this.relationGridView.TabIndex = 10;
             this.relationGridView.Visible = false;
             // 
-            // selectEntityTip
-            // 
-            this.selectEntityTip.AutoSize = true;
-            this.leafAnimator.SetDecoration(this.selectEntityTip, CCWin.SkinControl.DecorationType.None);
-            this.selectEntityTip.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.selectEntityTip.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.selectEntityTip.Location = new System.Drawing.Point(10, 27);
-            this.selectEntityTip.Name = "selectEntityTip";
-            this.selectEntityTip.Size = new System.Drawing.Size(161, 19);
-            this.selectEntityTip.TabIndex = 8;
-            this.selectEntityTip.Text = "请选择一个实体：";
-            this.selectEntityTip.Visible = false;
-            // 
-            // backBtn
-            // 
-            this.backBtn.AutoSize = true;
-            this.leafAnimator.SetDecoration(this.backBtn, CCWin.SkinControl.DecorationType.None);
-            this.backBtn.Location = new System.Drawing.Point(562, 24);
-            this.backBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.backBtn.Name = "backBtn";
-            this.backBtn.Size = new System.Drawing.Size(75, 31);
-            this.backBtn.TabIndex = 1;
-            this.backBtn.Text = "返回";
-            this.backBtn.UseVisualStyleBackColor = true;
-            this.backBtn.Visible = false;
-            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
-            // 
-            // leafAnimator
-            // 
-            this.leafAnimator.AnimationType = CCWin.SkinControl.AnimationType.Leaf;
-            this.leafAnimator.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 1F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 0F;
-            this.leafAnimator.DefaultAnimation = animation1;
-            // 
             // relType
             // 
             this.relType.HeaderText = "关系类型";
@@ -243,6 +223,28 @@
             this.relValue.Name = "relValue";
             this.relValue.ReadOnly = true;
             this.relValue.Width = 400;
+            // 
+            // leafAnimator
+            // 
+            this.leafAnimator.AnimationType = CCWin.SkinControl.AnimationType.Leaf;
+            this.leafAnimator.Cursor = null;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 1F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.leafAnimator.DefaultAnimation = animation1;
+            this.leafAnimator.MaxAnimationTime = 700;
             // 
             // RelExtForm
             // 

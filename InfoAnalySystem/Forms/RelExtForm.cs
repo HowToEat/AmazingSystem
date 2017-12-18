@@ -28,7 +28,7 @@ namespace InfoAnalySystem.Forms {
         /// 接受一条新闻，进行关系抽取
         /// </summary>
         /// <param name="newsId">新闻Id</param>
-        public void doWork(int newsId) {
+        public void getEntitiesFromNews(int newsId) {
             entityListView.Items.Clear();
             var sectionList = DBHelper.db.Queryable<Section>().Where(it => it.newsId == newsId).First();
             if (sectionList == null) {
@@ -154,6 +154,15 @@ namespace InfoAnalySystem.Forms {
             contentPanel.Size = relationGridView.Size;
             leafAnimator.WaitAllAnimations();
             leafAnimator.Show(contentPanel);
+        }
+
+        /// <summary>
+        /// 输入框回车事件
+        /// </summary>
+        private void entityInput_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter){
+                this.doWorkBtn_Click(sender, e);  
+            }
         }
 
 

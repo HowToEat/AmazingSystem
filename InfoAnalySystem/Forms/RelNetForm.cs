@@ -42,6 +42,7 @@ namespace InfoAnalySystem.Forms {
         /// <param name="e"></param>
         private void relLabelClick(object sender, EventArgs e) {
             this.relNetBackBtn.Visible = true;
+            this.refreshBtn.Visible = false;
             this.pageUpBtn.Visible = false;
             this.pageDownBtn.Visible = false;
             // 切换页面
@@ -62,6 +63,7 @@ namespace InfoAnalySystem.Forms {
         /// <param name="e"></param>
         private void relNetBackBtn_Click(object sender, EventArgs e) {
             this.relNetBackBtn.Visible = false;
+            this.refreshBtn.Visible = true;
             this.pageUpBtn.Visible = true;
             this.pageDownBtn.Visible = true;
             relNetPanel.Paint -= paintRelNet;
