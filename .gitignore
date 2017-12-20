@@ -243,3 +243,7 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/InfoAnalySystem/Resources/CN_DBpedia/baike_triples.txt
+/InfoAnalySystem/Resources/CN_DBpedia/m2e.txt
+/InfoAnalySystem/Resources/baike_triples.txt
+/InfoAnalySystem/Resources/CN_DBpedia/DBpediaEntity.sql
