@@ -160,7 +160,7 @@ namespace InfoAnalySystem {
             this.Controls.Add(this.basePanel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "信息分析系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.basePanel1.ResumeLayout(false);
