@@ -216,6 +216,7 @@
             animation1.TransparencyCoeff = 0F;
             this.flowAnimator.DefaultAnimation = animation1;
             this.flowAnimator.MaxAnimationTime = 700;
+            this.flowAnimator.TimeStep = 0.04F;
             // 
             // buttonFlowLayoutPanel
             // 

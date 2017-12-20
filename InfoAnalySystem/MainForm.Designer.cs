@@ -47,7 +47,7 @@ namespace InfoAnalySystem {
             this.tabControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(897, 715);
+            this.tabControl.Size = new System.Drawing.Size(827, 715);
             this.tabControl.TabIndex = 8;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.justDoIt);
             // 
@@ -58,7 +58,7 @@ namespace InfoAnalySystem {
             this.basePanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.basePanel1.Location = new System.Drawing.Point(8, 30);
             this.basePanel1.Name = "basePanel1";
-            this.basePanel1.Size = new System.Drawing.Size(200, 715);
+            this.basePanel1.Size = new System.Drawing.Size(270, 715);
             this.basePanel1.TabIndex = 9;
             // 
             // newsListView
@@ -67,8 +67,9 @@ namespace InfoAnalySystem {
             this.newsListView.Location = new System.Drawing.Point(0, 34);
             this.newsListView.Name = "newsListView";
             this.newsListView.OwnerDraw = true;
-            this.newsListView.Size = new System.Drawing.Size(200, 681);
+            this.newsListView.Size = new System.Drawing.Size(270, 681);
             this.newsListView.TabIndex = 0;
+            this.newsListView.TileSize = new System.Drawing.Size(200, 34);
             this.newsListView.UseCompatibleStateImageBehavior = false;
             this.newsListView.View = System.Windows.Forms.View.Tile;
             this.newsListView.SelectedIndexChanged += new System.EventHandler(this.justDoIt);
@@ -84,7 +85,7 @@ namespace InfoAnalySystem {
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 34);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(270, 34);
             this.flowLayoutPanel1.TabIndex = 1;
             // 
             // pageUpBtn
@@ -110,7 +111,7 @@ namespace InfoAnalySystem {
             // pageNo
             // 
             this.pageNo.AutoSize = true;
-            this.pageNo.Location = new System.Drawing.Point(3, 34);
+            this.pageNo.Location = new System.Drawing.Point(165, 0);
             this.pageNo.Name = "pageNo";
             this.pageNo.Size = new System.Drawing.Size(37, 15);
             this.pageNo.TabIndex = 11;
@@ -121,7 +122,7 @@ namespace InfoAnalySystem {
             // totalPage
             // 
             this.totalPage.AutoSize = true;
-            this.totalPage.Location = new System.Drawing.Point(46, 34);
+            this.totalPage.Location = new System.Drawing.Point(208, 0);
             this.totalPage.Name = "totalPage";
             this.totalPage.Size = new System.Drawing.Size(52, 15);
             this.totalPage.TabIndex = 12;
@@ -131,7 +132,7 @@ namespace InfoAnalySystem {
             // pageSize
             // 
             this.pageSize.AutoSize = true;
-            this.pageSize.Location = new System.Drawing.Point(104, 34);
+            this.pageSize.Location = new System.Drawing.Point(3, 34);
             this.pageSize.Name = "pageSize";
             this.pageSize.Size = new System.Drawing.Size(67, 15);
             this.pageSize.TabIndex = 13;
@@ -144,9 +145,9 @@ namespace InfoAnalySystem {
             this.basePanel2.BackColor = System.Drawing.Color.White;
             this.basePanel2.Controls.Add(this.tabControl);
             this.basePanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.basePanel2.Location = new System.Drawing.Point(208, 30);
+            this.basePanel2.Location = new System.Drawing.Point(278, 30);
             this.basePanel2.Name = "basePanel2";
-            this.basePanel2.Size = new System.Drawing.Size(897, 715);
+            this.basePanel2.Size = new System.Drawing.Size(827, 715);
             this.basePanel2.TabIndex = 10;
             // 
             // MainForm
@@ -160,6 +161,7 @@ namespace InfoAnalySystem {
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.basePanel1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);

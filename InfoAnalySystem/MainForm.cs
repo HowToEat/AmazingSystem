@@ -112,6 +112,7 @@ namespace InfoAnalySystem {
                 this.pageDownBtn.Enabled = false;
             else
                 this.pageDownBtn.Enabled = true;
+            // 将语料填入ListView
             this.newsListView.Items.Clear();
             foreach (var news in newsList) {
                 var listViewItem = new ListViewItem(news.title);

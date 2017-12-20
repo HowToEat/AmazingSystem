@@ -33,7 +33,6 @@
             this.doWorkBtn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.entityNotFoundTip = new System.Windows.Forms.Label();
-            this.entityListView = new System.Windows.Forms.ListView();
             this.newsNotAnalyTip = new System.Windows.Forms.Label();
             this.selectEntityFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.contentPanel = new System.Windows.Forms.Panel();
@@ -42,6 +41,7 @@
             this.relType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.relValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.leafAnimator = new CCWin.SkinControl.SkinAnimator(this.components);
+            this.entityListView = new CCWin.SkinControl.SkinListView();
             this.panel4.SuspendLayout();
             this.contentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.relationGridView)).BeginInit();
@@ -124,25 +124,12 @@
             this.entityNotFoundTip.Text = "未找到该实体的关系";
             this.entityNotFoundTip.Visible = false;
             // 
-            // entityListView
-            // 
-            this.leafAnimator.SetDecoration(this.entityListView, CCWin.SkinControl.DecorationType.None);
-            this.entityListView.Dock = System.Windows.Forms.DockStyle.Left;
-            this.entityListView.Location = new System.Drawing.Point(0, 0);
-            this.entityListView.MultiSelect = false;
-            this.entityListView.Name = "entityListView";
-            this.entityListView.Size = new System.Drawing.Size(172, 650);
-            this.entityListView.TabIndex = 8;
-            this.entityListView.UseCompatibleStateImageBehavior = false;
-            this.entityListView.View = System.Windows.Forms.View.Tile;
-            this.entityListView.SelectedIndexChanged += new System.EventHandler(this.entityListView_SelectedIndexChanged);
-            // 
             // newsNotAnalyTip
             // 
             this.newsNotAnalyTip.BackColor = System.Drawing.Color.White;
             this.leafAnimator.SetDecoration(this.newsNotAnalyTip, CCWin.SkinControl.DecorationType.None);
             this.newsNotAnalyTip.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.newsNotAnalyTip.Location = new System.Drawing.Point(1, 9);
+            this.newsNotAnalyTip.Location = new System.Drawing.Point(2, 4);
             this.newsNotAnalyTip.Name = "newsNotAnalyTip";
             this.newsNotAnalyTip.Size = new System.Drawing.Size(166, 115);
             this.newsNotAnalyTip.TabIndex = 13;
@@ -245,6 +232,20 @@
             animation1.TransparencyCoeff = 0F;
             this.leafAnimator.DefaultAnimation = animation1;
             this.leafAnimator.MaxAnimationTime = 700;
+            this.leafAnimator.TimeStep = 0.04F;
+            // 
+            // entityListView
+            // 
+            this.leafAnimator.SetDecoration(this.entityListView, CCWin.SkinControl.DecorationType.None);
+            this.entityListView.Dock = System.Windows.Forms.DockStyle.Left;
+            this.entityListView.Location = new System.Drawing.Point(0, 0);
+            this.entityListView.Name = "entityListView";
+            this.entityListView.OwnerDraw = true;
+            this.entityListView.Size = new System.Drawing.Size(172, 650);
+            this.entityListView.TabIndex = 14;
+            this.entityListView.UseCompatibleStateImageBehavior = false;
+            this.entityListView.View = System.Windows.Forms.View.Tile;
+            this.entityListView.SelectedIndexChanged += new System.EventHandler(this.entityListView_SelectedIndexChanged);
             // 
             // RelExtForm
             // 
@@ -274,7 +275,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox entityInput;
         private System.Windows.Forms.Button doWorkBtn;
-        private System.Windows.Forms.ListView entityListView;
         private System.Windows.Forms.Label newsNotAnalyTip;
         private System.Windows.Forms.Label entityNotFoundTip;
         private System.Windows.Forms.Panel contentPanel;
@@ -285,5 +285,6 @@
         private CCWin.SkinControl.SkinAnimator leafAnimator;
         private System.Windows.Forms.DataGridViewTextBoxColumn relType;
         private System.Windows.Forms.DataGridViewTextBoxColumn relValue;
+        private CCWin.SkinControl.SkinListView entityListView;
     }
 }

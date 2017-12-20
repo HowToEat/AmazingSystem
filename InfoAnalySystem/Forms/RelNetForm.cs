@@ -15,12 +15,10 @@ using SqlSugar;
 namespace InfoAnalySystem.Forms {
     public partial class RelNetForm : Form {
         private List<Label> relEntyLabelList;
-        private List<string> relList;
 
         public RelNetForm() {
             InitializeComponent();
             this.relEntyLabelList = new List<Label>();
-            this.relList = new List<string>();
             relSetFlowLayout.Visible = true;
             relNetPanel.Dock = DockStyle.Fill;
             relSetFlowLayout.Dock = DockStyle.Fill;
@@ -150,9 +148,6 @@ namespace InfoAnalySystem.Forms {
                 .OrderBy(em => SqlFunc.AggregateCount(em.entityId), OrderByType.Desc)
                 .Select((em, sec) =>new { entityMention = em, section = sec })
                 .Take(10).ToList();
-            string[] relSet = { "从属", "对比", "对比", "从属", "别名", "打击", "打击", "打击", "打击", "打击" };
-            relList.Clear();
-            relList.AddRange(relSet);
             relEntyLabelList.Clear();
             // 调整中心实体位置
             int entyX = (int)(0.5 * (relNetPanel.Width - entyLabel.Width));
@@ -199,28 +194,30 @@ namespace InfoAnalySystem.Forms {
             entyCenterPt.Y += entyLabel.Height / 2;
             for (int i = 0; i < relEntyLabelList.Count; i++) {
                 var relEntyLabel = relEntyLabelList[i];
-                var relation = relList[i];
                 var relEntyCenterPt = relEntyLabel.Location;
                 relEntyCenterPt.X += relEntyLabel.Width / 2;
                 relEntyCenterPt.Y += relEntyLabel.Height / 2;
-                switch (relation) {
-                    case "从属":
-                        g.DrawLine(Pens.OrangeRed, entyCenterPt, relEntyCenterPt);
-                        relEntyLabel.ForeColor = Color.OrangeRed;
-                        break;
-                    case "对比":
-                        g.DrawLine(Pens.Goldenrod, entyCenterPt, relEntyCenterPt);
-                        relEntyLabel.ForeColor = Color.Goldenrod;
-                        break;
-                    case "别名":
-                        g.DrawLine(Pens.LimeGreen, entyCenterPt, relEntyCenterPt);
-                        relEntyLabel.ForeColor = Color.LimeGreen;
-                        break;
-                    case "打击":
-                        g.DrawLine(Pens.Aqua, entyCenterPt, relEntyCenterPt);
-                        relEntyLabel.ForeColor = Color.Aqua;
-                        break;
-                }
+                g.DrawLine(Pens.OrangeRed, entyCenterPt, relEntyCenterPt);
+                relEntyLabel.ForeColor = Color.OrangeRed;
+                //var relation = relList[i];
+                //switch (relation) {
+                //    case "从属":
+                //        g.DrawLine(Pens.OrangeRed, entyCenterPt, relEntyCenterPt);
+                //        relEntyLabel.ForeColor = Color.OrangeRed;
+                //        break;
+                //    case "对比":
+                //        g.DrawLine(Pens.Goldenrod, entyCenterPt, relEntyCenterPt);
+                //        relEntyLabel.ForeColor = Color.Goldenrod;
+                //        break;
+                //    case "别名":
+                //        g.DrawLine(Pens.LimeGreen, entyCenterPt, relEntyCenterPt);
+                //        relEntyLabel.ForeColor = Color.LimeGreen;
+                //        break;
+                //    case "打击":
+                //        g.DrawLine(Pens.Aqua, entyCenterPt, relEntyCenterPt);
+                //        relEntyLabel.ForeColor = Color.Aqua;
+                //        break;
+                //}
             }
             g.Dispose();
         }
