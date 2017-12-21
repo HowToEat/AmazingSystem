@@ -35,6 +35,8 @@ namespace InfoAnalySystem.Forms {
 
         public async void doEventExtract(int newsId)
         {
+            if (newsId < 0)
+                return;
             News news = DBHelper.db.Queryable<News>().InSingle(newsId);
 
             string strInput = news.content;

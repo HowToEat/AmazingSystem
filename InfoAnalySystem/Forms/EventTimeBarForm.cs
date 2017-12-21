@@ -18,7 +18,7 @@ namespace InfoAnalySystem.Forms {
             var htmlPath = Application.StartupPath + @"\Resources\HtmlViews\EventTimeBar\";
             using (var htmlFileR = File.OpenRead(htmlPath+"index.html")) {
                 htmlDoc.Load(htmlFileR);
-                htmlDoc.DocumentNode.SelectSingleNode("//*[@class='container']/h1").InnerHtml="nice!";
+                //htmlDoc.DocumentNode.SelectSingleNode("//*[@class='container']/h1").InnerHtml="nice!";
             }
             File.Delete(htmlPath + "index_fill.html");
             using (var htmlFileW = File.OpenWrite(htmlPath + "index_fill.html")) {
