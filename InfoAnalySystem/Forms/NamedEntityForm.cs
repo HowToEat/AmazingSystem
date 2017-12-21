@@ -34,10 +34,7 @@ namespace InfoAnalySystem.Forms {
             this.entityMentionList.Clear();
             this.entityMap.Clear();
             //清空panel
-            for (int i = flowLayoutPanel1.Controls.Count - 1; i >= 0; i--) {
-                Control c = flowLayoutPanel1.Controls[i];
-                c.Dispose();
-            }
+            this.richTextBox1.Text = "";
             News news = DBHelper.db.Queryable<News>().InSingle(newsId);
             var segmenter = new JiebaSegmenter();
             var posSeg = new PosSegmenter();
@@ -68,6 +65,7 @@ namespace InfoAnalySystem.Forms {
             string sentence = "";
             int entityFlag = -1;
             int wordIndex = -1;
+            addMargin();//段首添加缩进
             foreach (Pair word in tokens) {
                 int wordFlag = Array.IndexOf(Const.entityList, word.Flag);
                 if (sentence != "") {
@@ -75,7 +73,7 @@ namespace InfoAnalySystem.Forms {
                         sentence += word.Word;
                         wordIndex++;
                     } else {
-                        addLabel(sentence, entityFlag);
+                        addText(sentence, entityFlag);
                         if (entityFlag >= 0) { //找到entity
                             var entityMention = new EntityMention();
                             entityMention.indexInSection = wordIndex;
@@ -103,36 +101,40 @@ namespace InfoAnalySystem.Forms {
                 }
             }
             if (sentence != "") {
-                addLabel(sentence, entityFlag);
+                addText(sentence, entityFlag);
+                addLineBreak();
             }
         }
 
         /// <summary>
-        /// 在界面加label进行展示
+        /// 在界面加文字进行展示
         /// </summary>
         /// <param name="sentence">要展示的内容</param>
-        /// <param name="flag">是否为命名实体</param>
-        private void addLabel(string sentence, int flag) {
+        /// <param name="flag">为何类命名实体</param>
+        private void addText(string sentence, int flag) {
             if (flag >= 0) {
-                LinkLabel titleLabel = new LinkLabel();
-                titleLabel.Text = sentence;
-                titleLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(jumpWindows);
-                titleLabel.AutoSize = true;
-                flowLayoutPanel1.Controls.Add(titleLabel);
+                richTextBox1.SelectionColor = Color.Blue;
+                richTextBox1.AppendText(sentence);
             } else {
-                Label titleLabel = new Label();
-                titleLabel.Text = sentence;
-                titleLabel.AutoSize = true;
-                flowLayoutPanel1.Controls.Add(titleLabel);
+                richTextBox1.SelectionColor = Color.Black;
+                richTextBox1.AppendText(sentence);
             }
-
         }
 
-        // 命名实体点击函数,跳转到网址
-        private static void jumpWindows(object sender, EventArgs e) {
-            LinkLabel titleLabel = sender as LinkLabel;
-            String sentence = titleLabel.Text;
-            System.Diagnostics.Process.Start("https://www.baidu.com/s?ie=utf-8&wd=" + sentence);
+        /// <summary>
+        /// 段落之间添加换行符
+        /// </summary>
+        private void addLineBreak()
+        {
+            richTextBox1.AppendText("\n");
+        }
+
+        /// <summary>
+        /// 段首添加缩进
+        /// </summary>
+        private void addMargin()
+        {
+            richTextBox1.AppendText("\t");
         }
 
         // 存入数据库响应函数
