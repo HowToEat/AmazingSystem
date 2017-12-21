@@ -122,6 +122,7 @@
     <Compile Include="PO_数据库表对应的实体类--》放这里\DBpediaEntity.cs" />
     <Compile Include="PO_数据库表对应的实体类--》放这里\DBpediaRelPair.cs" />
     <Compile Include="PO_数据库表对应的实体类--》放这里\EntityMention.cs" />
+    <Compile Include="PO_数据库表对应的实体类--》放这里\Event.cs" />
     <Compile Include="PO_数据库表对应的实体类--》放这里\NamedEntity.cs" />
     <Compile Include="PO_数据库表对应的实体类--》放这里\News.cs" />
     <Compile Include="PO_数据库表对应的实体类--》放这里\Section.cs" />
