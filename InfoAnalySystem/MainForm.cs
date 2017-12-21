@@ -24,6 +24,7 @@ namespace InfoAnalySystem {
         private RelNetForm relNetForm = new RelNetForm();
         private EventExtractForm eventExtForm = new EventExtractForm();
         private EventTimeBarForm eventTimeBarForm = new EventTimeBarForm();
+        private EventCountryForm eventCountryForm = new EventCountryForm();
 
 
         public MainForm() {
@@ -33,6 +34,7 @@ namespace InfoAnalySystem {
             this.addPage(relNetForm, Const.relationLibraryPage);
             this.addPage(eventExtForm, Const.eventPage);
             this.addPage(eventTimeBarForm, Const.eventTimeBar);
+            this.addPage(eventCountryForm, Const.eventCountry);
         }
         /// <summary>
         /// 加入一个标签页
