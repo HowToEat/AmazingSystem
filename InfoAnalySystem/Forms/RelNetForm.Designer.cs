@@ -41,6 +41,7 @@
             this.buttonFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.pageUpBtn = new System.Windows.Forms.Button();
             this.pageDownBtn = new System.Windows.Forms.Button();
+            this.saveDataBtn = new System.Windows.Forms.Button();
             this.pageNo = new System.Windows.Forms.Label();
             this.totalPage = new System.Windows.Forms.Label();
             this.pageSize = new System.Windows.Forms.Label();
@@ -225,6 +226,7 @@
             this.buttonFlowLayoutPanel.Controls.Add(this.pageUpBtn);
             this.buttonFlowLayoutPanel.Controls.Add(this.pageDownBtn);
             this.buttonFlowLayoutPanel.Controls.Add(this.relNetBackBtn);
+            this.buttonFlowLayoutPanel.Controls.Add(this.saveDataBtn);
             this.buttonFlowLayoutPanel.Controls.Add(this.pageNo);
             this.buttonFlowLayoutPanel.Controls.Add(this.totalPage);
             this.buttonFlowLayoutPanel.Controls.Add(this.pageSize);
@@ -257,11 +259,26 @@
             this.pageDownBtn.UseVisualStyleBackColor = true;
             this.pageDownBtn.Click += new System.EventHandler(this.pageDownBtn_Click);
             // 
+            // saveData
+            // 
+            this.saveDataBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveDataBtn.BackColor = System.Drawing.SystemColors.Control;
+            this.flowAnimator.SetDecoration(this.saveDataBtn, CCWin.SkinControl.DecorationType.None);
+            this.saveDataBtn.Location = new System.Drawing.Point(327, 2);
+            this.saveDataBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.saveDataBtn.Name = "saveData";
+            this.saveDataBtn.Size = new System.Drawing.Size(133, 28);
+            this.saveDataBtn.TabIndex = 9;
+            this.saveDataBtn.Text = "保存到图数据库";
+            this.saveDataBtn.UseVisualStyleBackColor = true;
+            this.saveDataBtn.Visible = false;
+            this.saveDataBtn.Click += new System.EventHandler(this.saveData_Click);
+            // 
             // pageNo
             // 
             this.pageNo.AutoSize = true;
             this.flowAnimator.SetDecoration(this.pageNo, CCWin.SkinControl.DecorationType.None);
-            this.pageNo.Location = new System.Drawing.Point(327, 0);
+            this.pageNo.Location = new System.Drawing.Point(539, 0);
             this.pageNo.Name = "pageNo";
             this.pageNo.Size = new System.Drawing.Size(37, 15);
             this.pageNo.TabIndex = 6;
@@ -273,7 +290,7 @@
             // 
             this.totalPage.AutoSize = true;
             this.flowAnimator.SetDecoration(this.totalPage, CCWin.SkinControl.DecorationType.None);
-            this.totalPage.Location = new System.Drawing.Point(370, 0);
+            this.totalPage.Location = new System.Drawing.Point(582, 0);
             this.totalPage.Name = "totalPage";
             this.totalPage.Size = new System.Drawing.Size(52, 15);
             this.totalPage.TabIndex = 7;
@@ -340,5 +357,6 @@
         private System.Windows.Forms.Label totalPage;
         private System.Windows.Forms.Label pageSize;
         private System.Windows.Forms.ToolTip relSentenceTip;
+        private System.Windows.Forms.Button saveDataBtn;
     }
 }

@@ -66,9 +66,17 @@
       <HintPath>..\packages\jieba.NET.0.38.3\lib\net45\JiebaNet.Segmenter.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Neo4j.Driver, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Neo4j.Driver.1.5.2\lib\net452\Neo4j.Driver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Neo4jClient, Version=2.0.0.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Neo4jClient.2.0.0.10\lib\net45\Neo4jClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SqlSugar, Version=4.6.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -150,6 +158,7 @@
     <Compile Include="Resources\Controls\TitleControl.Designer.cs">
       <DependentUpon>TitleControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Neo4jDB.cs" />
     <Compile Include="Utils\DBHelper.cs" />
     <Compile Include="Utils\Const.cs" />
     <Compile Include="Program.cs" />
@@ -188,7 +197,9 @@
     <EmbeddedResource Include="Resources\Controls\TitleControl.resx">
       <DependentUpon>TitleControl.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
