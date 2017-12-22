@@ -28,6 +28,8 @@ namespace InfoAnalySystem.Forms {
         /// </summary>
         /// <param name="newsId"></param>
         public void doNamedEntityRecognition(int newsId) {
+            if (newsId < 0)
+                return;
             saveBtn.Visible = true;
             this.newsId = newsId;
             this.sectionList.Clear();
