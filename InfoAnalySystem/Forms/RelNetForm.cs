@@ -90,7 +90,7 @@ namespace InfoAnalySystem.Forms {
                     entityList.Add(entity);
                 }
             }
-            neoHelper.CreateEntity(entityList);
+            neoHelper.CreateUniqueEntity(entityList);
             neoHelper.CreateEntityRel(entityList);
         }
 

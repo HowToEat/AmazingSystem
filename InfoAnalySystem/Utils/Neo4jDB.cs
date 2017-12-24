@@ -1,6 +1,7 @@
 ﻿using Neo4jClient;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Neo4jHelper
 {
@@ -33,6 +34,26 @@ public class Neo4jHelper
             .Merge("(n)-[r:实体关联]-(s)")
             .WithParam("centerName", centerName)
             .ExecuteWithoutResults();
+    }
+    //保存命名实体节点
+    public void CreateUniqueEntity(List<Entity> nodes)
+    {
+        foreach (Entity node in nodes)
+        {
+            IEnumerable < Entity > temp = _client.Cypher
+                .Match("(n:NamedEntity)")
+                .Where("n.Name={Name}")
+                .WithParam("Name", node.Name)
+                .Return(n => n.As<Entity>())
+                .Results;
+            if(temp.Count()==0){
+                _client.Cypher
+                .Create("(n:NamedEntity)")
+                .Set("n.Name={Name}")
+                .WithParam("Name", node.Name)
+                .ExecuteWithoutResults();
+            }
+        }
     }
 }
 
