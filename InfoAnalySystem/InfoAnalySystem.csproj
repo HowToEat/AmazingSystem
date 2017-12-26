@@ -74,7 +74,7 @@
       <HintPath>..\packages\jieba.NET.0.38.3\lib\net45\JiebaNet.Segmenter.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Neo4j.Driver, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+	<Reference Include="Neo4j.Driver, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Neo4j.Driver.1.5.2\lib\net452\Neo4j.Driver.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -132,6 +132,12 @@
     <Compile Include="Forms\EventTimeBarForm.Designer.cs">
       <DependentUpon>EventTimeBarForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TextClassiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TextClassiForm.Designer.cs">
+      <DependentUpon>TextClassiForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\NamedEntityForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EventTimeBarForm.resx">
       <DependentUpon>EventTimeBarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TextClassiForm.resx">
+      <DependentUpon>TextClassiForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\NamedEntityForm.resx">
       <DependentUpon>NamedEntityForm.cs</DependentUpon>
