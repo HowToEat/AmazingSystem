@@ -29,10 +29,109 @@ namespace InfoAnalySystem.Forms {
         public EventExtractForm()
         {
             InitializeComponent();
-            //SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw | ControlStyles.SupportsTransparentBackColor, true);
         }
 
+        /// <summary>
+        /// 在eventShowPanel面板中展示事件
+        /// </summary>
+        /// <param name="newsId"></param>
+        public void showEvent(int newsId)
+        {
+            this.eventShowPanel.Controls.Clear();
+            List<Event> eventList= DBHelper.db.Queryable<Event>().Where(it => it.newsId == newsId).ToList();
+            if(eventList.Count!=0)
+            {
+                for(int i=0;i<eventList.Count;i++)
+                {
+                    Point point = new Point(30, 230 * i+10);
+                    createEventView(eventList[i], point);
+                }
 
+            }
+        }
+
+        /// <summary>
+        /// 创建事件视图
+        /// </summary>
+        /// <param name="eventEntity"></param>
+        private void createEventView(Event eventEntity,Point point)
+        {
+            Panel panel = new Panel();
+            //panel.Size = new Size(210,200);
+            panel.Location = point;
+            panel.Cursor = Cursors.Hand;
+
+            DataGridView eventView = new DataGridView();
+            eventView.ReadOnly = true;
+            eventView.RowHeadersVisible = false;
+            eventView.AutoSize = true;
+            eventView.BorderStyle = BorderStyle.None;
+
+
+            DataGridViewTextBoxColumn columnTitle = new DataGridViewTextBoxColumn();
+            columnTitle.HeaderText = "叙事框架";
+            eventView.Columns.Add(columnTitle);
+            columnTitle.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            DataGridViewTextBoxColumn columnValue = new DataGridViewTextBoxColumn();
+            columnValue.HeaderText = "事件要素";
+            eventView.Columns.Add(columnValue);
+            columnValue.SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            eventView.ColumnHeadersHeight = 35;
+
+            eventView.Rows.Add();
+            eventView.Rows.Add();
+            eventView.Rows.Add();
+            eventView.Rows.Add();
+
+
+
+            eventView.Rows[0].Cells[0].Value = "事件";
+            eventView.Rows[0].Cells[1].Value = eventEntity.topic;
+            eventView.Rows[0].Height = 30;
+
+
+            eventView.Rows[1].Cells[0].Value = "时间";
+            eventView.Rows[1].Cells[1].Value = eventEntity.time.ToString();
+            eventView.Rows[1].Height = 30;
+
+            eventView.Rows[2].Cells[0].Value = "地点";
+            eventView.Rows[2].Cells[1].Value = eventEntity.location;
+            eventView.Rows[2].Height = 30;
+
+            eventView.Rows[3].Cells[0].Value = "对象";
+            eventView.Rows[3].Cells[1].Value = eventEntity.target;
+            eventView.Rows[3].Height = 30;
+
+            eventView.Rows[4].Cells[0].Value = "事件句";
+            eventView.Rows[4].Cells[1].Value = eventEntity.comment;
+            eventView.Rows[4].Height = 30;
+
+
+            //eventView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            eventView.BackgroundColor = Color.White;
+
+            //显示全部内容
+            //eventView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            //eventView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            eventView.Columns[0].Width = 100;
+            eventView.Columns[1].Width = 500;
+
+            eventView.AllowUserToResizeColumns = false;
+            eventView.AllowUserToResizeRows = false;
+            eventView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+            panel.AutoSize = true;
+            panel.Controls.Add(eventView);
+            this.eventShowPanel.Controls.Add(panel);
+        }
+
+        /// <summary>
+        /// 从文本中抽取事件
+        /// </summary>
+        /// <param name="newsId"></param>
         public async void doEventExtract(int newsId)
         {
             News news = DBHelper.db.Queryable<News>().InSingle(newsId);
@@ -58,39 +157,6 @@ namespace InfoAnalySystem.Forms {
             }
         }
 
-        ///// <summary>
-        ///// 抽取事件
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private async void eventExtractBtn_Click(object sender, EventArgs e)
-        //{
-        //    //string eventStr = "[昨天下午][，][101国道密云县庄头峪村附近路段][上，一辆开往承德、载有20多名乘客的][客车][与一辆拉矿石的][农用车][相撞][。]";
-        //    //string eventType = "[时间][None][地点][None][参与者][None][参与者][trigger-交通事故][None]";
-
-        //    string strInput = this.eventInputText.Text;
-        //    string eventStr = await this.loadEvent(strInput);
-
-        //    this.eventShowPanel.Controls.Clear();
-        //    this.eventShowPanel.CreateGraphics().Clear(Color.White);
-        //    coordinateList.Clear();
-
-
-        //    //string eventStr = "{{{[4月17日上午10时59分][，][晋江市灵源街道好日子超市门口][，一辆平板][载货车][与一辆][货车][发生][碰撞][，致使货车司机被困。]}{[3月18日上午8时30分][，][兴庆区丽景北街][发生一起][车祸][。]}}{{[时间][None][地点][None][参与者][None][参与者][None][trigger-交通事故][None]}{[时间][None][地点][None][trigger-交通事故][None]}}}";
-        //    //string eventStr = "{{{[4月17日上午10时59分][，][晋江市灵源街道好日子超市门口][，一辆平板][载货车][与一辆][货车][发生][碰撞][，致使货车司机被困。]}}{{[时间][None][地点][None][参与者][None][参与者][None][trigger-交通事故][None]}}}";
-        //    List<EventEntity> eventList = this.analysisEventText(eventStr);
-            
-        //    if (eventList.Count != 0)
-        //    {
-        //        int height = 0;
-        //        foreach (EventEntity eventEntity in eventList)
-        //        {
-        //            paintEvent(eventEntity.wordList, eventEntity.typeList,height);
-        //            height += 200;
-        //        }
-        //        this.eventShowPanel.Paint += paintEventLine;
-        //    }
-        //}
 
         /// <summary>
         /// loading...
@@ -99,12 +165,12 @@ namespace InfoAnalySystem.Forms {
         /// <returns></returns>
         private async Task<string> loadEvent(string sentence)
         {
-            this.eventLoadCircle.Visible = true;
-            this.eventLoadLabel.Visible = true;
+            //this.eventLoadCircle.Visible = true;
+            //this.eventLoadLabel.Visible = true;
 
             string eventEntity = await this.getEvent(sentence);
-            this.eventLoadCircle.Visible = false;
-            this.eventLoadLabel.Visible = false;
+            //this.eventLoadCircle.Visible = false;
+            //this.eventLoadLabel.Visible = false;
 
             return eventEntity;
 
@@ -146,8 +212,6 @@ namespace InfoAnalySystem.Forms {
         /// <returns></returns>
         private List<EventEntity> analysisEventText(string s)
         {
-            //{{{[4月17日上午10时59分][，][晋江市灵源街道好日子超市门口][，一辆平板][载货车][与一辆][货车][发生][碰撞]}{[3月18日上午8时30分][，][兴庆区丽景北街][发生一起][车祸]}}{{[时间][None][地点][None][参与者][None][参与者][None][trigger-交通事故]}{[时间][None][地点][None][trigger-交通事故]}}}
-            //{{{[4月17日上午10时59分][，][晋江市灵源街道好日子超市门口][，一辆平板][载货车][与一辆][货车][发生][碰撞]}}{{[时间][None][地点][None][参与者][None][参与者][None][trigger-交通事故]}}}
             List<EventEntity> eventList = new List<EventEntity>();
             try
             {
@@ -317,16 +381,6 @@ namespace InfoAnalySystem.Forms {
                         coordinateList.Add(new Coordinate(typeList[i], triggerPoint, endPoint));
                     }
                 }
-
-                //foreach(Coordinate coordinate in coordinateList)
-                //{
-                //    coordinate.startPoint = triggerPoint;
-                //}
-                //this.eventShowPanel.Paint += paintEventLine;
-                //newEventPanel.BackColor = Color.White;
-                //newEventPanel.Paint += paintEventLine;
-                //newEventPanel.AutoSize = true;
-                //this.eventShowPanel.Controls.Add(newEventPanel);
 
             }
             else
