@@ -81,7 +81,8 @@ namespace InfoAnalySystem {
             }
             else if (tagName.Equals(Const.eventPage)) {
                 this.basePanel1.Visible = true;
-                eventExtForm.doEventExtract(newsId);
+                //eventExtForm.doEventExtract(newsId);
+                eventExtForm.showEvent(newsId);
             }
             else if (tagName.Equals(Const.eventTimeBar)) {
                 this.basePanel1.Visible = false;
