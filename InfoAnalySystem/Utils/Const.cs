@@ -20,7 +20,7 @@ namespace InfoAnalySystem.Utils
         public static string relationLibraryPage = "实体关系网络";
         public static string eventPage = "事件抽取";
         public static string eventTimeBar = "事件时间轴";
-        public static string eventCountry = "事件地区";
+        public static string eventCountry = "事件地图";
     }
     
 }

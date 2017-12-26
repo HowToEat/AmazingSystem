@@ -40,6 +40,7 @@ namespace InfoAnalySystem.Forms {
         /// <param name="e"></param>
         private void relLabelClick(object sender, EventArgs e) {
             this.relNetBackBtn.Visible = true;
+            this.saveDataBtn.Visible = true;
             this.refreshBtn.Visible = false;
             this.pageUpBtn.Visible = false;
             this.pageDownBtn.Visible = false;
@@ -61,6 +62,7 @@ namespace InfoAnalySystem.Forms {
         /// <param name="e"></param>
         private void relNetBackBtn_Click(object sender, EventArgs e) {
             this.relNetBackBtn.Visible = false;
+            this.saveDataBtn.Visible = false;
             this.refreshBtn.Visible = true;
             this.pageUpBtn.Visible = true;
             this.pageDownBtn.Visible = true;
@@ -68,6 +70,28 @@ namespace InfoAnalySystem.Forms {
             flowAnimator.Hide(relNetPanel);
             flowAnimator.WaitAllAnimations();
             flowAnimator.Show(relSetFlowLayout);
+        }
+
+        /// <summary>
+        /// 关系网图的保存按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void saveData_Click(object sender, EventArgs e)
+        {
+            Neo4jHelper neoHelper = new Neo4jHelper();
+            List<Entity> entityList= new List<Entity>();
+            foreach (Control c in relNetPanel.Controls)
+            {
+                if (c is Label)
+                {
+                    Entity entity = new Entity();
+                    entity.Name = c.Text;
+                    entityList.Add(entity);
+                }
+            }
+            neoHelper.CreateUniqueEntity(entityList);
+            neoHelper.CreateEntityRel(entityList);
         }
 
         private void pageUpBtn_Click(object sender, EventArgs e) {

@@ -31,8 +31,8 @@ namespace InfoAnalySystem {
             InitializeComponent();
             this.addPage(namedEntityForm, Const.nameEntityPage);
             this.addPage(relExtForm, Const.relationExtractionPage);
-            this.addPage(relNetForm, Const.relationLibraryPage);
             this.addPage(eventExtForm, Const.eventPage);
+            this.addPage(relNetForm, Const.relationLibraryPage);
             this.addPage(eventTimeBarForm, Const.eventTimeBar);
             this.addPage(eventCountryForm, Const.eventCountry);
         }
@@ -62,26 +62,32 @@ namespace InfoAnalySystem {
 
         //切换语料
         private void justDoIt(object sender, EventArgs e) {
-            if (newsListView.SelectedItems.Count <= 0)
-                return;
             //获取点击的标题
-            var newsId = (int)newsListView.SelectedItems[0].Tag;
+            var newsId = -1;
+            if (newsListView.SelectedItems.Count > 0)
+                newsId = (int)newsListView.SelectedItems[0].Tag;
             //获取当前页面名称
             string tagName = this.tabControl.SelectedTab.Text;
             if (tagName.Equals(Const.nameEntityPage)) {
+                this.basePanel1.Visible = true;
                 namedEntityForm.doNamedEntityRecognition(newsId);
-            } else if (tagName.Equals(Const.relationExtractionPage))
-            {
+            } else if (tagName.Equals(Const.relationExtractionPage)) {
+                this.basePanel1.Visible = true;
                 relExtForm.getEntitiesFromNews(newsId);
             }
-            else if (tagName.Equals(Const.relationLibraryPage))
-            {
+            else if (tagName.Equals(Const.relationLibraryPage)) {
+                this.basePanel1.Visible = false;
 
             }
-            else if (tagName.Equals(Const.eventPage))
-            {
-                eventExtForm.showEvent(newsId);
-                //eventExtForm.doEventExtract(newsId);
+            else if (tagName.Equals(Const.eventPage)) {
+                this.basePanel1.Visible = true;
+                eventExtForm.doEventExtract(newsId);
+            }
+            else if (tagName.Equals(Const.eventTimeBar)) {
+                this.basePanel1.Visible = false;
+            }
+            else if (tagName.Equals(Const.eventCountry)) {
+                this.basePanel1.Visible = false;
             }
         }
 

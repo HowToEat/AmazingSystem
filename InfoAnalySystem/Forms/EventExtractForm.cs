@@ -134,6 +134,8 @@ namespace InfoAnalySystem.Forms {
         /// <param name="newsId"></param>
         public async void doEventExtract(int newsId)
         {
+            if (newsId < 0)
+                return;
             News news = DBHelper.db.Queryable<News>().InSingle(newsId);
 
             string strInput = news.content;
