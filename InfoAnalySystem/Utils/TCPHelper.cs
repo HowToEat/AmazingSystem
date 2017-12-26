@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Web;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,10 +39,11 @@ namespace InfoAnalySystem.Utils {
             byte[] buffer = new byte[client.ReceiveBufferSize];
             NetworkStream stream = client.GetStream();//获取网络流
             stream.Read(buffer, 0, buffer.Length);//读取网络流中的数据 
-            var receiveString = Encoding.Default.GetString(buffer).Trim('\0');//转换成字符串
+            var receiveString = HttpUtility.UrlDecode(buffer,Encoding.UTF8).Trim('\0');
             // 读取参数
             var receiveAddr = receiveString.Split(new[] { "\r\n" },StringSplitOptions.RemoveEmptyEntries)[0];
-            var receiveFunc = receiveAddr.Substring(4, receiveAddr.Length - "GET  HTTP/1.1".Length);
+            receiveAddr = receiveAddr.Substring(receiveAddr.IndexOf('/'), receiveAddr.Length - "GET  HTTP/1.1".Length);
+            var receiveFunc = "";
             var receiveParamDict = new Dictionary<string, string>();
             if (receiveAddr.Contains('?')) {
                 receiveFunc = receiveAddr.Substring(0, receiveAddr.IndexOf('?'));
@@ -50,20 +52,21 @@ namespace InfoAnalySystem.Utils {
                     if (paramStr.Contains('=')) {
                         var paraName = paramStr.Substring(0, paramStr.IndexOf('='));
                         var paraValue = paramStr.Substring(paramStr.IndexOf('=') + 1);
-                        receiveParamDict.Add(paraName, paraValue);
+                        receiveParamDict.Add(paraName.Trim(), paraValue.Trim());
                     } else {
                         receiveParamDict.Add(paramStr, null);
                     }
                 }
+            }else {
+                receiveFunc = receiveAddr;
             }
             // 执行相应函数
-            if (responceFuncDict.ContainsKey(receiveFunc)) {
-                string responseBody = responceFuncDict[receiveFunc](receiveParamDict);
+            if (responceFuncDict.ContainsKey(receiveFunc.Trim())) {
+                string responseBody = responceFuncDict[receiveFunc.Trim()](receiveParamDict);
                 // 响应信息  
                 string statusLine = "HTTP/1.1 200 OK\r\n";
                 byte[] statusLineBytes = Encoding.UTF8.GetBytes(statusLine); // 状态行 
-                string responseHeader = String.Format("charset=UTF-8\r\nContent-Length:{0}\r\nAccess-Control-Allow-Origin:*\r\n",
-                                                                                        responseBody.Length);
+                string responseHeader = "charset=UTF-8\r\nAccess-Control-Allow-Origin:*\r\n";
                 byte[] responseHeaderBytes = Encoding.UTF8.GetBytes(responseHeader);//  回应头 
                 byte[] responseBodyBytes = Encoding.UTF8.GetBytes(responseBody);//   内容部分   
                 // 发送回应信息  

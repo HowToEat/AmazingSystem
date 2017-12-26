@@ -4,8 +4,8 @@
 .listWrap .filterform{border:1px solid #999;border-radius:15px;padding:4px 12px;background-color:#fff;}
 .listWrap .filterform input{font-size:12px;padding:0;border:0;outline:none;}
 ul.listContent {height:600px;overflow:auto;}
-ul.listContent li{padding:8px;list-style:none;border-top:1px solid #ccc;border-bottom:1px solid #fff;}
-ul.listContent li a{color:#000;font-family:Arial,Helvetica,sans-serif;font-size:11px;text-decoration:none;}
+ul.listContent li{padding:8px;list-style:none;border-top:1px solid #ccc;border-bottom:1px solid #fff;cursor:pointer;}
+ul.listContent li:hover{background-color: #7dbadf;}
+ul.listContent li p{font-family:Arial,Helvetica,sans-serif;font-size:13px;text-decoration:none;margin:auto}
 ul.listContent{margin:0;padding:0;}.clear{clear:both;}
-ul.listContent li a{font-size:12px}
 td{vertical-align:top}

@@ -18,18 +18,19 @@
 		<p>搜索事件:</p>
 		<div id="searchForm"></div>
 	</div>
-	<ul class="listContent">
-		<li><a href="#">张三</a></li>
+	<ul class="listContent" id="topicListContent">
+		<li><p href="#">张三</p></li>
 	</ul>
 </div>
 	</td>
 	
 	
 	<td>
-	<h1>民权运动1954-1964</h1>
+	<h1 id="topicLabel">民权运动1954-1964</h1>
 	<div id="timelineContainer" class="timelineContainer">
 		<div class="timelineToggle"><p><a class="expandAll">+ 全部展开</a></p></div>
-
+		<div id="eventContent">
+		
 		<div class="timelineMajor">
 			<h2 class="timelineMajorMarker"><span>1955</span></h2>
 			<dl class="timelineMinor">
@@ -49,7 +50,8 @@
 				</dd><!-- /.timelineEvent -->
 			</dl><!-- /.timelineMinor -->
 		</div><!-- /.timelineMajor -->
-
+		
+		</div>
 		<br class="clear">
 	</div><!-- /#timelineContainer -->
 	</td>
@@ -58,7 +60,49 @@
 <!-- GLOBAL CORE SCRIPTS -->
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/timeliner.js"></script>
-<script type="text/javascript" src="../sql.js"></script>
+<script>
+<!-- 加载左侧topic列表 -->
+$(function() {
+	$.ajax({ url: "http://127.0.0.1:13000/eventTimeBar/getTopicList",
+		success: function(data){
+			topicList = JSON.parse(data);
+			$('#topicListContent').html("");
+			for(var i=0;i<topicList.length;i++){
+				$('#topicListContent').append("<li onclick=\"showEventsByTopic('"+topicList[i]+"');\"><p>"+topicList[i]+"</p></li>");
+			}
+		}
+	});
+});
+<!-- Topic点击事件，查询数据库并展示events -->
+function showEventsByTopic(topic){
+	$.ajax({ url: "http://127.0.0.1:13000/eventTimeBar/getEventsByTopic?topic="+topic,
+		success: function(data){
+			$('#topicLabel').html(topic);
+			timeEventDict = JSON.parse(data);
+			var htmlStr = "";
+			for(var time in timeEventDict){
+				$('#eventContent').html("");
+				htmlStr +=
+					"<div class='timelineMajor'>"+
+						"<h2 class='timelineMajorMarker'><span>"+time+"</span></h2>";
+				for(var i=0;i<timeEventDict[time].length;i++){
+					var event = timeEventDict[time][i];
+					htmlStr +=
+						"<dl class='timelineMinor'>"+
+							"<dt id='"+event.id+"'><a>"+event.target+"</a></dt>"+
+							"<dd class='timelineEvent' id='"+event.id+"EX' style='display:none;'>"+
+								"<h3>"+event.time.replace("T"," ")+"</h3>"+
+								"<p>"+event.comment+"</p>"+
+							"</dd>"+
+						"</dl>'";
+				}
+				htmlStr += "</div>";
+				$('#eventContent').append(htmlStr);
+			}
+		}
+	});
+}
+</script>
 <!-- 列表搜索逻辑 -->
 <script type="text/javascript">
 (function($) {
@@ -80,7 +124,7 @@
         $(input).change(function() {
             var filter = $(this).val();
             if (filter) {
-                $matches = $(list).find("a:Contains(" + filter + ")").parent();
+                $matches = $(list).find("p:Contains(" + filter + ")").parent();
                 $("li", list).not($matches).slideUp();
                 $matches.slideDown();
             } else {
@@ -93,34 +137,8 @@
     }
     $(function() {
         filterList($("#searchForm"), $(".listContent"));
-		$.ajax({ url: "http://127.0.0.1:13000/good",
-			success: function(data){
-				alert(data);
-			}
-		});
     });
 })(jQuery);	
-</script>
-<!-- sqlite查询数据 -->
-<script>
-<!-- var xhr = new XMLHttpRequest(); -->
-<!-- xhr.open('GET', '../../../data.db', true); -->
-<!-- xhr.responseType = 'arraybuffer'; -->
-<!-- xhr.onload = function(e) { -->
-  <!-- var uInt8Array = new Uint8Array(this.response); -->
-  <!-- var db = new SQL.Database(uInt8Array); -->
-  <!-- var contents = db.exec("SELECT * FROM 'Event';"); -->
-  <!-- // contents is now [{columns:['col1','col2',...], values:[[first row], [second row], ...]}] -->
-<!-- }; -->
-<!-- xhr.send(); -->
-
-<!-- var sql = window.SQL; -->
-<!-- var fso = new ActiveXObject(Scripting.FileSystemObject);  -->
-<!-- //文件绝对路径;文件的常数 只读=1,只写=2,追加=8 等权限;是否允许新建；  -->
-<!-- var file = fso.createtextfile('../../../data.db',1,false); -->
-
-<!-- var db = new sql.Database(file); -->
-<!-- var c = db.exec("SELECT * FROM 'Event';"); -->
 </script>
 <!-- 时间轴处理逻辑 -->
 <script>
