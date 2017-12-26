@@ -22,6 +22,7 @@ namespace InfoAnalySystem.Utils
         public static string eventPage = "事件抽取";
         public static string eventTimeBar = "事件时间轴";
         public static string eventCountry = "事件地图";
+        public static string textClassiPage = "文本分类";
     }
     
 }
