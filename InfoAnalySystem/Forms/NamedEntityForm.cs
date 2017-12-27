@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,16 +19,79 @@ namespace InfoAnalySystem.Forms {
         private List<Section> sectionList = new List<Section>();
         private List<EntityMention> entityMentionList = new List<EntityMention>();
         private Dictionary<string, NamedEntity> entityMap = new Dictionary<string, NamedEntity>();
-
+        private int currentNewsId=-1;
         public NamedEntityForm() {
             InitializeComponent();
         }
 
+        //选择方法
+        public void doNamedEntityRecognition(int newsId)
+        {
+            currentNewsId = newsId;
+            if (radioButton1.Checked)
+            {
+                doNamedEntityRecognitionByCRF(newsId);
+            }else if (radioButton2.Checked)
+            {
+                doNamedEntityRecognitionByNN(newsId);
+            }
+            
+        }
+        // 选择方法
+        private void doNamedEntityRecognition(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                doNamedEntityRecognitionByCRF(currentNewsId);
+            }
+            else if (radioButton2.Checked)
+            {
+                doNamedEntityRecognitionByNN(currentNewsId);
+            }
+        }
+
         /// <summary>
-        /// 进行命名实体标记
+        /// 利用bi-LSTM ensemble进行命名实体标记
         /// </summary>
         /// <param name="newsId"></param>
-        public void doNamedEntityRecognition(int newsId) {
+        private void doNamedEntityRecognitionByNN(int newsId)
+        {
+            if (newsId < 0)
+                return;
+            saveBtn.Visible = true;
+            this.newsId = newsId;
+            this.sectionList.Clear();
+            this.entityMentionList.Clear();
+            this.entityMap.Clear();
+            //清空panel
+            this.richTextBox1.Text = "";
+            News news = DBHelper.db.Queryable<News>().InSingle(newsId);
+            if(news.resultNER == null){
+                doNamedEntityRecognitionByCRF(newsId);
+                return;
+            }
+            string[] sections = news.resultNER.Split('\n');
+            int secIndex = 0;
+            foreach (string sectionValue in sections)
+            {
+                var section = new Section();
+                section.newsId = news.id;
+                section.indexInNews = secIndex;
+                section.value = sectionValue;
+                sectionList.Add(section);
+                // 识别命名实体
+                splitEntity(secIndex, sectionValue);
+                // 下一section在新闻中的位置
+                int tokensNum = sectionValue.ToCharArray().Count(x => x == '/');
+                secIndex += tokensNum;
+            }
+        }
+
+        /// <summary>
+        /// 利用CRF进行命名实体标记
+        /// </summary>
+        /// <param name="newsId"></param>
+        public void doNamedEntityRecognitionByCRF(int newsId) {
             if (newsId < 0)
                 return;
             saveBtn.Visible = true;
@@ -44,7 +108,23 @@ namespace InfoAnalySystem.Forms {
             string[] sections = news.content.Split(' ');
             int secIndex = 0;
             foreach (string sectionValue in sections) {
+                if (sectionValue == "")
+                {
+                    continue;
+                }
                 var tokens = posSeg.Cut(sectionValue);
+                FileStream fs = new FileStream("E:\\asda.txt", FileMode.Append);
+                StreamWriter sw = new StreamWriter(fs);
+                String line = "";
+                foreach (Pair word in tokens)
+                {
+                    line = line + word.Word +"/"+ word.Flag + " ";
+                }
+                sw.Write(line.Substring(0,line.Length-1)+"\n");
+                sw.Flush();
+                //关闭流
+                sw.Close();
+                fs.Close();
                 // 生成实例存入sectionList,用于存入数据库
                 var section = new Section();
                 section.newsId = news.id;
@@ -52,7 +132,8 @@ namespace InfoAnalySystem.Forms {
                 section.value = sectionValue;
                 sectionList.Add(section);
                 // 识别命名实体
-                splitEntity(secIndex, tokens);
+                string content = string.Join(" ", tokens.Select(token => string.Format("{0}/{1}", token.Word, token.Flag)));
+                splitEntity(secIndex, content);
                 // 下一section在新闻中的位置
                 secIndex += tokens.Count();
             }
@@ -63,16 +144,24 @@ namespace InfoAnalySystem.Forms {
         /// </summary>
         /// <param name="sectionIndex">section在新闻中的位置</param>
         /// <param name="tokens">section中词--词性pair的集合</param>
-        private void splitEntity(int sectionIndex, IEnumerable<Pair> tokens) {
+        private void splitEntity(int sectionIndex, string content) {
             string sentence = "";
             int entityFlag = -1;
             int wordIndex = -1;
+            if(content.Equals("")|| content.Equals(" "))
+            {
+                return;
+            }
             addMargin();//段首添加缩进
-            foreach (Pair word in tokens) {
-                int wordFlag = Array.IndexOf(Const.entityList, word.Flag);
+            string[] tokens = content.Split(' ');
+            foreach (string wordWithFlag in tokens) {
+                string[] tempArray = wordWithFlag.Split('/');
+                string word = tempArray[0];
+                string flag = tempArray[1];
+                int wordFlag = Array.IndexOf(Const.entityList, flag);
                 if (sentence != "") {
                     if (entityFlag == wordFlag) {
-                        sentence += word.Word;
+                        sentence += word;
                         wordIndex++;
                     } else {
                         addText(sentence, entityFlag);
@@ -93,12 +182,12 @@ namespace InfoAnalySystem.Forms {
                             }
                         }
                         entityFlag = wordFlag;
-                        sentence = word.Word;
+                        sentence = word;
                         wordIndex++;
                     }
                 } else {
                     entityFlag = wordFlag;
-                    sentence = word.Word;
+                    sentence = word;
                     wordIndex++;
                 }
             }
@@ -115,7 +204,26 @@ namespace InfoAnalySystem.Forms {
         /// <param name="flag">为何类命名实体</param>
         private void addText(string sentence, int flag) {
             if (flag >= 0) {
-                richTextBox1.SelectionColor = Color.Blue;
+                if (flag == 0)
+                {
+                    richTextBox1.SelectionColor = Color.Blue;
+                }
+                else if (flag == 1)
+                {
+                    richTextBox1.SelectionColor = Color.Chartreuse;
+                }
+                else if (flag == 2)
+                {
+                    richTextBox1.SelectionColor = Color.Orange;
+                }
+                else if (flag == 3)
+                {
+                    richTextBox1.SelectionColor = Color.Purple;
+                }
+                else if (flag == 4)
+                {
+                    richTextBox1.SelectionColor = Color.Brown;
+                }
                 richTextBox1.AppendText(sentence);
             } else {
                 richTextBox1.SelectionColor = Color.Black;
