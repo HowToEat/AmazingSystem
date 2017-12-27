@@ -286,7 +286,7 @@
     <Content Include="python\relation_classification\model.py" />
     <Content Include="python\relation_classification\data\word_embeddings.txt" />
     <Content Include="python\relation_classification\data\words.lst" />
-    <Content Include="Resources\Event_张润岩.sql" />
+    <Content Include="Resources\Event.sql" />
     <Content Include="Resources\HtmlViews\sql.js" />
     <Content Include="Resources\JiebaConfig\cn_synonym.txt" />
     <Content Include="Resources\JiebaConfig\dict.txt" />
