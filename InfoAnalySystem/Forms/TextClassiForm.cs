@@ -33,23 +33,29 @@ namespace InfoAnalySystem.Forms
         {
             
             this.newsId = newsId;
-            this.sectionList.Clear();
-            //清空panel
-            this.richTextBox1.Text = "";
-            News news = DBHelper.db.Queryable<News>().InSingle(newsId);                       
-            // 将新闻按段落分组
-            string[] sections = news.content.Split(' ');
-            foreach (string sectionValue in sections)
-            {
-                addMargin();//段首添加缩进
-                if (sectionValue != "")
+            if (this.newsId > 0) {
+                this.sectionList.Clear();
+                //清空panel
+                this.richTextBox1.Text = "";
+                News news = DBHelper.db.Queryable<News>().InSingle(newsId);
+                // 将新闻按段落分组
+
+                string[] sections = news.content.Split(' ');
+                foreach (string sectionValue in sections)
                 {
-                    addText(sectionValue);
-                    addLineBreak();
+                    addMargin();//段首添加缩进
+                    if (sectionValue != "")
+                   {
+                        addText(sectionValue);
+                        addLineBreak();
+                    }
+
+
                 }
-                
-                
             }
+           
+            
+            
         }
 
        
