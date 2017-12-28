@@ -11,6 +11,7 @@
 
 
 <body>
+<input type="hidden" id="port" value="13000"/>
 <table><tr>
 	<td>
 <div class="listWrap">
@@ -63,7 +64,7 @@
 <script>
 <!-- 加载左侧topic列表 -->
 $(function() {
-	$.ajax({ url: "http://127.0.0.1:13000/eventTimeBar/getTopicList",
+	$.ajax({ url: "http://127.0.0.1:"+$('#port').val()+"/eventTimeBar/getTopicList",
 		success: function(data){
 			topicList = JSON.parse(data);
 			$('#topicListContent').html("");
@@ -75,7 +76,7 @@ $(function() {
 });
 <!-- Topic点击事件，查询数据库并展示events -->
 function showEventsByTopic(topic){
-	$.ajax({ url: "http://127.0.0.1:13000/eventTimeBar/getEventsByTopic?topic="+topic,
+	$.ajax({ url: "http://127.0.0.1:"+$('#port').val()+"/eventTimeBar/getEventsByTopic?topic="+topic,
 		success: function(data){
 			$('#topicLabel').html(topic);
 			timeEventDict = JSON.parse(data);
