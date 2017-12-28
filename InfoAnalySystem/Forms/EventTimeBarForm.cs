@@ -16,20 +16,10 @@ namespace InfoAnalySystem.Forms {
 
         public EventTimeBarForm() {
             InitializeComponent();
-
-            // 替换html文件
-            //var htmlDoc = new HtmlAgilityPack.HtmlDocument();
-            //using (var htmlFileR = File.OpenRead(htmlPath + "index.html")) {
-            //    htmlDoc.Load(htmlFileR);
-            //    htmlDoc.DocumentNode.SelectSingleNode("//*[@class='container']/h1").InnerHtml = "nice!";
-            //}
-            //File.Delete(htmlPath + "index_fill.html");
-            //using (var htmlFileW = File.OpenWrite(htmlPath + "index_fill.html")) {
-            //    htmlDoc.Save(htmlFileW);
-            //}
-
+            
             // 载入网页
-            this.webKitBrowser1.Navigate(Const.htmlPath + @"EventTimeBar\index.html");
+            var htmlPathWithPort = TCPHelper.fillPortInHtml(Const.htmlPath+@"EventTimeBar\", "index.html");
+            this.webKitBrowser1.Navigate(htmlPathWithPort);
             TCPHelper.responceFuncDict.Add("/eventTimeBar/getTopicList", getTopicList);
             TCPHelper.responceFuncDict.Add("/eventTimeBar/getEventsByTopic", getEventsByTopic);
         }

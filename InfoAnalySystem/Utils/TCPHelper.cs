@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Web;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace InfoAnalySystem.Utils {
     class TCPHelper {
@@ -30,7 +31,30 @@ namespace InfoAnalySystem.Utils {
         }
 
         /// <summary>
-        /// 监听相应事件
+        /// 将port端口加入html文件的id=port控件
+        /// </summary>
+        /// <param name="htmlDirPath"></param>
+        /// <param name="htmlFileName"></param>
+        /// <returns></returns>
+        public static string fillPortInHtml(string htmlDirPath, string htmlFileName) {
+            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
+            var fileName = htmlFileName.Substring(0, htmlFileName.LastIndexOf('.'));
+            using (var htmlFileR = File.OpenRead(htmlDirPath+ htmlFileName)) {
+                htmlDoc.Load(htmlFileR, Encoding.UTF8);
+                var portInput = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='port']");
+                if (portInput != null)
+                    portInput.SetAttributeValue("value", TCPHelper.port.ToString());
+            }
+            var newFileFullPath = htmlDirPath + "/" + fileName + "_fill.html";
+            File.Delete(newFileFullPath);
+            using (var htmlFileW = File.OpenWrite(newFileFullPath)) {
+                htmlDoc.Save(htmlFileW);
+            }
+            return newFileFullPath;
+        }
+
+        /// <summary>
+        /// 监听响应事件
         /// </summary>
         /// <param name="ar"></param>
         private static void HandleTcpClientAccepted(IAsyncResult ar) {

@@ -11,5 +11,6 @@ namespace InfoAnalySystem.PO {
         public string title { get; set; }
         public DateTime time { get; set; }
         public string content { get; set; }
+        public string resultNER { get; set; }
     }
 }
