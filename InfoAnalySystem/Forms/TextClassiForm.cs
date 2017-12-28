@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InfoAnalySystem.PO;
 using InfoAnalySystem.Utils;
-using JiebaNet.Segmenter;
-using JiebaNet.Segmenter.PosSeg;
+
 
 
 namespace InfoAnalySystem.Forms
@@ -23,16 +22,22 @@ namespace InfoAnalySystem.Forms
         public TextClassiForm()
         {
             InitializeComponent();
+            contentPanel.Dock = DockStyle.Fill;
+            //relationGridView.Dock = DockStyle.Fill;
         }
 
         /// <summary>
-        /// 进行文本分类
+        /// 接收一条新闻,进行文本分类
         /// </summary>
         /// <param name="newsId"></param>
         public void doTextClassification(int newsId)
         {
             
             this.newsId = newsId;
+            back_button.Visible = false;
+            result_panel.Visible = false;
+            //panel4.Visible = true;
+            contentPanel.Visible = true;
             if (this.newsId > 0) {
                 this.sectionList.Clear();
                 //清空panel
@@ -95,17 +100,79 @@ namespace InfoAnalySystem.Forms
 
         }
 
-        private void 文本分类ToolStripMenuItem_Click(object sender, EventArgs e)
+      
+      
+
+       
+     
+        /// <summary>
+        /// 分类按钮点击事件，跳转到结果展示页面
+        /// </summary>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // 查询数据库得到新闻的信息
+            // 切换页面
+            back_button.Visible = true;
+           // contentPanel.Visible = false;
+           // result_panel.Visible = true;
+            leafAnimator.Hide(contentPanel);
+            
+            leafAnimator.WaitAllAnimations();
+            leafAnimator.Show(result_panel);
+
+
+
+
+
+            // 将查询得到的信息进行展示
+
+
+
+
+
+
+        }
+        /// <summary>
+        /// 返回按钮
+        /// </summary>
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (!back_button.Visible)
+                return;
+            back_button.Visible = false;
+            leafAnimator.Hide(result_panel);        
+            leafAnimator.WaitAllAnimations();
+            leafAnimator.Show(contentPanel);
+
+            
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void 传统方法ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void contentPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
 
         }
