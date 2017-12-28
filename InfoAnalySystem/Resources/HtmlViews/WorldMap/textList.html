@@ -32,7 +32,7 @@ $(function(){
 			}else{
 				var eventList = JSON.parse(data);
 				if(eventList.length == 0)
-					$("#eventListContent").html("<h4>未收录该国家的新闻</h4>");
+					$("#eventListContent").html("<h4>未收录该国家或地区的新闻</h4>");
 				else{
 					var htmlStr = "";
 					for(var i=0;i<eventList.length;i++){
