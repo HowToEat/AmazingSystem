@@ -45,7 +45,7 @@ $(function(){
 								"</h4>"+
 							"</div>"+
 							"<div class='collapse-card__body' style='display: none;'>"+
-								event.comment+
+								event.comment.replace(/\\n/,"</p><p>")+
 							"</div>"+
 						"</div>";
 					}
