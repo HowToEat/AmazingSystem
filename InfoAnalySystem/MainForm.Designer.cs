@@ -26,6 +26,8 @@ namespace InfoAnalySystem {
         /// </summary>
         private void InitializeComponent() {
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.homePage = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.basePanel1 = new System.Windows.Forms.Panel();
             this.newsListView = new CCWin.SkinControl.SkinListView();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -35,6 +37,8 @@ namespace InfoAnalySystem {
             this.totalPage = new System.Windows.Forms.Label();
             this.pageSize = new System.Windows.Forms.Label();
             this.basePanel2 = new System.Windows.Forms.Panel();
+            this.tabControl.SuspendLayout();
+            this.homePage.SuspendLayout();
             this.basePanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.basePanel2.SuspendLayout();
@@ -42,7 +46,9 @@ namespace InfoAnalySystem {
             // 
             // tabControl
             // 
+            this.tabControl.Controls.Add(this.homePage);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl.Font = new System.Drawing.Font("宋体", 12F);
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl.Name = "tabControl";
@@ -50,6 +56,31 @@ namespace InfoAnalySystem {
             this.tabControl.Size = new System.Drawing.Size(827, 715);
             this.tabControl.TabIndex = 8;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.justDoIt);
+            // 
+            // homePage
+            // 
+            this.homePage.BackgroundImage = global::InfoAnalySystem.Properties.Resources.backgroundImg;
+            this.homePage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.homePage.Controls.Add(this.label1);
+            this.homePage.Location = new System.Drawing.Point(4, 30);
+            this.homePage.Name = "homePage";
+            this.homePage.Padding = new System.Windows.Forms.Padding(3);
+            this.homePage.Size = new System.Drawing.Size(819, 681);
+            this.homePage.TabIndex = 0;
+            this.homePage.Text = "首页";
+            this.homePage.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("宋体", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.Crimson;
+            this.label1.Location = new System.Drawing.Point(3, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(813, 675);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "赛博空间数据管理原型系统";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // basePanel1
             // 
@@ -60,6 +91,7 @@ namespace InfoAnalySystem {
             this.basePanel1.Name = "basePanel1";
             this.basePanel1.Size = new System.Drawing.Size(270, 715);
             this.basePanel1.TabIndex = 9;
+            this.basePanel1.Visible = false;
             // 
             // newsListView
             // 
@@ -160,9 +192,11 @@ namespace InfoAnalySystem {
             this.Controls.Add(this.basePanel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
-            this.Text = "信息分析系统";
+            this.Text = "赛博空间数据管理原型系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.tabControl.ResumeLayout(false);
+            this.homePage.ResumeLayout(false);
             this.basePanel1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
@@ -182,6 +216,8 @@ namespace InfoAnalySystem {
         private Label pageNo;
         private Label totalPage;
         private Label pageSize;
+        private TabPage homePage;
+        private Label label1;
     }
 }
 
