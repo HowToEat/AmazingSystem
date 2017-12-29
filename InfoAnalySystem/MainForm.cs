@@ -30,13 +30,13 @@ namespace InfoAnalySystem {
 
         public MainForm() {
             InitializeComponent();
+            this.addPage(textClassiForm, Const.textClassiPage);
             this.addPage(namedEntityForm, Const.nameEntityPage);
             this.addPage(relExtForm, Const.relationExtractionPage);
             this.addPage(eventExtForm, Const.eventPage);
             this.addPage(relNetForm, Const.relationLibraryPage);
             this.addPage(eventTimeBarForm, Const.eventTimeBar);
             this.addPage(eventCountryForm, Const.eventCountry);
-            this.addPage(textClassiForm, Const.textClassiPage);
         }
         /// <summary>
         /// 加入一个标签页
@@ -70,7 +70,9 @@ namespace InfoAnalySystem {
                 newsId = (int)newsListView.SelectedItems[0].Tag;
             //获取当前页面名称
             string tagName = this.tabControl.SelectedTab.Text;
-            if (tagName.Equals(Const.nameEntityPage)) {
+            if (tagName.Equals(Const.homePage)) {
+                this.basePanel1.Visible = false;
+            }else if (tagName.Equals(Const.nameEntityPage)) {
                 this.basePanel1.Visible = true;
                 namedEntityForm.doNamedEntityRecognition(newsId);
             } else if (tagName.Equals(Const.relationExtractionPage)) {
