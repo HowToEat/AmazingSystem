@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InfoAnalySystem.PO;
 using InfoAnalySystem.Utils;
-
-
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace InfoAnalySystem.Forms
 {
@@ -63,8 +62,22 @@ namespace InfoAnalySystem.Forms
             
         }
 
-       
-       
+
+
+        //显示图表
+        private void showChart(Chart chart, double[] value)
+        {
+            string[] xValue = { "A", "B", "C", "D" };     //设置标签
+            double[] yValue = value;    //获取要显示的值
+
+            chart.BorderSkin.SkinStyle = BorderSkinStyle.Emboss;    //设置图表边框为浮雕效果
+            chart.BorderlineDashStyle = ChartDashStyle.Solid;    //设置图表边框为实线
+            chart.BorderlineWidth = 1;    //设置图表边框的宽度
+
+            chart.Series[0].ChartType = SeriesChartType.Pie;    //设置图表类型为饼图
+            chart.Series[0].CustomProperties = "DoughnutRadius=25, PieDrawingStyle=Concave, CollectedLabel=Other, MinimumRelative" + "PieSize=20";    //设置饼图的参数
+            chart.Series[0].Points.DataBindXY(xValue, yValue);    //将数据绑定到图表
+        }
 
         /// <summary>
         /// 在界面加文字进行展示
@@ -113,25 +126,17 @@ namespace InfoAnalySystem.Forms
             // 查询数据库得到新闻的信息
             // 切换页面
             back_button.Visible = true;
-           // contentPanel.Visible = false;
-           // result_panel.Visible = true;
+            double[] value = { 30, 40, 50, 60 };    //要显示的数据
+           
+
             leafAnimator.Hide(contentPanel);
-            
+            result_panel.Location = contentPanel.Location;
+            result_panel.Size = contentPanel.Size;
             leafAnimator.WaitAllAnimations();
-            leafAnimator.Show(result_panel);
-
-
-
-
-
-            // 将查询得到的信息进行展示
-
-
-
-
-
+            leafAnimator.Show(result_panel);           
 
         }
+
         /// <summary>
         /// 返回按钮
         /// </summary>
@@ -140,22 +145,21 @@ namespace InfoAnalySystem.Forms
             if (!back_button.Visible)
                 return;
             back_button.Visible = false;
-            leafAnimator.Hide(result_panel);        
+            leafAnimator.Hide(result_panel);
+            contentPanel.Location = result_panel.Location;
+            contentPanel.Size = result_panel.Size;
             leafAnimator.WaitAllAnimations();
             leafAnimator.Show(contentPanel);
 
+
             
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void result_panel_Paint(object sender, PaintEventArgs e)
         {
-
+            double[] value = { 30, 40, 50, 60 };    //要显示的数据
+            showChart(this.chart1, value);    //显示图表
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void contentPanel_Paint(object sender, PaintEventArgs e)
         {
@@ -176,5 +180,7 @@ namespace InfoAnalySystem.Forms
         {
 
         }
+
+     
     }
 }

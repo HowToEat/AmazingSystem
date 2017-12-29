@@ -29,14 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            CCWin.SkinControl.Animation animation1 = new CCWin.SkinControl.Animation();
+            CCWin.SkinControl.Animation animation3 = new CCWin.SkinControl.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextClassiForm));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.result_panel = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.leafAnimator = new CCWin.SkinControl.SkinAnimator(this.components);
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
@@ -47,15 +49,18 @@
             this.contentPanel = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.result_panel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
+            this.radioButton2.Checked = true;
             this.leafAnimator.SetDecoration(this.radioButton2, CCWin.SkinControl.DecorationType.None);
             this.radioButton2.Location = new System.Drawing.Point(136, 21);
             this.radioButton2.Name = "radioButton2";
@@ -73,7 +78,6 @@
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(41, 16);
             this.radioButton5.TabIndex = 22;
-            this.radioButton5.TabStop = true;
             this.radioButton5.Text = "SVM";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
@@ -85,7 +89,6 @@
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(41, 16);
             this.radioButton1.TabIndex = 23;
-            this.radioButton1.TabStop = true;
             this.radioButton1.Text = "CNN";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -98,50 +101,40 @@
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(65, 16);
             this.radioButton6.TabIndex = 24;
-            this.radioButton6.TabStop = true;
             this.radioButton6.Text = "CNN+RNN";
             this.radioButton6.UseVisualStyleBackColor = true;
             this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
             // 
             // result_panel
             // 
-            this.result_panel.Controls.Add(this.textBox1);
+            this.result_panel.Controls.Add(this.chart1);
             this.leafAnimator.SetDecoration(this.result_panel, CCWin.SkinControl.DecorationType.None);
-            this.result_panel.Location = new System.Drawing.Point(59, 139);
+            this.result_panel.Location = new System.Drawing.Point(77, 5);
             this.result_panel.Name = "result_panel";
-            this.result_panel.Size = new System.Drawing.Size(200, 100);
+            this.result_panel.Size = new System.Drawing.Size(529, 328);
             this.result_panel.TabIndex = 29;
-            // 
-            // textBox1
-            // 
-            this.leafAnimator.SetDecoration(this.textBox1, CCWin.SkinControl.DecorationType.None);
-            this.textBox1.Location = new System.Drawing.Point(34, 38);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "分类结果展示";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.result_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.result_panel_Paint);
             // 
             // leafAnimator
             // 
             this.leafAnimator.AnimationType = CCWin.SkinControl.AnimationType.Leaf;
             this.leafAnimator.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 1F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 0F;
-            this.leafAnimator.DefaultAnimation = animation1;
+            animation3.AnimateOnlyDifferences = true;
+            animation3.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.BlindCoeff")));
+            animation3.LeafCoeff = 1F;
+            animation3.MaxTime = 1F;
+            animation3.MinTime = 0F;
+            animation3.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicCoeff")));
+            animation3.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicShift")));
+            animation3.MosaicSize = 0;
+            animation3.Padding = new System.Windows.Forms.Padding(0);
+            animation3.RotateCoeff = 0F;
+            animation3.RotateLimit = 0F;
+            animation3.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.ScaleCoeff")));
+            animation3.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.SlideCoeff")));
+            animation3.TimeCoeff = 0F;
+            animation3.TransparencyCoeff = 0F;
+            this.leafAnimator.DefaultAnimation = animation3;
             this.leafAnimator.MaxAnimationTime = 700;
             this.leafAnimator.TimeStep = 0.04F;
             // 
@@ -153,7 +146,6 @@
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(83, 16);
             this.radioButton3.TabIndex = 25;
-            this.radioButton3.TabStop = true;
             this.radioButton3.Text = "我们的模型";
             this.radioButton3.UseVisualStyleBackColor = true;
             this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
@@ -166,7 +158,6 @@
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(41, 16);
             this.radioButton4.TabIndex = 21;
-            this.radioButton4.TabStop = true;
             this.radioButton4.Text = "KNN";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
@@ -227,7 +218,7 @@
             // 
             // contentPanel
             // 
-            this.contentPanel.BackColor = System.Drawing.Color.White;
+            this.contentPanel.BackColor = System.Drawing.Color.White;           
             this.contentPanel.Controls.Add(this.richTextBox1);
             this.leafAnimator.SetDecoration(this.contentPanel, CCWin.SkinControl.DecorationType.None);
             this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -255,6 +246,7 @@
             // 
             this.panel1.Controls.Add(this.contentPanel);
             this.panel1.Controls.Add(this.panel4);
+            this.contentPanel.Controls.Add(this.result_panel);
             this.leafAnimator.SetDecoration(this.panel1, CCWin.SkinControl.DecorationType.None);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -262,23 +254,39 @@
             this.panel1.Size = new System.Drawing.Size(906, 381);
             this.panel1.TabIndex = 31;
             // 
+            // chart1
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            this.leafAnimator.SetDecoration(this.chart1, CCWin.SkinControl.DecorationType.None);
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
+            this.chart1.Location = new System.Drawing.Point(42, 15);
+            this.chart1.Name = "chart1";
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart1.Series.Add(series3);
+            this.chart1.Size = new System.Drawing.Size(300, 300);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
+            // 
             // TextClassiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(906, 381);
-            this.Controls.Add(this.result_panel);
             this.Controls.Add(this.panel1);
             this.leafAnimator.SetDecoration(this, CCWin.SkinControl.DecorationType.None);
             this.Name = "TextClassiForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.TextClassiForm_Load);
             this.result_panel.ResumeLayout(false);
-            this.result_panel.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.contentPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -289,7 +297,6 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.Panel result_panel;
-        private System.Windows.Forms.TextBox textBox1;
         private CCWin.SkinControl.SkinAnimator leafAnimator;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton4;
@@ -300,5 +307,6 @@
         private System.Windows.Forms.Panel contentPanel;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
