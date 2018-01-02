@@ -84,7 +84,7 @@ function showEventsByTopic(topic){
 							"<dt id='"+event.id+"'><a>"+event.target+"</a></dt>"+
 							"<dd class='timelineEvent' id='"+event.id+"EX' style='display:none;'>"+
 								"<h3>"+event.time.replace("T"," ")+"</h3>"+
-								"<p>"+event.comment+"</p>"+
+								"<p>"+event.comment.replace(/\\n/,"</p><p>")+"</p>"+
 							"</dd>"+
 						"</dl>'";
 				}
