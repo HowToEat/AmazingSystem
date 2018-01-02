@@ -12,5 +12,6 @@ namespace InfoAnalySystem.PO {
         public DateTime time { get; set; }
         public string content { get; set; }
         public string resultNER { get; set; }
+        public string resultCLF { get; set; }
     }
 }
