@@ -66,7 +66,8 @@ namespace InfoAnalySystem.Forms {
             //清空panel
             this.richTextBox1.Text = "";
             News news = DBHelper.db.Queryable<News>().InSingle(newsId);
-            if(news.resultNER == null){
+            if(news.resultNER == null|| news.resultNER == "")
+            {
                 doNamedEntityRecognitionByCRF(newsId);
                 return;
             }
@@ -113,18 +114,18 @@ namespace InfoAnalySystem.Forms {
                     continue;
                 }
                 var tokens = posSeg.Cut(sectionValue);
-                FileStream fs = new FileStream("E:\\asda.txt", FileMode.Append);
-                StreamWriter sw = new StreamWriter(fs);
-                String line = "";
-                foreach (Pair word in tokens)
-                {
-                    line = line + word.Word +"/"+ word.Flag + " ";
-                }
-                sw.Write(line.Substring(0,line.Length-1)+"\n");
-                sw.Flush();
-                //关闭流
-                sw.Close();
-                fs.Close();
+                //FileStream fs = new FileStream("E:\\asda.txt", FileMode.Append);
+                //StreamWriter sw = new StreamWriter(fs);
+                //String line = "";
+                //foreach (Pair word in tokens)
+                //{
+                //    line = line + word.Word +"/"+ word.Flag + " ";
+                //}
+                //sw.Write(line.Substring(0,line.Length-1)+"\n");
+                //sw.Flush();
+                ////关闭流
+                //sw.Close();
+                //fs.Close();
                 // 生成实例存入sectionList,用于存入数据库
                 var section = new Section();
                 section.newsId = news.id;
@@ -165,7 +166,7 @@ namespace InfoAnalySystem.Forms {
                         wordIndex++;
                     } else {
                         addText(sentence, entityFlag);
-                        if (entityFlag >= 0) { //找到entity
+                        if (entityFlag >= 0 && entityFlag!=4) { //找到entity
                             var entityMention = new EntityMention();
                             entityMention.indexInSection = wordIndex;
                             entityMention.indexInNews = wordIndex + sectionIndex;
