@@ -151,7 +151,8 @@ namespace InfoAnalySystem.Forms
             result_panel.Location = contentPanel.Location;
             result_panel.Size = contentPanel.Size;
             leafAnimator.WaitAllAnimations();
-            leafAnimator.Show(result_panel);           
+            leafAnimator.Show(result_panel);
+            result_panel.Refresh();           
 
         }
 
