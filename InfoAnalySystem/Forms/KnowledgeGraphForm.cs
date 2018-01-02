@@ -17,8 +17,8 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
 namespace InfoAnalySystem.Forms {
-    public partial class RelExtForm : Form {
-        public RelExtForm() {
+    public partial class KnowledgeGraphForm : Form {
+        public KnowledgeGraphForm() {
             InitializeComponent();
             contentPanel.Dock = DockStyle.Fill;
             relationGridView.Dock = DockStyle.Fill;

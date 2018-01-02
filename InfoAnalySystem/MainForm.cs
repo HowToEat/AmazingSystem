@@ -20,7 +20,7 @@ using InfoAnalySystem.PO;
 namespace InfoAnalySystem {
     public partial class MainForm : Skin_Metro {
         private NamedEntityForm namedEntityForm = new NamedEntityForm();
-        private RelExtForm relExtForm = new RelExtForm();
+        private KnowledgeGraphForm relExtForm = new KnowledgeGraphForm();
         private RelNetForm relNetForm = new RelNetForm();
         private EventExtractForm eventExtForm = new EventExtractForm();
         private EventTimeBarForm eventTimeBarForm = new EventTimeBarForm();

@@ -1,5 +1,5 @@
 ﻿namespace InfoAnalySystem.Forms {
-    partial class RelExtForm {
+    partial class KnowledgeGraphForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -26,7 +26,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             CCWin.SkinControl.Animation animation1 = new CCWin.SkinControl.Animation();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelExtForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KnowledgeGraphForm));
             this.panel4 = new System.Windows.Forms.Panel();
             this.entityInput = new System.Windows.Forms.TextBox();
             this.backBtn = new System.Windows.Forms.Button();

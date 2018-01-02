@@ -165,11 +165,11 @@
     <Compile Include="Resources\Controls\LoadingCircle.Designer.cs">
       <DependentUpon>LoadingCircle.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\RelExtForm.cs">
+    <Compile Include="Forms\KnowledgeGraphForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\RelExtForm.Designer.cs">
-      <DependentUpon>RelExtForm.cs</DependentUpon>
+    <Compile Include="Forms\KnowledgeGraphForm.Designer.cs">
+      <DependentUpon>KnowledgeGraphForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\RelNetForm.cs">
       <SubType>Form</SubType>
@@ -220,8 +220,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Forms\RelExtForm.resx">
-      <DependentUpon>RelExtForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\KnowledgeGraphForm.resx">
+      <DependentUpon>KnowledgeGraphForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RelNetForm.resx">
       <DependentUpon>RelNetForm.cs</DependentUpon>
