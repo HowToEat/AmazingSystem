@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace InfoAnalySystem.PO {
-    class Event {
+    public class Event {
         public int? id { get; set; }
         public int? newsId { get; set; }
         public DateTime time { get; set; }

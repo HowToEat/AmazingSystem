@@ -28,6 +28,7 @@
 	
 	<td>
 	<h1 id="topicLabel">请选择一个事件主题</h1>
+	<button id = "save" onclick="saveNeo()">保存图数据库</button>
 	<div id="timelineContainer" class="timelineContainer">
 		<div class="timelineToggle"><p><a class="expandAll">+ 全部展开</a></p></div>
 		<div id="eventContent">
@@ -92,6 +93,14 @@ function showEventsByTopic(topic){
 				$('#eventContent').append(htmlStr);
 			}
 		}
+	});
+}
+
+<!-- 保存当前主题 -->
+function saveNeo(){
+	$.ajax({ url: "http://127.0.0.1:"+$('#port').val()+"/eventTimeBar/saveNeo",
+		success: function(data){
+			}
 	});
 }
 </script>

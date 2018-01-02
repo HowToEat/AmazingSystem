@@ -90,8 +90,8 @@ namespace InfoAnalySystem.Forms {
                     entityList.Add(entity);
                 }
             }
-            neoHelper.CreateUniqueEntity(entityList);
-            neoHelper.CreateEntityRel(entityList);
+            neoHelper.createUniqueEntity(entityList);
+            neoHelper.createEntityRel(entityList);
         }
 
         private void pageUpBtn_Click(object sender, EventArgs e) {
