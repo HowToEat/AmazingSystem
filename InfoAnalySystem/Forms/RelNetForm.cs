@@ -15,10 +15,16 @@ using SqlSugar;
 namespace InfoAnalySystem.Forms {
     public partial class RelNetForm : Form {
         private List<Label> relEntyLabelList;
+        private List<int> relColorList;
+        private static Color[] colors = {
+            Color.OrangeRed, Color.Goldenrod,
+            Color.DarkTurquoise, Color.LimeGreen
+        };
 
         public RelNetForm() {
             InitializeComponent();
             this.relEntyLabelList = new List<Label>();
+            this.relColorList = new List<int>();
             relSetFlowLayout.Visible = true;
             relNetPanel.Dock = DockStyle.Fill;
             relSetFlowLayout.Dock = DockStyle.Fill;
@@ -140,6 +146,7 @@ namespace InfoAnalySystem.Forms {
             relSetFlowLayout.Controls.Clear();
             foreach (var entityWithCount in entityList) {
                 Label relLabel = new Label();
+                relLabel.AutoEllipsis = true;
                 relLabel.Text = entityWithCount.model.value + "(" + entityWithCount.count + ")";
                 relLabel.Tag = entityWithCount.model;
                 relLabel.Cursor = Cursors.Hand;
@@ -173,13 +180,15 @@ namespace InfoAnalySystem.Forms {
                 .Select((em, sec) =>new { entityMention = em, section = sec })
                 .Take(10).ToList();
             relEntyLabelList.Clear();
+            relColorList.Clear();
             // 调整中心实体位置
             int entyX = (int)(0.5 * (relNetPanel.Width - entyLabel.Width));
             int entyY = (int)(0.5 * (relNetPanel.Height - entyLabel.Height));
             entyLabel.Location = new Point(entyX, entyY);
             entyLabel.MouseMove += (sender, e) => { if (e.Button == MouseButtons.Left) ((Label)sender).Location = relNetPanel.PointToClient(MousePosition); };
             // 关系实体排布一圈，远近不一
-            var rand = new Random();
+            var radiusRand = new Random();
+            var colorRand = new Random();
             var baseRadius = (int)(0.2 * relNetPanel.Height);
             var intervalRadian = 2 * Math.PI / relEntyList.Count;
             var radian = 0.0;
@@ -195,11 +204,13 @@ namespace InfoAnalySystem.Forms {
                 relEntyLabel.MouseMove += (sender, e) => { if (e.Button == MouseButtons.Left) ((Label)sender).Location = relNetPanel.PointToClient(MousePosition); };
                 relEntyLabel.Text = relEnty;
                 relEntyLabel.AutoSize = true;
+                relEntyLabel.BackColor = Color.WhiteSmoke;
                 this.relSentenceTip.SetToolTip(relEntyLabel, ne.value + "--" + relEnty + "\n" + relSentence);
-                int radius = rand.Next(0, baseRadius) + baseRadius;
+                int radius = radiusRand.Next(0, baseRadius) + baseRadius;
                 var relEntyX = (int)(entyX - radius * Math.Cos(radian));
                 var relEntyY = (int)(entyY - radius * Math.Sin(radian));
                 relEntyLabel.Location = new Point(relEntyX, relEntyY);
+                this.relColorList.Add(colorRand.Next(0, 4));
                 relNetPanel.Controls.Add(relEntyLabel);
                 relEntyLabelList.Add(relEntyLabel);
                 radian += intervalRadian;
@@ -218,30 +229,23 @@ namespace InfoAnalySystem.Forms {
             entyCenterPt.Y += entyLabel.Height / 2;
             for (int i = 0; i < relEntyLabelList.Count; i++) {
                 var relEntyLabel = relEntyLabelList[i];
+                var relColor = colors[relColorList[i]];
                 var relEntyCenterPt = relEntyLabel.Location;
                 relEntyCenterPt.X += relEntyLabel.Width / 2;
                 relEntyCenterPt.Y += relEntyLabel.Height / 2;
-                g.DrawLine(Pens.OrangeRed, entyCenterPt, relEntyCenterPt);
-                relEntyLabel.ForeColor = Color.OrangeRed;
-                //var relation = relList[i];
-                //switch (relation) {
-                //    case "从属":
-                //        g.DrawLine(Pens.OrangeRed, entyCenterPt, relEntyCenterPt);
-                //        relEntyLabel.ForeColor = Color.OrangeRed;
-                //        break;
-                //    case "对比":
-                //        g.DrawLine(Pens.Goldenrod, entyCenterPt, relEntyCenterPt);
-                //        relEntyLabel.ForeColor = Color.Goldenrod;
-                //        break;
-                //    case "别名":
-                //        g.DrawLine(Pens.LimeGreen, entyCenterPt, relEntyCenterPt);
-                //        relEntyLabel.ForeColor = Color.LimeGreen;
-                //        break;
-                //    case "打击":
-                //        g.DrawLine(Pens.Aqua, entyCenterPt, relEntyCenterPt);
-                //        relEntyLabel.ForeColor = Color.Aqua;
-                //        break;
-                //}
+                Rectangle labelRectangle = relEntyLabel.DisplayRectangle;
+                relEntyLabel.ForeColor = relColor;
+                g.DrawLine(new Pen(relColor), entyCenterPt, relEntyCenterPt);
+                g.DrawEllipse(new Pen(relColor), 
+                    relEntyLabel.Left - 7,
+                    relEntyLabel.Top - 7,
+                    relEntyLabel.Width + 14,
+                    relEntyLabel.Height + 14);
+                g.FillEllipse(Brushes.WhiteSmoke, 
+                    relEntyLabel.Left - 6,
+                    relEntyLabel.Top - 6,
+                    relEntyLabel.Width + 12,
+                    relEntyLabel.Height + 12);
             }
             g.Dispose();
         }
