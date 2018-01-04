@@ -72,13 +72,15 @@ namespace InfoAnalySystem.Forms {
                 return;
             }
             string[] sections = news.resultNER.Split('\n');
+            string[] realSections = news.content.Split(' ');
             int secIndex = 0;
-            foreach (string sectionValue in sections)
+            for(int i=0;i < realSections.Length; i++)
             {
+                string sectionValue = sections[i];
                 var section = new Section();
                 section.newsId = news.id;
                 section.indexInNews = secIndex;
-                section.value = sectionValue;
+                section.value = realSections[i];
                 sectionList.Add(section);
                 // 识别命名实体
                 splitEntity(secIndex, sectionValue);
