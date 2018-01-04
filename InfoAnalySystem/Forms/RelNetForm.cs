@@ -146,6 +146,7 @@ namespace InfoAnalySystem.Forms {
             relSetFlowLayout.Controls.Clear();
             foreach (var entityWithCount in entityList) {
                 Label relLabel = new Label();
+                relLabel.Width = 150;
                 relLabel.AutoEllipsis = true;
                 relLabel.Text = entityWithCount.model.value + "(" + entityWithCount.count + ")";
                 relLabel.Tag = entityWithCount.model;

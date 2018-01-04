@@ -283,7 +283,7 @@
             this.pageSize.Name = "pageSize";
             this.pageSize.Size = new System.Drawing.Size(67, 15);
             this.pageSize.TabIndex = 8;
-            this.pageSize.Tag = "40";
+            this.pageSize.Tag = "200";
             this.pageSize.Text = "每页条数";
             this.pageSize.Visible = false;
             // 
@@ -304,7 +304,7 @@
             animation3.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicCoeff")));
             animation3.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicShift")));
             animation3.MosaicSize = 0;
-            animation3.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            animation3.Padding = new System.Windows.Forms.Padding(0);
             animation3.RotateCoeff = 0F;
             animation3.RotateLimit = 0F;
             animation3.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.ScaleCoeff")));

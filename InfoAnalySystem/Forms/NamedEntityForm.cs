@@ -58,7 +58,6 @@ namespace InfoAnalySystem.Forms {
         {
             if (newsId < 0)
                 return;
-            saveBtn.Visible = true;
             this.newsId = newsId;
             this.sectionList.Clear();
             this.entityMentionList.Clear();
@@ -97,7 +96,6 @@ namespace InfoAnalySystem.Forms {
         public void doNamedEntityRecognitionByCRF(int newsId) {
             if (newsId < 0)
                 return;
-            saveBtn.Visible = true;
             this.newsId = newsId;
             this.sectionList.Clear();
             this.entityMentionList.Clear();
@@ -251,7 +249,7 @@ namespace InfoAnalySystem.Forms {
         }
 
         // 存入数据库响应函数
-        private void saveBtn_Click(object sender, EventArgs e) {
+        private void saveToDB() {
             bool isExit = DBHelper.db.Queryable<EntityMention>().Where(it => it.newsId == this.newsId).First() != null;
             bool isOverwrite = true;
             if (isExit) {

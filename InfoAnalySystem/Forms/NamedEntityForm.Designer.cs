@@ -29,6 +29,11 @@ namespace InfoAnalySystem.Forms {
             this.panel3 = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -37,12 +42,6 @@ namespace InfoAnalySystem.Forms {
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.saveBtn = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -100,6 +99,52 @@ namespace InfoAnalySystem.Forms {
             this.panel2.Size = new System.Drawing.Size(200, 474);
             this.panel2.TabIndex = 3;
             // 
+            // label10
+            // 
+            this.label10.BackColor = System.Drawing.Color.Brown;
+            this.label10.ForeColor = System.Drawing.Color.BlueViolet;
+            this.label10.Location = new System.Drawing.Point(39, 300);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(71, 15);
+            this.label10.TabIndex = 10;
+            // 
+            // label9
+            // 
+            this.label9.BackColor = System.Drawing.Color.Purple;
+            this.label9.ForeColor = System.Drawing.Color.Chartreuse;
+            this.label9.Location = new System.Drawing.Point(39, 260);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(71, 15);
+            this.label9.TabIndex = 9;
+            // 
+            // label8
+            // 
+            this.label8.BackColor = System.Drawing.Color.Orange;
+            this.label8.ForeColor = System.Drawing.Color.Chartreuse;
+            this.label8.Location = new System.Drawing.Point(39, 220);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(71, 15);
+            this.label8.TabIndex = 8;
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Chartreuse;
+            this.label7.ForeColor = System.Drawing.Color.Chartreuse;
+            this.label7.Location = new System.Drawing.Point(39, 180);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(71, 15);
+            this.label7.TabIndex = 7;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Blue;
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label6.ForeColor = System.Drawing.Color.Blue;
+            this.label6.Location = new System.Drawing.Point(39, 140);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(71, 15);
+            this.label6.TabIndex = 6;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -155,7 +200,6 @@ namespace InfoAnalySystem.Forms {
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel2.Controls.Add(this.radioButton1);
             this.flowLayoutPanel2.Controls.Add(this.radioButton2);
-            this.flowLayoutPanel2.Controls.Add(this.saveBtn);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -188,64 +232,6 @@ namespace InfoAnalySystem.Forms {
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.doNamedEntityRecognition);
             // 
-            // saveBtn
-            // 
-            this.saveBtn.AutoSize = true;
-            this.saveBtn.Location = new System.Drawing.Point(236, 3);
-            this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(92, 25);
-            this.saveBtn.TabIndex = 0;
-            this.saveBtn.Text = "存入数据库";
-            this.saveBtn.UseVisualStyleBackColor = true;
-            this.saveBtn.Visible = false;
-            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Blue;
-            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label6.ForeColor = System.Drawing.Color.Blue;
-            this.label6.Location = new System.Drawing.Point(39, 140);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(71, 15);
-            this.label6.TabIndex = 6;
-            // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.Color.Chartreuse;
-            this.label7.ForeColor = System.Drawing.Color.Chartreuse;
-            this.label7.Location = new System.Drawing.Point(39, 180);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(71, 15);
-            this.label7.TabIndex = 7;
-            // 
-            // label8
-            // 
-            this.label8.BackColor = System.Drawing.Color.Orange;
-            this.label8.ForeColor = System.Drawing.Color.Chartreuse;
-            this.label8.Location = new System.Drawing.Point(39, 220);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(71, 15);
-            this.label8.TabIndex = 8;
-            // 
-            // label9
-            // 
-            this.label9.BackColor = System.Drawing.Color.Purple;
-            this.label9.ForeColor = System.Drawing.Color.Chartreuse;
-            this.label9.Location = new System.Drawing.Point(39, 260);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(71, 15);
-            this.label9.TabIndex = 9;
-            // 
-            // label10
-            // 
-            this.label10.BackColor = System.Drawing.Color.Brown;
-            this.label10.ForeColor = System.Drawing.Color.BlueViolet;
-            this.label10.Location = new System.Drawing.Point(39, 300);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(71, 15);
-            this.label10.TabIndex = 10;
-            // 
             // NamedEntityForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -268,7 +254,6 @@ namespace InfoAnalySystem.Forms {
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;

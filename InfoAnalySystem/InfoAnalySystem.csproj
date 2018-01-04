@@ -288,13 +288,12 @@
     <Content Include="python\relation_classification\data\word_embeddings.txt" />
     <Content Include="python\relation_classification\data\words.lst" />
     <Content Include="Resources\backgroundImg.png" />
-    <Content Include="Resources\Event.sql" />
+    <Content Include="Resources\db.sql" />
     <Content Include="Resources\HtmlViews\sql.js" />
     <Content Include="Resources\JiebaConfig\cn_synonym.txt" />
     <Content Include="Resources\JiebaConfig\dict.txt" />
     <Content Include="Resources\JiebaConfig\idf.txt" />
     <Content Include="Resources\JiebaConfig\stopwords.txt" />
-    <Content Include="Resources\News.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
