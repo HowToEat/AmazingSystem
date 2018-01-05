@@ -146,6 +146,12 @@
     <Compile Include="Forms\NamedEntityForm.Designer.cs">
       <DependentUpon>NamedEntityForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TextClusterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TextClusterForm.Designer.cs">
+      <DependentUpon>TextClusterForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\NamedEntityForm.resx">
       <DependentUpon>NamedEntityForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TextClusterForm.resx">
+      <DependentUpon>TextClusterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

@@ -26,10 +26,12 @@ namespace InfoAnalySystem {
         private EventTimeBarForm eventTimeBarForm = new EventTimeBarForm();
         private EventCountryForm eventCountryForm = new EventCountryForm();
         private TextClassiForm textClassiForm = new TextClassiForm();
+        private TextClusterForm textClusteriForm = new TextClusterForm();
 
 
         public MainForm() {
             InitializeComponent();
+            this.addPage(textClusteriForm, Const.textClusterPage);
             this.addPage(textClassiForm, Const.textClassiPage);
             this.addPage(namedEntityForm, Const.nameEntityPage);
             this.addPage(relExtForm, Const.relationExtractionPage);
@@ -94,6 +96,8 @@ namespace InfoAnalySystem {
             } else if (tagName.Equals(Const.textClassiPage)) {
                 this.basePanel1.Visible = true;
                 textClassiForm.doTextClassification(newsId);
+            } else if (tagName.Equals(Const.textClusterPage)) {
+                this.basePanel1.Visible = false;
             }
 
     }
