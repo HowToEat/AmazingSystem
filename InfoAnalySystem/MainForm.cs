@@ -27,6 +27,7 @@ namespace InfoAnalySystem {
         private EventCountryForm eventCountryForm = new EventCountryForm();
         private TextClassiForm textClassiForm = new TextClassiForm();
         private TextClusterForm textClusteriForm = new TextClusterForm();
+        private BridgeIdentifyForm bridgeIdentifyForm = new BridgeIdentifyForm();
 
 
         public MainForm() {
@@ -39,6 +40,7 @@ namespace InfoAnalySystem {
             this.addPage(relNetForm, Const.relationLibraryPage);
             this.addPage(eventTimeBarForm, Const.eventTimeBar);
             this.addPage(eventCountryForm, Const.eventCountry);
+            this.addPage(bridgeIdentifyForm, Const.bridgeIdentifyPage);
         }
         /// <summary>
         /// 加入一个标签页
@@ -97,6 +99,8 @@ namespace InfoAnalySystem {
                 this.basePanel1.Visible = true;
                 textClassiForm.doTextClassification(newsId);
             } else if (tagName.Equals(Const.textClusterPage)) {
+                this.basePanel1.Visible = false;
+            } else if (tagName.Equals(Const.bridgeIdentifyPage)) {
                 this.basePanel1.Visible = false;
             }
 

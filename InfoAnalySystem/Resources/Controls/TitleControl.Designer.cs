@@ -56,11 +56,11 @@
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.titleLabel.Font = new System.Drawing.Font("华文中宋", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.titleLabel.ForeColor = System.Drawing.Color.DarkOrange;
             this.titleLabel.Location = new System.Drawing.Point(9, 15);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(71, 23);
+            this.titleLabel.Size = new System.Drawing.Size(100, 26);
             this.titleLabel.TabIndex = 1;
             this.titleLabel.Text = "大 标 题";
             // 

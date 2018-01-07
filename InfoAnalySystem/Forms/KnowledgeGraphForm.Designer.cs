@@ -24,8 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            CCWin.SkinControl.Animation animation1 = new CCWin.SkinControl.Animation();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            CCWin.SkinControl.Animation animation2 = new CCWin.SkinControl.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KnowledgeGraphForm));
             this.panel4 = new System.Windows.Forms.Panel();
             this.entityInput = new System.Windows.Forms.TextBox();
@@ -129,11 +129,11 @@
             this.newsNotAnalyTip.BackColor = System.Drawing.Color.White;
             this.leafAnimator.SetDecoration(this.newsNotAnalyTip, CCWin.SkinControl.DecorationType.None);
             this.newsNotAnalyTip.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.newsNotAnalyTip.Location = new System.Drawing.Point(2, 4);
+            this.newsNotAnalyTip.Location = new System.Drawing.Point(4, 9);
             this.newsNotAnalyTip.Name = "newsNotAnalyTip";
-            this.newsNotAnalyTip.Size = new System.Drawing.Size(166, 115);
+            this.newsNotAnalyTip.Size = new System.Drawing.Size(166, 26);
             this.newsNotAnalyTip.TabIndex = 13;
-            this.newsNotAnalyTip.Text = "未找到命名实体，请先对该新闻提取命名实体，并“存入数据库”";
+            this.newsNotAnalyTip.Text = "请选择一条新闻";
             this.newsNotAnalyTip.Visible = false;
             // 
             // selectEntityFlowPanel
@@ -181,14 +181,14 @@
             this.relType,
             this.relValue});
             this.leafAnimator.SetDecoration(this.relationGridView, CCWin.SkinControl.DecorationType.None);
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.relationGridView.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.relationGridView.DefaultCellStyle = dataGridViewCellStyle2;
             this.relationGridView.Location = new System.Drawing.Point(178, 156);
             this.relationGridView.Name = "relationGridView";
             this.relationGridView.ReadOnly = true;
@@ -215,22 +215,22 @@
             // 
             this.leafAnimator.AnimationType = CCWin.SkinControl.AnimationType.Leaf;
             this.leafAnimator.Cursor = null;
-            animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 1F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 0F;
-            this.leafAnimator.DefaultAnimation = animation1;
+            animation2.AnimateOnlyDifferences = true;
+            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
+            animation2.LeafCoeff = 1F;
+            animation2.MaxTime = 1F;
+            animation2.MinTime = 0F;
+            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
+            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
+            animation2.MosaicSize = 0;
+            animation2.Padding = new System.Windows.Forms.Padding(0);
+            animation2.RotateCoeff = 0F;
+            animation2.RotateLimit = 0F;
+            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
+            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
+            animation2.TimeCoeff = 0F;
+            animation2.TransparencyCoeff = 0F;
+            this.leafAnimator.DefaultAnimation = animation2;
             this.leafAnimator.MaxAnimationTime = 700;
             this.leafAnimator.TimeStep = 0.04F;
             // 
@@ -247,7 +247,7 @@
             this.entityListView.View = System.Windows.Forms.View.Tile;
             this.entityListView.SelectedIndexChanged += new System.EventHandler(this.entityListView_SelectedIndexChanged);
             // 
-            // RelExtForm
+            // KnowledgeGraphForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -258,7 +258,7 @@
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.entityListView);
             this.leafAnimator.SetDecoration(this, CCWin.SkinControl.DecorationType.None);
-            this.Name = "RelExtForm";
+            this.Name = "KnowledgeGraphForm";
             this.Text = "RelationExtractForm";
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
