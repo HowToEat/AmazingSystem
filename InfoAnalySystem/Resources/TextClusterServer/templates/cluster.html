@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>聚类</title>
+</head>
+<body>
+<form action="/cluster/" method="post" autocomplete="off">
+    <label>聚类数</label>
+	<input name="num_clusters" type="text" placeholder="输入个数" />
+    <input class="ok" id="okBtn" type="submit" value="确定" />
+    {% csrf_token %}
+</form>
+	<div class="button">
+		<!-- <input type="button" value="返回" id="backHomeBtn" /> -->
+		<a href="/">返回主页</a>
+    </div>
+</body>
+</html>
