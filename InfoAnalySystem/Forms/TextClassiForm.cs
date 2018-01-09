@@ -15,7 +15,7 @@ namespace InfoAnalySystem.Forms
 {
     public partial class TextClassiForm : Form
     {
-        private int newsId;
+        private int newsId=-1;
         private List<Section> sectionList = new List<Section>();
         public int index;
 
@@ -145,7 +145,11 @@ namespace InfoAnalySystem.Forms
         {
             // 查询数据库得到新闻的信息
             // 切换页面
-           // this.result_panel.Controls.Clear();
+            // this.result_panel.Controls.Clear();
+            if (this.newsId == -1) {
+                MessageBox.Show("请选择一条新闻");
+                return;
+            }
             back_button.Visible = true;
             leafAnimator.Hide(contentPanel);
             result_panel.Location = contentPanel.Location;
