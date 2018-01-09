@@ -1,8 +1,8 @@
 # Cluster
 基于K-means算法的自动文档聚类系统
-使用mysql数据库，数据库配置在./Cluster/settings.py
 
 # 初始化和运行
+pip install -r python_inclue.txt
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser

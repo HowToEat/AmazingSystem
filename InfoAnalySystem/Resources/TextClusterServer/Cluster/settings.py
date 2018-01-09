@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'Cluster.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cluster_db',
-        'USER': 'root',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR+'/cluster.db',
+        'USER': '',
         'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'HOST': '',
         # 'OPTIONS': {
         #     "init_command": "SET foreign_key_checks = 0;",
         # },

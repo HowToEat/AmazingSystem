@@ -25,7 +25,7 @@ namespace InfoAnalySystem.Utils
         public static string eventCountry = "事件地图";
         public static string textClassiPage = "文本分类";
         public static string textClusterPage = "文本聚类";
-        public static string bridgeIdentifyPage = "桥梁识别";
+        public static string bridgeIdentifyPage = "目标检测";
     }
     
 }

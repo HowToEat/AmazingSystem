@@ -66,7 +66,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(133, 40);
             this.button1.TabIndex = 2;
-            this.button1.Text = "桥梁检测";
+            this.button1.Text = "目标检测";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
