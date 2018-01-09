@@ -23,7 +23,8 @@ namespace InfoAnalySystem.Forms {
         public NamedEntityForm() {
             InitializeComponent();
         }
-
+        private JiebaSegmenter segmenter = new JiebaSegmenter();
+        private PosSegmenter posSeg = new PosSegmenter();
         //选择方法
         public void doNamedEntityRecognition(int newsId)
         {
@@ -103,8 +104,6 @@ namespace InfoAnalySystem.Forms {
             //清空panel
             this.richTextBox1.Text = "";
             News news = DBHelper.db.Queryable<News>().InSingle(newsId);
-            var segmenter = new JiebaSegmenter();
-            var posSeg = new PosSegmenter();
             // 将新闻按段落分组
             string[] sections = news.content.Split(' ');
             int secIndex = 0;
