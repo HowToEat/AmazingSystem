@@ -2,7 +2,7 @@
 基于K-means算法的自动文档聚类系统
 
 # 初始化和运行
-pip install -r python_inclue.txt
+pip install -r python_include.txt
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser

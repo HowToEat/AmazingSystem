@@ -23,10 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            CCWin.SkinControl.Animation animation2 = new CCWin.SkinControl.Animation();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KnowledgeGraphForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel4 = new System.Windows.Forms.Panel();
             this.entityInput = new System.Windows.Forms.TextBox();
             this.backBtn = new System.Windows.Forms.Button();
@@ -40,7 +37,6 @@
             this.relationGridView = new System.Windows.Forms.DataGridView();
             this.relType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.relValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.leafAnimator = new CCWin.SkinControl.SkinAnimator(this.components);
             this.entityListView = new CCWin.SkinControl.SkinListView();
             this.panel4.SuspendLayout();
             this.contentPanel.SuspendLayout();
@@ -54,7 +50,6 @@
             this.panel4.Controls.Add(this.backBtn);
             this.panel4.Controls.Add(this.doWorkBtn);
             this.panel4.Controls.Add(this.label8);
-            this.leafAnimator.SetDecoration(this.panel4, CCWin.SkinControl.DecorationType.None);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(172, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -64,7 +59,6 @@
             // 
             // entityInput
             // 
-            this.leafAnimator.SetDecoration(this.entityInput, CCWin.SkinControl.DecorationType.None);
             this.entityInput.Location = new System.Drawing.Point(159, 27);
             this.entityInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.entityInput.Name = "entityInput";
@@ -75,7 +69,6 @@
             // backBtn
             // 
             this.backBtn.AutoSize = true;
-            this.leafAnimator.SetDecoration(this.backBtn, CCWin.SkinControl.DecorationType.None);
             this.backBtn.Location = new System.Drawing.Point(562, 24);
             this.backBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.backBtn.Name = "backBtn";
@@ -89,7 +82,6 @@
             // doWorkBtn
             // 
             this.doWorkBtn.AutoSize = true;
-            this.leafAnimator.SetDecoration(this.doWorkBtn, CCWin.SkinControl.DecorationType.None);
             this.doWorkBtn.Location = new System.Drawing.Point(481, 24);
             this.doWorkBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.doWorkBtn.Name = "doWorkBtn";
@@ -102,7 +94,6 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.leafAnimator.SetDecoration(this.label8, CCWin.SkinControl.DecorationType.None);
             this.label8.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label8.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.label8.Location = new System.Drawing.Point(11, 28);
@@ -114,7 +105,6 @@
             // entityNotFoundTip
             // 
             this.entityNotFoundTip.AutoSize = true;
-            this.leafAnimator.SetDecoration(this.entityNotFoundTip, CCWin.SkinControl.DecorationType.None);
             this.entityNotFoundTip.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.entityNotFoundTip.ForeColor = System.Drawing.SystemColors.GrayText;
             this.entityNotFoundTip.Location = new System.Drawing.Point(53, 27);
@@ -127,7 +117,6 @@
             // newsNotAnalyTip
             // 
             this.newsNotAnalyTip.BackColor = System.Drawing.Color.White;
-            this.leafAnimator.SetDecoration(this.newsNotAnalyTip, CCWin.SkinControl.DecorationType.None);
             this.newsNotAnalyTip.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.newsNotAnalyTip.Location = new System.Drawing.Point(4, 9);
             this.newsNotAnalyTip.Name = "newsNotAnalyTip";
@@ -139,7 +128,6 @@
             // selectEntityFlowPanel
             // 
             this.selectEntityFlowPanel.AutoSize = true;
-            this.leafAnimator.SetDecoration(this.selectEntityFlowPanel, CCWin.SkinControl.DecorationType.None);
             this.selectEntityFlowPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.selectEntityFlowPanel.Location = new System.Drawing.Point(14, 52);
             this.selectEntityFlowPanel.Name = "selectEntityFlowPanel";
@@ -152,7 +140,6 @@
             this.contentPanel.Controls.Add(this.selectEntityFlowPanel);
             this.contentPanel.Controls.Add(this.selectEntityTip);
             this.contentPanel.Controls.Add(this.entityNotFoundTip);
-            this.leafAnimator.SetDecoration(this.contentPanel, CCWin.SkinControl.DecorationType.None);
             this.contentPanel.Location = new System.Drawing.Point(460, 139);
             this.contentPanel.Name = "contentPanel";
             this.contentPanel.Size = new System.Drawing.Size(444, 304);
@@ -161,7 +148,6 @@
             // selectEntityTip
             // 
             this.selectEntityTip.AutoSize = true;
-            this.leafAnimator.SetDecoration(this.selectEntityTip, CCWin.SkinControl.DecorationType.None);
             this.selectEntityTip.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.selectEntityTip.ForeColor = System.Drawing.SystemColors.GrayText;
             this.selectEntityTip.Location = new System.Drawing.Point(10, 27);
@@ -180,15 +166,14 @@
             this.relationGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.relType,
             this.relValue});
-            this.leafAnimator.SetDecoration(this.relationGridView, CCWin.SkinControl.DecorationType.None);
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.relationGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.relationGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.relationGridView.Location = new System.Drawing.Point(178, 156);
             this.relationGridView.Name = "relationGridView";
             this.relationGridView.ReadOnly = true;
@@ -211,32 +196,8 @@
             this.relValue.ReadOnly = true;
             this.relValue.Width = 400;
             // 
-            // leafAnimator
-            // 
-            this.leafAnimator.AnimationType = CCWin.SkinControl.AnimationType.Leaf;
-            this.leafAnimator.Cursor = null;
-            animation2.AnimateOnlyDifferences = true;
-            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
-            animation2.LeafCoeff = 1F;
-            animation2.MaxTime = 1F;
-            animation2.MinTime = 0F;
-            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
-            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
-            animation2.MosaicSize = 0;
-            animation2.Padding = new System.Windows.Forms.Padding(0);
-            animation2.RotateCoeff = 0F;
-            animation2.RotateLimit = 0F;
-            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
-            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
-            animation2.TimeCoeff = 0F;
-            animation2.TransparencyCoeff = 0F;
-            this.leafAnimator.DefaultAnimation = animation2;
-            this.leafAnimator.MaxAnimationTime = 700;
-            this.leafAnimator.TimeStep = 0.04F;
-            // 
             // entityListView
             // 
-            this.leafAnimator.SetDecoration(this.entityListView, CCWin.SkinControl.DecorationType.None);
             this.entityListView.Dock = System.Windows.Forms.DockStyle.Left;
             this.entityListView.Location = new System.Drawing.Point(0, 0);
             this.entityListView.Name = "entityListView";
@@ -257,7 +218,6 @@
             this.Controls.Add(this.newsNotAnalyTip);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.entityListView);
-            this.leafAnimator.SetDecoration(this, CCWin.SkinControl.DecorationType.None);
             this.Name = "KnowledgeGraphForm";
             this.Text = "RelationExtractForm";
             this.panel4.ResumeLayout(false);
@@ -282,7 +242,6 @@
         private System.Windows.Forms.Label selectEntityTip;
         private System.Windows.Forms.DataGridView relationGridView;
         private System.Windows.Forms.Button backBtn;
-        private CCWin.SkinControl.SkinAnimator leafAnimator;
         private System.Windows.Forms.DataGridViewTextBoxColumn relType;
         private System.Windows.Forms.DataGridViewTextBoxColumn relValue;
         private CCWin.SkinControl.SkinListView entityListView;

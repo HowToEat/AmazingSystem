@@ -51,11 +51,8 @@ namespace InfoAnalySystem.Forms {
             this.pageUpBtn.Visible = false;
             this.pageDownBtn.Visible = false;
             // 切换页面
-            flowAnimator.Hide(relSetFlowLayout);
-            relNetPanel.Location = relSetFlowLayout.Location;
-            relNetPanel.Size = relSetFlowLayout.Size;
-            flowAnimator.WaitAllAnimations();
-            flowAnimator.Show(relNetPanel);
+            relSetFlowLayout.Hide();
+            relNetPanel.Show();
             // 绘制关系图
             var entity = (NamedEntity)((Label)sender).Tag;
             feedRelEntitys(entity);
@@ -73,9 +70,8 @@ namespace InfoAnalySystem.Forms {
             this.pageUpBtn.Visible = true;
             this.pageDownBtn.Visible = true;
             relNetPanel.Paint -= paintRelNet;
-            flowAnimator.Hide(relNetPanel);
-            flowAnimator.WaitAllAnimations();
-            flowAnimator.Show(relSetFlowLayout);
+            relNetPanel.Hide();
+            relSetFlowLayout.Show();
         }
 
         /// <summary>

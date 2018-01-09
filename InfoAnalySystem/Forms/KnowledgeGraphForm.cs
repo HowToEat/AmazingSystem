@@ -139,11 +139,8 @@ namespace InfoAnalySystem.Forms {
             relationGridView.Columns[1].Width = relationGridView.Width - relationGridView.Columns[0].Width - 60;
             // 切换页面
             backBtn.Visible = true;
-            leafAnimator.Hide(contentPanel);
-            relationGridView.Location = contentPanel.Location;
-            relationGridView.Size = contentPanel.Size;
-            leafAnimator.WaitAllAnimations();
-            leafAnimator.Show(relationGridView);
+            contentPanel.Hide();
+            relationGridView.Show();
         }
 
         /// <summary>
@@ -153,11 +150,8 @@ namespace InfoAnalySystem.Forms {
             if (!backBtn.Visible)
                 return;
             backBtn.Visible = false;
-            leafAnimator.Hide(relationGridView);
-            contentPanel.Location = relationGridView.Location;
-            contentPanel.Size = relationGridView.Size;
-            leafAnimator.WaitAllAnimations();
-            leafAnimator.Show(contentPanel);
+            relationGridView.Hide();
+            contentPanel.Show();
         }
 
         /// <summary>

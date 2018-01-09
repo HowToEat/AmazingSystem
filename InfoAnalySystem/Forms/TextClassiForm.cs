@@ -151,11 +151,8 @@ namespace InfoAnalySystem.Forms
                 return;
             }
             back_button.Visible = true;
-            leafAnimator.Hide(contentPanel);
-            result_panel.Location = contentPanel.Location;
-            result_panel.Size = contentPanel.Size;
-            leafAnimator.WaitAllAnimations();
-            leafAnimator.Show(result_panel);
+            contentPanel.Hide();
+            result_panel.Show();
             result_panel.Refresh();           
 
         }
@@ -168,11 +165,8 @@ namespace InfoAnalySystem.Forms
             if (!back_button.Visible)
                 return;
             back_button.Visible = false;
-            leafAnimator.Hide(result_panel);
-            contentPanel.Location = result_panel.Location;
-            contentPanel.Size = result_panel.Size;
-            leafAnimator.WaitAllAnimations();
-            leafAnimator.Show(contentPanel);            
+            result_panel.Hide();
+            contentPanel.Show();
         }
 
         /// <summary>

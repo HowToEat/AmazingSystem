@@ -24,8 +24,6 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            CCWin.SkinControl.Animation animation3 = new CCWin.SkinControl.Animation();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelNetForm));
             this.refreshBtn = new System.Windows.Forms.Button();
             this.relNetPanel = new System.Windows.Forms.Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -45,7 +43,6 @@
             this.totalPage = new System.Windows.Forms.Label();
             this.pageSize = new System.Windows.Forms.Label();
             this.relSentenceTip = new System.Windows.Forms.ToolTip(this.components);
-            this.flowAnimator = new CCWin.SkinControl.SkinAnimator(this.components);
             this.relNetPanel.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.buttonFlowLayoutPanel.SuspendLayout();
@@ -54,7 +51,6 @@
             // refreshBtn
             // 
             this.refreshBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowAnimator.SetDecoration(this.refreshBtn, CCWin.SkinControl.DecorationType.None);
             this.refreshBtn.Location = new System.Drawing.Point(3, 2);
             this.refreshBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.refreshBtn.Name = "refreshBtn";
@@ -69,7 +65,6 @@
             this.relNetPanel.BackColor = System.Drawing.Color.White;
             this.relNetPanel.Controls.Add(this.flowLayoutPanel2);
             this.relNetPanel.Controls.Add(this.entyLabel);
-            this.flowAnimator.SetDecoration(this.relNetPanel, CCWin.SkinControl.DecorationType.None);
             this.relNetPanel.Location = new System.Drawing.Point(234, 123);
             this.relNetPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.relNetPanel.Name = "relNetPanel";
@@ -87,7 +82,6 @@
             this.flowLayoutPanel2.Controls.Add(this.label2);
             this.flowLayoutPanel2.Controls.Add(this.label5);
             this.flowLayoutPanel2.Controls.Add(this.label6);
-            this.flowAnimator.SetDecoration(this.flowLayoutPanel2, CCWin.SkinControl.DecorationType.None);
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(247, 36);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -99,7 +93,6 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.flowAnimator.SetDecoration(this.label7, CCWin.SkinControl.DecorationType.None);
             this.label7.Font = new System.Drawing.Font("宋体", 9F);
             this.label7.ForeColor = System.Drawing.Color.Black;
             this.label7.Location = new System.Drawing.Point(3, 0);
@@ -111,7 +104,6 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.flowAnimator.SetDecoration(this.label1, CCWin.SkinControl.DecorationType.None);
             this.label1.Font = new System.Drawing.Font("宋体", 9F);
             this.label1.ForeColor = System.Drawing.Color.OrangeRed;
             this.label1.Location = new System.Drawing.Point(3, 15);
@@ -123,7 +115,6 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.flowAnimator.SetDecoration(this.label2, CCWin.SkinControl.DecorationType.None);
             this.label2.Font = new System.Drawing.Font("宋体", 9F);
             this.label2.ForeColor = System.Drawing.Color.Goldenrod;
             this.label2.Location = new System.Drawing.Point(3, 30);
@@ -136,7 +127,6 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.White;
-            this.flowAnimator.SetDecoration(this.label5, CCWin.SkinControl.DecorationType.None);
             this.label5.Font = new System.Drawing.Font("宋体", 9F);
             this.label5.ForeColor = System.Drawing.Color.LimeGreen;
             this.label5.Location = new System.Drawing.Point(3, 45);
@@ -148,7 +138,6 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.flowAnimator.SetDecoration(this.label6, CCWin.SkinControl.DecorationType.None);
             this.label6.Font = new System.Drawing.Font("宋体", 9F);
             this.label6.ForeColor = System.Drawing.Color.DarkTurquoise;
             this.label6.Location = new System.Drawing.Point(3, 60);
@@ -160,7 +149,6 @@
             // entyLabel
             // 
             this.entyLabel.AutoSize = true;
-            this.flowAnimator.SetDecoration(this.entyLabel, CCWin.SkinControl.DecorationType.None);
             this.entyLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.entyLabel.ForeColor = System.Drawing.Color.Firebrick;
             this.entyLabel.Location = new System.Drawing.Point(0, 0);
@@ -172,7 +160,6 @@
             // 
             this.relNetBackBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.relNetBackBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.flowAnimator.SetDecoration(this.relNetBackBtn, CCWin.SkinControl.DecorationType.None);
             this.relNetBackBtn.Location = new System.Drawing.Point(246, 2);
             this.relNetBackBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.relNetBackBtn.Name = "relNetBackBtn";
@@ -187,7 +174,6 @@
             // 
             this.relSetFlowLayout.AutoScroll = true;
             this.relSetFlowLayout.BackColor = System.Drawing.Color.White;
-            this.flowAnimator.SetDecoration(this.relSetFlowLayout, CCWin.SkinControl.DecorationType.None);
             this.relSetFlowLayout.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.relSetFlowLayout.Location = new System.Drawing.Point(34, 123);
             this.relSetFlowLayout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -208,7 +194,6 @@
             this.buttonFlowLayoutPanel.Controls.Add(this.pageNo);
             this.buttonFlowLayoutPanel.Controls.Add(this.totalPage);
             this.buttonFlowLayoutPanel.Controls.Add(this.pageSize);
-            this.flowAnimator.SetDecoration(this.buttonFlowLayoutPanel, CCWin.SkinControl.DecorationType.None);
             this.buttonFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonFlowLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.buttonFlowLayoutPanel.Name = "buttonFlowLayoutPanel";
@@ -217,7 +202,6 @@
             // 
             // pageUpBtn
             // 
-            this.flowAnimator.SetDecoration(this.pageUpBtn, CCWin.SkinControl.DecorationType.None);
             this.pageUpBtn.Location = new System.Drawing.Point(84, 3);
             this.pageUpBtn.Name = "pageUpBtn";
             this.pageUpBtn.Size = new System.Drawing.Size(75, 28);
@@ -228,7 +212,6 @@
             // 
             // pageDownBtn
             // 
-            this.flowAnimator.SetDecoration(this.pageDownBtn, CCWin.SkinControl.DecorationType.None);
             this.pageDownBtn.Location = new System.Drawing.Point(165, 3);
             this.pageDownBtn.Name = "pageDownBtn";
             this.pageDownBtn.Size = new System.Drawing.Size(75, 28);
@@ -241,7 +224,6 @@
             // 
             this.saveDataBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.saveDataBtn.BackColor = System.Drawing.SystemColors.Control;
-            this.flowAnimator.SetDecoration(this.saveDataBtn, CCWin.SkinControl.DecorationType.None);
             this.saveDataBtn.Location = new System.Drawing.Point(327, 2);
             this.saveDataBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.saveDataBtn.Name = "saveDataBtn";
@@ -255,7 +237,6 @@
             // pageNo
             // 
             this.pageNo.AutoSize = true;
-            this.flowAnimator.SetDecoration(this.pageNo, CCWin.SkinControl.DecorationType.None);
             this.pageNo.Location = new System.Drawing.Point(466, 0);
             this.pageNo.Name = "pageNo";
             this.pageNo.Size = new System.Drawing.Size(37, 15);
@@ -267,7 +248,6 @@
             // totalPage
             // 
             this.totalPage.AutoSize = true;
-            this.flowAnimator.SetDecoration(this.totalPage, CCWin.SkinControl.DecorationType.None);
             this.totalPage.Location = new System.Drawing.Point(509, 0);
             this.totalPage.Name = "totalPage";
             this.totalPage.Size = new System.Drawing.Size(52, 15);
@@ -278,7 +258,6 @@
             // pageSize
             // 
             this.pageSize.AutoSize = true;
-            this.flowAnimator.SetDecoration(this.pageSize, CCWin.SkinControl.DecorationType.None);
             this.pageSize.Location = new System.Drawing.Point(567, 0);
             this.pageSize.Name = "pageSize";
             this.pageSize.Size = new System.Drawing.Size(67, 15);
@@ -292,29 +271,6 @@
             this.relSentenceTip.IsBalloon = true;
             this.relSentenceTip.ShowAlways = true;
             // 
-            // flowAnimator
-            // 
-            this.flowAnimator.AnimationType = CCWin.SkinControl.AnimationType.Leaf;
-            this.flowAnimator.Cursor = null;
-            animation3.AnimateOnlyDifferences = true;
-            animation3.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.BlindCoeff")));
-            animation3.LeafCoeff = 1F;
-            animation3.MaxTime = 1F;
-            animation3.MinTime = 0F;
-            animation3.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicCoeff")));
-            animation3.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation3.MosaicShift")));
-            animation3.MosaicSize = 0;
-            animation3.Padding = new System.Windows.Forms.Padding(0);
-            animation3.RotateCoeff = 0F;
-            animation3.RotateLimit = 0F;
-            animation3.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.ScaleCoeff")));
-            animation3.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation3.SlideCoeff")));
-            animation3.TimeCoeff = 0F;
-            animation3.TransparencyCoeff = 0F;
-            this.flowAnimator.DefaultAnimation = animation3;
-            this.flowAnimator.MaxAnimationTime = 700;
-            this.flowAnimator.TimeStep = 0.04F;
-            // 
             // RelNetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -324,7 +280,6 @@
             this.Controls.Add(this.relSetFlowLayout);
             this.Controls.Add(this.relNetPanel);
             this.Controls.Add(this.buttonFlowLayoutPanel);
-            this.flowAnimator.SetDecoration(this, CCWin.SkinControl.DecorationType.None);
             this.Name = "RelNetForm";
             this.Text = "RelNet";
             this.Load += new System.EventHandler(this.refreshBtn_Click);
@@ -358,6 +313,5 @@
         private System.Windows.Forms.Label pageSize;
         private System.Windows.Forms.ToolTip relSentenceTip;
         private System.Windows.Forms.Button saveDataBtn;
-        private CCWin.SkinControl.SkinAnimator flowAnimator;
     }
 }
