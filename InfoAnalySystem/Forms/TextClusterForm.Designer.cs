@@ -27,8 +27,8 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.showNetBtn = new System.Windows.Forms.Button();
             this.toConsoleBtn = new System.Windows.Forms.Button();
-            this.refreshDataBtn = new System.Windows.Forms.Button();
             this.backBtn = new System.Windows.Forms.Button();
+            this.refreshDataBtn = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -36,9 +36,9 @@
             // 
             this.webKitBrowser1.BackColor = System.Drawing.Color.White;
             this.webKitBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webKitBrowser1.Location = new System.Drawing.Point(0, 0);
+            this.webKitBrowser1.Location = new System.Drawing.Point(0, 43);
             this.webKitBrowser1.Name = "webKitBrowser1";
-            this.webKitBrowser1.Size = new System.Drawing.Size(869, 641);
+            this.webKitBrowser1.Size = new System.Drawing.Size(869, 598);
             this.webKitBrowser1.TabIndex = 0;
             this.webKitBrowser1.Url = null;
             // 
@@ -74,18 +74,8 @@
             this.toConsoleBtn.TabIndex = 0;
             this.toConsoleBtn.Text = "转到控制台";
             this.toConsoleBtn.UseVisualStyleBackColor = true;
+            this.toConsoleBtn.Visible = false;
             this.toConsoleBtn.Click += new System.EventHandler(this.toConsoleBtn_Click);
-            // 
-            // refreshDataBtn
-            // 
-            this.refreshDataBtn.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.refreshDataBtn.Location = new System.Drawing.Point(468, 3);
-            this.refreshDataBtn.Name = "refreshDataBtn";
-            this.refreshDataBtn.Size = new System.Drawing.Size(149, 36);
-            this.refreshDataBtn.TabIndex = 0;
-            this.refreshDataBtn.Text = "更新数据";
-            this.refreshDataBtn.UseVisualStyleBackColor = true;
-            this.refreshDataBtn.Click += new System.EventHandler(this.refreshDataBtn_Click);
             // 
             // backBtn
             // 
@@ -98,6 +88,18 @@
             this.backBtn.UseVisualStyleBackColor = true;
             this.backBtn.Visible = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
+            // 
+            // refreshDataBtn
+            // 
+            this.refreshDataBtn.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.refreshDataBtn.Location = new System.Drawing.Point(468, 3);
+            this.refreshDataBtn.Name = "refreshDataBtn";
+            this.refreshDataBtn.Size = new System.Drawing.Size(149, 36);
+            this.refreshDataBtn.TabIndex = 0;
+            this.refreshDataBtn.Text = "更新数据";
+            this.refreshDataBtn.UseVisualStyleBackColor = true;
+            this.refreshDataBtn.Visible = false;
+            this.refreshDataBtn.Click += new System.EventHandler(this.refreshDataBtn_Click);
             // 
             // TextClusterForm
             // 
