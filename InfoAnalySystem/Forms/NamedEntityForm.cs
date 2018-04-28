@@ -55,7 +55,7 @@ namespace InfoAnalySystem.Forms {
         /// 利用bi-LSTM ensemble进行命名实体标记
         /// </summary>
         /// <param name="newsId"></param>
-        private void doNamedEntityRecognitionByNN(int newsId)
+        public void doNamedEntityRecognitionByNN(int newsId)
         {
             if (newsId < 0)
                 return;
@@ -73,6 +73,18 @@ namespace InfoAnalySystem.Forms {
             }
             string[] sections = news.resultNER.Split('\n');
             string[] realSections = news.content.Split(' ');
+            if (sections.Length != realSections.Length) {
+                var sectionsTemp = new List<string>(sections);
+                for (int i = sectionsTemp.Count-1; i >= 0; i--)
+                    if (sectionsTemp[i] == "")
+                        sectionsTemp.RemoveAt(i);
+                sections = sectionsTemp.ToArray();
+                var realSectionsTemp = new List<string>(realSections);
+                for (int i = realSectionsTemp.Count-1; i >= 0; i--)
+                    if (realSectionsTemp[i] == "")
+                        realSectionsTemp.RemoveAt(i);
+                realSections = realSectionsTemp.ToArray();
+            }
             int secIndex = 0;
             for(int i=0;i < realSections.Length; i++)
             {
@@ -248,7 +260,7 @@ namespace InfoAnalySystem.Forms {
         }
 
         // 存入数据库响应函数
-        private void saveToDB() {
+        public void saveToDB() {
             bool isExit = DBHelper.db.Queryable<EntityMention>().Where(it => it.newsId == this.newsId).First() != null;
             bool isOverwrite = true;
             if (isExit) {
@@ -260,7 +272,8 @@ namespace InfoAnalySystem.Forms {
                 DBHelper.db.Deleteable<EntityMention>().Where(it => it.newsId == this.newsId).ExecuteCommand();
                 DBHelper.db.Insertable(sectionList.ToArray()).ExecuteCommand();
                 DBHelper.db.Insertable(entityMentionList.ToArray()).ExecuteCommand();
-                DBHelper.db.Insertable(entityMap.Values.ToArray()).ExecuteCommand();
+                if(entityMap.Values.Count>0)
+                    DBHelper.db.Insertable(entityMap.Values.ToArray()).ExecuteCommand();
                 //更新entity对应的sectionId
                 var updateSql =
                     "UPDATE EntityMention " +
@@ -280,7 +293,7 @@ namespace InfoAnalySystem.Forms {
                     ") " +
                     "where EntityMention.newsId == @newsId";
                 DBHelper.db.Ado.ExecuteCommand(updateSql, new SqlSugar.SugarParameter("@newsId", this.newsId));
-                MessageBox.Show("保存完成");
+                //MessageBox.Show("保存完成");
             }
         }
 

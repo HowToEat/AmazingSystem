@@ -14,6 +14,16 @@ namespace InfoAnalySystem {
         /// </summary>
         [STAThread]
         static void Main() {
+            ////批量标记命名实体并存入数据库
+            //Forms.NamedEntityForm namedEntityForm = new Forms.NamedEntityForm();
+            //var newsList = DBHelper.db.Queryable<News>(
+            //    ).Select(news => new { news.id }
+            //    ).ToList();
+            //foreach (var newsId in newsList) {
+            //    int id = newsId.id.Value;
+            //    namedEntityForm.doNamedEntityRecognitionByNN(id);
+            //    namedEntityForm.saveToDB();
+            //}
             if (!File.Exists(Const.dbFileName)) {
                 DBHelper.createTable();
             }
